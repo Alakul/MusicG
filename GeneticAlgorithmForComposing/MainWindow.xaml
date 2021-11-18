@@ -1,0 +1,59 @@
+﻿<Window x:Class="GeneticAlgorithmForComposing.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GeneticAlgorithmForComposing"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <StackPanel HorizontalAlignment="Left" Height="204" VerticalAlignment="Top" Width="377">
+            <Label Content="Muzyka" HorizontalAlignment="Center"/>
+
+            <StackPanel Orientation="Horizontal" Height="32">
+                <Label Content="Skala:"/>
+                <ComboBox x:Name="scaleType" Width="120"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Height="32">
+                <Label Content="Gama:"/>
+                <ComboBox x:Name="scale" Width="120"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Height="32">
+                <Label Content="Metrum:"/>
+                <ComboBox x:Name="timeSignature" Width="120"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Height="32">
+                <Label Content="Liczba taktów:"/>
+                <TextBox x:Name="measures" TextWrapping="Wrap" Text="TextBox" Width="120"/>
+            </StackPanel>
+        </StackPanel>
+        <StackPanel HorizontalAlignment="Left" Height="204" Margin="382,0,-0.4,0" VerticalAlignment="Top" Width="412" RenderTransformOrigin="-0.233,0.543">
+            <Label Content="Algorytm genetyczny" HorizontalAlignment="Center"/>
+
+            <StackPanel Orientation="Horizontal" Height="32" Margin="0,0,-0.2,0">
+                <Label Content="Rozmiar populacji:"/>
+                <TextBox x:Name="populationSize" TextWrapping="Wrap" Text="TextBox" Width="120"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Height="32" Margin="0,0,-0.2,0">
+                <Label Content="Liczba generacji:"/>
+                <TextBox x:Name="generations" TextWrapping="Wrap" Text="TextBox" Width="120"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Height="32" Margin="0,0,-0.2,0">
+                <Label Content="Prawdopodobieństwo krzyżowania:"/>
+                <TextBox TextWrapping="Wrap" Text="TextBox" Width="120"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Height="32" Margin="0,0,-0.2,0">
+                <Label Content="Prawdopodobieństwo mutacji:"/>
+                <TextBox TextWrapping="Wrap" Text="TextBox" Width="120"/>
+            </StackPanel>
+        </StackPanel>
+        <StackPanel HorizontalAlignment="Left" Height="211" Margin="10,209,0,0" VerticalAlignment="Top" Width="774">
+            <StackPanel Orientation="Horizontal" Height="66" Margin="0,0,-0.6,0">
+                <Button Content="Graj" Height="53" Margin="0,6,0,6.6" Width="93"/>
+                <Button Content="Kontynuuj komponowanie" Height="53" Margin="0,6,0.4,6.6" Width="211"/>
+            </StackPanel>
+            <Button Content="Zapisz do pliku MIDI" HorizontalAlignment="Right" Height="54" Margin="0,0,0.4,0"/>
+        </StackPanel>
+
+    </Grid>
+</Window>
