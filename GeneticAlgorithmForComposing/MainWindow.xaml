@@ -5,55 +5,186 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GeneticAlgorithmForComposing"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MusicGen" Height="450" Width="800">
+
+
+
+    <Window.Resources>
+        <ControlTemplate x:Key="ValidationTemplate">
+            <DockPanel>
+                <TextBlock Foreground="Red" FontSize="20" DockPanel.Dock="Left">!</TextBlock>
+                <TextBlock Text="{Binding [0].ErrorContent}" Foreground="Red" DockPanel.Dock="Bottom"/>
+                <AdornedElementPlaceholder/>
+            </DockPanel>
+        </ControlTemplate>
+
+        
+
+
+        <Style x:Key="CustomTextBoxTextStyle" TargetType="TextBox">
+            <Setter Property="Foreground" Value="Green" />
+            <Setter Property="MaxLength" Value="40" />
+            <Setter Property="Width" Value="392" />
+            <Style.Triggers>
+                <Trigger Property="Validation.HasError" Value="True">
+                    <Trigger.Setters>
+                        <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self},Path=(Validation.Errors)[0].ErrorContent}"/>
+                        <Setter Property="Background" Value="Red"/>
+                    </Trigger.Setters>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+    </Window.Resources>
+
+
     <Grid>
-        <StackPanel HorizontalAlignment="Left" Height="204" VerticalAlignment="Top" Width="377">
-            <Label Content="Muzyka" HorizontalAlignment="Center"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
 
-            <StackPanel Orientation="Horizontal" Height="32">
-                <Label Content="Skala:"/>
-                <ComboBox x:Name="scaleType" Width="120"/>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" Height="32">
-                <Label Content="Gama:"/>
-                <ComboBox x:Name="scale" Width="120"/>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" Height="32">
-                <Label Content="Metrum:"/>
-                <ComboBox x:Name="timeSignature" Width="120"/>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" Height="32">
-                <Label Content="Liczba taktów:"/>
-                <TextBox x:Name="measures" TextWrapping="Wrap" Text="TextBox" Width="120"/>
-            </StackPanel>
-        </StackPanel>
-        <StackPanel HorizontalAlignment="Left" Height="204" Margin="382,0,-0.4,0" VerticalAlignment="Top" Width="412" RenderTransformOrigin="-0.233,0.543">
-            <Label Content="Algorytm genetyczny" HorizontalAlignment="Center"/>
+        <GroupBox Style="{StaticResource groupBox}" Header="MUZYKA" Grid.Column="0" Grid.Row="0">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                    <ColumnDefinition Width="4*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition Height="auto"></RowDefinition>
+                </Grid.RowDefinitions>
 
-            <StackPanel Orientation="Horizontal" Height="32" Margin="0,0,-0.2,0">
-                <Label Content="Rozmiar populacji:"/>
-                <TextBox x:Name="populationSize" TextWrapping="Wrap" Text="TextBox" Width="120"/>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" Height="32" Margin="0,0,-0.2,0">
-                <Label Content="Liczba generacji:"/>
-                <TextBox x:Name="generations" TextWrapping="Wrap" Text="TextBox" Width="120"/>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" Height="32" Margin="0,0,-0.2,0">
-                <Label Content="Prawdopodobieństwo krzyżowania:"/>
-                <TextBox TextWrapping="Wrap" Text="TextBox" Width="120"/>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" Height="32" Margin="0,0,-0.2,0">
-                <Label Content="Prawdopodobieństwo mutacji:"/>
-                <TextBox TextWrapping="Wrap" Text="TextBox" Width="120"/>
-            </StackPanel>
-        </StackPanel>
-        <StackPanel HorizontalAlignment="Left" Height="211" Margin="10,209,0,0" VerticalAlignment="Top" Width="774">
-            <StackPanel Orientation="Horizontal" Height="66" Margin="0,0,-0.6,0">
-                <Button Content="Graj" Height="53" Margin="0,6,0,6.6" Width="93"/>
-                <Button Content="Kontynuuj komponowanie" Height="53" Margin="0,6,0.4,6.6" Width="211"/>
-            </StackPanel>
-            <Button Content="Zapisz do pliku MIDI" HorizontalAlignment="Right" Height="54" Margin="0,0,0.4,0"/>
-        </StackPanel>
+                <Border Style="{StaticResource border}" Grid.Column="0" Grid.Row="0">
+                    <Label Style="{StaticResource label}" Content="Gama:"/>
+                </Border>
+                <Border Style="{StaticResource border}" Grid.Column="1" Grid.Row="0">
+                    <ComboBox x:Name="scale" Style="{StaticResource comboBox}">
+                        <ComboBox.GroupStyle>
+                            <GroupStyle>
+                                <GroupStyle.HeaderTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Scale}"/>
+                                    </DataTemplate>
+                                </GroupStyle.HeaderTemplate>
+                            </GroupStyle>
+                        </ComboBox.GroupStyle>
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Scale}"/>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                </Border>
 
+                <Border Style="{StaticResource border}" Grid.Column="0" Grid.Row="1">
+                    <Label Style="{StaticResource label}" Content="Liczba taktów:"/>
+                </Border>
+                <Border Style="{StaticResource border}" Grid.Column="1" Grid.Row="1">
+                    <TextBox x:Name="measures" Style="{StaticResource textBoxInError}">
+                        <TextBox.Text>
+                            <Binding Path="MeasureValue" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <local:MeasureValidationRule MinValue="1" MaxValue="8"/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+                </Border>
+            </Grid>
+        </GroupBox>
+
+        <GroupBox Style="{StaticResource groupBox}" Header="ALGORYTM GENETYCZNY" Grid.Column="1" Grid.Row="0">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                    <ColumnDefinition Width="4*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition Height="auto"></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <Border Style="{StaticResource border}" Grid.Column="0" Grid.Row="0">
+                    <Label Style="{StaticResource label}" Content="Rozmiar populacji:"/>
+                </Border>
+                <Border Style="{StaticResource border}" Grid.Column="1" Grid.Row="0">
+                    <TextBox x:Name="populationSize" Style="{StaticResource textBoxInError}">
+                        <TextBox.Text>
+                            <Binding Path="PopulationSize" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <local:PopulationValidationRule MinValue="4" MaxValue="50"/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+                </Border>
+
+                <Border Style="{StaticResource border}" Grid.Column="0" Grid.Row="1">
+                    <Label Style="{StaticResource label}" Content="Liczba generacji:"/>
+                </Border>
+                <Border Style="{StaticResource border}" Grid.Column="1" Grid.Row="1">
+                    <TextBox x:Name="generations" Style="{StaticResource textBoxInError}">
+                        <TextBox.Text>
+                            <Binding Path="GenerationValue" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <local:PopulationValidationRule MinValue="1" MaxValue="1000000"/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+                </Border>
+
+                <Border Style="{StaticResource border}" Grid.Column="0" Grid.Row="2">
+                    <Label Style="{StaticResource label}" Content="Prawdopodobieństwo krzyżowania:"/>
+                </Border>
+                <Border Style="{StaticResource border}" Grid.Column="1" Grid.Row="2">
+                    <TextBox x:Name="probCrossover" Style="{StaticResource textBox}" Text=""/>
+                </Border>
+
+                <Border Style="{StaticResource border}" Grid.Column="0" Grid.Row="3">
+                    <Label Style="{StaticResource label}" Content="Prawdopodobieństwo mutacji:"/>
+                </Border>
+                <Border Style="{StaticResource border}" Grid.Column="1" Grid.Row="3">
+                    <TextBox x:Name="probMutation" Style="{StaticResource textBox}" Text=""/>
+                </Border>
+
+            </Grid>
+        </GroupBox>
+
+        <Border Grid.ColumnSpan="2" Grid.Column="0" Grid.Row="1">
+            <Grid Style="{StaticResource grid}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="auto"></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <Border Style="{StaticResource border}" Grid.Column="0" Grid.Row="0">
+                    <Button x:Name="compose" Click="Compose" Content="Komponuj"/>
+                </Border>
+                <Border Style="{StaticResource border}" Grid.Column="1" Grid.Row="0">
+                    <Button x:Name="play" Click="PlayButton" Content="Graj"/>
+                </Border>
+
+                <Border Style="{StaticResource border}" Grid.ColumnSpan="3" Grid.Column="0" Grid.Row="1">
+                    <TextBlock x:Name="show" TextWrapping="Wrap"/>
+                </Border>
+                
+                <Border Style="{StaticResource border}" Grid.Column="3" Grid.Row="2">
+                    <Button x:Name="saveAsMIDI" Content="Zapisz do pliku MIDI" HorizontalAlignment="Right"/>
+                </Border>
+            </Grid>
+        </Border>
     </Grid>
 </Window>

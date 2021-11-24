@@ -17,3 +17,6 @@ C:\Users\alicj\source\repos\GeneticAlgorithmForComposing\GeneticAlgorithmForComp
 C:\Users\alicj\source\repos\GeneticAlgorithmForComposing\GeneticAlgorithmForComposing\bin\Debug\Midi.pdb
 C:\Users\alicj\source\repos\GeneticAlgorithmForComposing\GeneticAlgorithmForComposing\bin\Debug\Midi.xml
 C:\Users\alicj\source\repos\GeneticAlgorithmForComposing\GeneticAlgorithmForComposing\obj\Debug\GeneticAlgorithmForComposing.csproj.CopyComplete
+C:\Users\alicj\source\repos\GeneticAlgorithmForComposing\GeneticAlgorithmForComposing\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\alicj\source\repos\GeneticAlgorithmForComposing\GeneticAlgorithmForComposing\obj\Debug\App.baml
+C:\Users\alicj\source\repos\GeneticAlgorithmForComposing\GeneticAlgorithmForComposing\obj\Debug\ControlsDictionary.baml

@@ -40,7 +40,7 @@ namespace GeneticAlgorithmForComposing
 
         public static string CodeGene(string gene)
         {
-            string[] geneValues = gene.Split(' ');
+            string[] geneValues = gene.Split(';');
             string noteValue = geneValues[0];
             int octaveValue = int.Parse(geneValues[1]);
             double durationValue = double.Parse(geneValues[2]);
@@ -105,8 +105,8 @@ namespace GeneticAlgorithmForComposing
             string noteDecoding = DecodeNote(noteValue);
             string octaveDecoding = DecodeOctave(octaveValue);
             string durationDecoding = DecodeDuration(durationValue);
-            string geneDecoded = noteDecoding + octaveDecoding + durationDecoding;
 
+            string geneDecoded = noteDecoding + ";"+ octaveDecoding + ";" + durationDecoding;
             return geneDecoded;
         }
 
@@ -142,7 +142,7 @@ namespace GeneticAlgorithmForComposing
             for (int i = 1; i <= sumaCzasu; i++){
                 while (sum != i){
                     string geneGenerated = GenerateGene(scale);
-                    geneValues = geneGenerated.Split(' ');
+                    geneValues = geneGenerated.Split(';');
                     durationValue = double.Parse(geneValues[2]);
 
                     if (sum + durationValue <= i){
@@ -323,6 +323,84 @@ namespace GeneticAlgorithmForComposing
 
         }
 
+
+
+
+
+
+        public static double OcenaNuty(string nutaPierwsza, string nutaDruga)
+        {
+            //Np. preferowana nuta lub odległości między nutami
+
+            //DekodowanieAlleli
+            string dekodowanaPierwsza = DecodeGene(nutaPierwsza);
+            string dekodowanaDruga = DecodeGene(nutaDruga);
+
+            string[] wartosciPierwsza = dekodowanaPierwsza.Split(';');
+            string nutaP = wartosciPierwsza[0];
+            int oktawaP = int.Parse(wartosciPierwsza[1]);
+            double czasTrwaniaP = double.Parse(wartosciPierwsza[2]);
+
+            string[] wartosciDruga = dekodowanaDruga.Split(';');
+            string nutaD = wartosciDruga[0];
+            int oktawaD = int.Parse(wartosciDruga[1]);
+            double czasTrwaniaD = double.Parse(wartosciDruga[2]);
+
+            //Obliczanie odległości w interwale
+            ///
+
+            double odleglosc = OdlegloscOktawa(oktawaP, oktawaD);
+            return odleglosc;
+        }
+
+        public static double OdlegloscOktawa(int oktawaP, int oktawaD)
+        {
+            int odleglosc = 0;
+            double waga = 0;
+
+            if (oktawaP < oktawaD)
+                odleglosc = oktawaD - oktawaP;
+            else if (oktawaP > oktawaD)
+                odleglosc = oktawaP - oktawaD;
+            else if (oktawaP == oktawaD)
+                odleglosc = 0;
+
+            if (odleglosc == 0)
+                waga = 1.0;
+            else if (odleglosc == 1)
+                waga = 0.7;
+            else if (odleglosc > 1)
+                waga = 0.3;
+
+            return waga;
+        }
+
+        public static List<double> OcenaPopulacji(string[][] populacja)
+        {
+            List<double> listaOcen = new List<double>();
+            double ocena;
+
+            for (int i = 0; i < populacja.Length; i++)
+            {
+                ocena = 0;
+
+                //Przejście przez wszystkie nuty aż do przedostatniej
+                for (int j = 0; j < populacja[i].Length - 1; j++)
+                {
+                    ocena += OcenaNuty(populacja[i][j], populacja[i][j + 1]);
+                }
+                listaOcen.Add(ocena);
+            }
+            return listaOcen;
+        }
+
+
+
+
+
+
+
+
         //MIDI
         public static List<MidiNote> GetNotesSequence(string[] chromosome)
         {
@@ -340,7 +418,7 @@ namespace GeneticAlgorithmForComposing
             for (int i = 0; i < chromosome.Length; i++)
             {
                 geneDecoded = DecodeGene(chromosome[i]);
-                geneValues = geneDecoded.Split(' ');
+                geneValues = geneDecoded.Split(';');
                 noteValue = geneValues[0];
                 octaveValue = geneValues[1];
                 durationValue = double.Parse(geneValues[2]);
