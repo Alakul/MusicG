@@ -57,7 +57,6 @@
     </ApplicationDefinition>
     <Compile Include="CrossoverValidationRule.cs" />
     <Compile Include="GenerationValidationRule.cs" />
-    <Compile Include="Item.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

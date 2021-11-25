@@ -22,6 +22,7 @@ namespace GeneticAlgorithmForComposing
     {
         public static string[] gamaCdur = new[] { "C", "D", "E", "F", "G", "A", "B", "C" };
         string[] kodowanyChromosom;
+        public static IDictionary<string, List<string>> scaleValues;
 
         private void PlayButton(object sender, RoutedEventArgs e)
         {
@@ -30,6 +31,8 @@ namespace GeneticAlgorithmForComposing
 
         private void Compose(object sender, RoutedEventArgs e)
         {
+            string SelectedItem = scale.Text;
+
             //MUSIC PARAMETERS
             string scaleValue;
             double measuresValue = double.Parse(measures.Text);
@@ -37,20 +40,12 @@ namespace GeneticAlgorithmForComposing
             //GENETIC PARAMETERS
             int populationValue = int.Parse(populationSize.Text);
             int iterationsValue = int.Parse(generations.Text);
-            double crossoverProbabilityValue = double.Parse(probCrossover.Text);
-            double MutationProbabilityValue = double.Parse(probMutation.Text);
+            //double crossoverProbabilityValue = double.Parse(probCrossover.Text);
+            //double MutationProbabilityValue = double.Parse(probMutation.Text);
 
             //GENETIC ALGORITHM
             string[] chromosomeChoosen;
             string[][] population;
-
-            //Algorithm loop
-            int i = 0;
-            while (i <= iterationsValue)
-            {
-                i++;
-            }
-
 
 
             //**************************
@@ -67,7 +62,6 @@ namespace GeneticAlgorithmForComposing
             //**************************
 
 
-
             //Show
             string rozw = string.Join(" ", krzyzowanie[0]);
             show.Text = rozw.ToString();
@@ -81,22 +75,16 @@ namespace GeneticAlgorithmForComposing
         {
             InitializeComponent();
             DataContext = new MainViewModel();
-
+            Console.Read();
             //Buttons
             play.IsEnabled = false;
             saveAsMIDI.IsEnabled = false;
 
             //ComboBox scale values
-            List<Item> items = new List<Item>();
-            items.Add(new Item() { Scale = "Cdur", Category = "Durowa" });
-            items.Add(new Item() { Scale = "C#dur", Category = "Durowa" });
-            items.Add(new Item() { Scale = "Ddur", Category = "Durowa" });
-            items.Add(new Item() { Scale = "Amoll", Category = "Molowa" });
-            items.Add(new Item() { Scale = "Cmoll", Category = "Molowa" });
-
-            ListCollectionView listCollectionView = new ListCollectionView(items);
-            listCollectionView.GroupDescriptions.Add(new PropertyGroupDescription("Category"));
-            scale.ItemsSource = listCollectionView;
+            scaleValues = new Dictionary<string, List<string>>();
+            scaleValues.Add("Durowe", new List<string> { "C-dur", "G-dur", "D-dur", "A-dur", "E-dur", "B-dur", "Fis-dur", "Cis-dur", "F-dur", "B-dur", "Es-dur", "As-dur" });
+            scaleValues.Add("Molowe", new List<string> { "A-moll", "E-moll", "H-moll", "Fis-moll", "Cis-moll", "Gis-moll", "Dis-moll", "Ais-moll", "D-moll", "G-moll", "C-moll", "F-moll" });
+            scale.ItemsSource = scaleValues;
         }
     }
 }

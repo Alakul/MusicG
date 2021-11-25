@@ -8,6 +8,7 @@
         Title="MusicGen" Height="450" Width="800">
 
 
+    
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"></ColumnDefinition>
@@ -27,34 +28,34 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"></RowDefinition>
                     <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition Height="auto"></RowDefinition>
                 </Grid.RowDefinitions>
 
+
                 <Border Style="{StaticResource border}" Grid.Column="0" Grid.Row="0">
-                    <Label Style="{StaticResource label}" Content="Gama:"/>
+                    <Label Style="{StaticResource label}" Content="Skala:"/>
                 </Border>
                 <Border Style="{StaticResource border}" Grid.Column="1" Grid.Row="0">
-                    <ComboBox x:Name="scale" Style="{StaticResource comboBox}">
-                        <ComboBox.GroupStyle>
-                            <GroupStyle>
-                                <GroupStyle.HeaderTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="{Binding Scale}"/>
-                                    </DataTemplate>
-                                </GroupStyle.HeaderTemplate>
-                            </GroupStyle>
-                        </ComboBox.GroupStyle>
+                    <ComboBox x:Name="scale" Style="{StaticResource comboBox}" ItemsSource="{Binding scaleValues}" IsSynchronizedWithCurrentItem="True" SelectedValuePath="Content" SelectedIndex="0">
                         <ComboBox.ItemTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding Scale}"/>
+                                <TextBlock Text="{Binding Key}"/>
                             </DataTemplate>
                         </ComboBox.ItemTemplate>
                     </ComboBox>
                 </Border>
-
+                
                 <Border Style="{StaticResource border}" Grid.Column="0" Grid.Row="1">
-                    <Label Style="{StaticResource label}" Content="Liczba taktów:"/>
+                    <Label Style="{StaticResource label}" Content="Gama:"/>
                 </Border>
                 <Border Style="{StaticResource border}" Grid.Column="1" Grid.Row="1">
+                    <ComboBox x:Name="scaleValue" Style="{StaticResource comboBox}" ItemsSource="{Binding SelectedItem.Value, ElementName=scale}" IsSynchronizedWithCurrentItem="True" SelectedValuePath="Content" SelectedIndex="0"/>
+                </Border>
+
+                <Border Style="{StaticResource border}" Grid.Column="0" Grid.Row="2">
+                    <Label Style="{StaticResource label}" Content="Liczba taktów:"/>
+                </Border>
+                <Border Style="{StaticResource border}" Grid.Column="1" Grid.Row="2">
                     <TextBox x:Name="measures" Style="{StaticResource textBoxInError}">
                         <TextBox.Text>
                             <Binding Path="MeasureValue" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
@@ -157,8 +158,6 @@
                 </Grid.RowDefinitions>
 
                 <Border Style="{StaticResource border}" Grid.Column="0" Grid.Row="0">
-
-
                     <Button x:Name="compose" Content="Komponuj" Click="Compose">
                         <Button.Style>
                             <Style TargetType="{x:Type Button}">
@@ -178,10 +177,7 @@
                             </Style>
                         </Button.Style>
                     </Button>
-
                 </Border>
-                
-                
                 
                 <Border Style="{StaticResource border}" Grid.Column="1" Grid.Row="0">
                     <Button x:Name="play" Click="PlayButton" Content="Graj"/>
@@ -190,7 +186,7 @@
                 <Border Style="{StaticResource border}" Grid.ColumnSpan="3" Grid.Column="0" Grid.Row="1">
                     <TextBlock x:Name="show" TextWrapping="Wrap"/>
                 </Border>
-                
+
                 <Border Style="{StaticResource border}" Grid.Column="3" Grid.Row="2">
                     <Button x:Name="saveAsMIDI" Content="Zapisz do pliku MIDI" HorizontalAlignment="Right"/>
                 </Border>
