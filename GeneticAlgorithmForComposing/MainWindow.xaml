@@ -8,36 +8,6 @@
         Title="MusicGen" Height="450" Width="800">
 
 
-
-    <Window.Resources>
-        <ControlTemplate x:Key="ValidationTemplate">
-            <DockPanel>
-                <TextBlock Foreground="Red" FontSize="20" DockPanel.Dock="Left">!</TextBlock>
-                <TextBlock Text="{Binding [0].ErrorContent}" Foreground="Red" DockPanel.Dock="Bottom"/>
-                <AdornedElementPlaceholder/>
-            </DockPanel>
-        </ControlTemplate>
-
-        
-
-
-        <Style x:Key="CustomTextBoxTextStyle" TargetType="TextBox">
-            <Setter Property="Foreground" Value="Green" />
-            <Setter Property="MaxLength" Value="40" />
-            <Setter Property="Width" Value="392" />
-            <Style.Triggers>
-                <Trigger Property="Validation.HasError" Value="True">
-                    <Trigger.Setters>
-                        <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self},Path=(Validation.Errors)[0].ErrorContent}"/>
-                        <Setter Property="Background" Value="Red"/>
-                    </Trigger.Setters>
-                </Trigger>
-            </Style.Triggers>
-        </Style>
-
-    </Window.Resources>
-
-
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"></ColumnDefinition>
@@ -145,14 +115,30 @@
                     <Label Style="{StaticResource label}" Content="Prawdopodobieństwo krzyżowania:"/>
                 </Border>
                 <Border Style="{StaticResource border}" Grid.Column="1" Grid.Row="2">
-                    <TextBox x:Name="probCrossover" Style="{StaticResource textBox}" Text=""/>
+                    <TextBox x:Name="probCrossover" Style="{StaticResource textBoxInError}">
+                        <TextBox.Text>
+                            <Binding Path="CrossoverProbability" StringFormat="{}{0:#,##}}" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <local:CrossoverValidationRule MinValue="0" MaxValue="1"/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
                 </Border>
 
                 <Border Style="{StaticResource border}" Grid.Column="0" Grid.Row="3">
                     <Label Style="{StaticResource label}" Content="Prawdopodobieństwo mutacji:"/>
                 </Border>
                 <Border Style="{StaticResource border}" Grid.Column="1" Grid.Row="3">
-                    <TextBox x:Name="probMutation" Style="{StaticResource textBox}" Text=""/>
+                    <TextBox x:Name="probMutation" Style="{StaticResource textBoxInError}">
+                        <TextBox.Text>
+                            <Binding Path="MutationProbability" StringFormat="{}{0:#,##}}" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <local:CrossoverValidationRule MinValue="0" MaxValue="1"/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
                 </Border>
 
             </Grid>
@@ -171,8 +157,32 @@
                 </Grid.RowDefinitions>
 
                 <Border Style="{StaticResource border}" Grid.Column="0" Grid.Row="0">
-                    <Button x:Name="compose" Click="Compose" Content="Komponuj"/>
+
+
+                    <Button x:Name="compose" Content="Komponuj" Click="Compose">
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="IsEnabled" Value="false" />
+                                <Style.Triggers>
+                                    <MultiDataTrigger>
+                                        <MultiDataTrigger.Conditions>
+                                            <Condition Binding="{Binding ElementName=measures, Path=(Validation.HasError)}" Value="false" />
+                                            <Condition Binding="{Binding ElementName=populationSize, Path=(Validation.HasError)}" Value="false" />
+                                            <Condition Binding="{Binding ElementName=generations, Path=(Validation.HasError)}" Value="false" />
+                                            <Condition Binding="{Binding ElementName=probCrossover, Path=(Validation.HasError)}" Value="false" />
+                                            <Condition Binding="{Binding ElementName=probMutation, Path=(Validation.HasError)}" Value="false" />
+                                        </MultiDataTrigger.Conditions>
+                                        <Setter Property="IsEnabled" Value="true" />
+                                    </MultiDataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+
                 </Border>
+                
+                
+                
                 <Border Style="{StaticResource border}" Grid.Column="1" Grid.Row="0">
                     <Button x:Name="play" Click="PlayButton" Content="Graj"/>
                 </Border>

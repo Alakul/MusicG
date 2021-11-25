@@ -277,7 +277,7 @@ namespace GeneticAlgorithmForComposing
             return chromosomesSelected;
         }
 
-        public static string[][] Crossover(string[][] chromosomesSelected, int crossoverProbability)
+        public static string[][] Crossover(string[][] chromosomesSelected, double crossoverProbability)
         {
             int crossPoint = 0;
             int value1, value2;
@@ -286,7 +286,7 @@ namespace GeneticAlgorithmForComposing
             string[][] chromosomesAfterCrossover = new string[chromosomesSelected.Length][];
 
             for (int i = 0; i < chromosomesSelected.Length; i = i + 2){
-                if (random.Next(1, 1001) < crossoverProbability){
+                if (random.NextDouble() < crossoverProbability){
                     parent1 = chromosomesSelected[i];
                     parent2 = chromosomesSelected[i + 1];
                     child1 = parent1.ToArray();
