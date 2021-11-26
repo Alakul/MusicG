@@ -8,7 +8,7 @@ using System.Windows.Controls;
 
 namespace GeneticAlgorithmForComposing
 {
-    class GenerationValidationRule : ValidationRule
+    public class GenerationValidationRule : ValidationRule
     {
         public int MinValue { get; set; }
         public int MaxValue { get; set; }

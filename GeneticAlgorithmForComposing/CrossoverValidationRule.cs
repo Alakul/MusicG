@@ -18,8 +18,7 @@ namespace GeneticAlgorithmForComposing
             string crossoverValue = value as string;
 
             double crossover = 0;
-            if (double.TryParse(crossoverValue, out crossover))
-            {
+            if (double.TryParse(crossoverValue, out crossover) || double.TryParse(crossoverValue, NumberStyles.Any, cultureInfo, out crossover)){
                 if ((crossover <= MinValue) || (crossover >= MaxValue)){
                     return new ValidationResult(false, "Prawdopodobienstwo powinno zawierać się w przedziale od " + MinValue + " do " + MaxValue + ".");
                 }

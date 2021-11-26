@@ -20,22 +20,57 @@ namespace GeneticAlgorithmForComposing
     /// </summary>
     public partial class MainWindow : Window
     {
-        public static string[] gamaCdur = new[] { "C", "D", "E", "F", "G", "A", "B", "C" };
         string[] kodowanyChromosom;
-        public static IDictionary<string, List<string>> scaleValues;
+        string[] semitonesSelected;
+
 
         private void PlayButton(object sender, RoutedEventArgs e)
         {
-            GeneticAlgorithm.Play(kodowanyChromosom);
+            GeneticAlgorithm.Play(kodowanyChromosom, semitonesSelected);
+        }
+
+        private string[] SetDictionary()
+        {
+            //SET SCALE DICTIONARY
+            int selectedScale = int.Parse(scale.SelectedIndex.ToString());
+            int selectedScaleValue = int.Parse(scaleValue.SelectedIndex.ToString());
+            Dictionary<string, string[]> selectedScaleDictionary = new Dictionary<string, string[]>();
+
+            if (selectedScale == 0){
+                selectedScaleDictionary = new Dictionary<string, string[]>(Music.scaleMajor);
+            }
+            else if (selectedScale == 1){
+                selectedScaleDictionary = new Dictionary<string, string[]>(Music.scaleMinor);
+            }
+            string[] scaleSelected = selectedScaleDictionary.Values.ElementAt(selectedScaleValue);
+
+            return scaleSelected;
+        }
+
+        public static string[] SetSign(string[] scale)
+        {
+            string[] semitonesSelected = new string[12];
+            for (int i = 0; i < scale.Length; i++){
+                if (scale[i].Contains('#') == true){
+                    semitonesSelected = Music.semitonesSharp;
+                    break;
+                }
+                else if (scale[i].Contains('b') == true){
+                    semitonesSelected = Music.semitonesFlat;
+                    break;
+                }
+                else {
+                    semitonesSelected = Music.semitonesSharp;
+                }
+            }
+            return semitonesSelected;
         }
 
         private void Compose(object sender, RoutedEventArgs e)
         {
-            string SelectedItem = scale.Text;
-
             //MUSIC PARAMETERS
-            string scaleValue;
             double measuresValue = double.Parse(measures.Text);
+            string[] scaleSelected = SetDictionary();
 
             //GENETIC PARAMETERS
             int populationValue = int.Parse(populationSize.Text);
@@ -49,13 +84,13 @@ namespace GeneticAlgorithmForComposing
 
 
             //**************************
+            semitonesSelected = SetSign(scaleSelected);
+            string[] chromosom = GeneticAlgorithm.GenerateChromosome(scaleSelected, measuresValue);
+            kodowanyChromosom = GeneticAlgorithm.CodeChromosome(chromosom, semitonesSelected);
+            string[] dekodowanyChromosom = GeneticAlgorithm.DecodeChromosome(kodowanyChromosom, semitonesSelected);
 
-            string[] chromosom = GeneticAlgorithm.GenerateChromosome(gamaCdur, measuresValue);
-            kodowanyChromosom = GeneticAlgorithm.CodeChromosome(chromosom);
-            string[] dekodowanyChromosom = GeneticAlgorithm.DecodeChromosome(kodowanyChromosom);
-
-            string[][] populacja = GeneticAlgorithm.GeneratePopulation(populationValue, gamaCdur, measuresValue);
-            List<double> ocena = GeneticAlgorithm.OcenaPopulacji(populacja);
+            string[][] populacja = GeneticAlgorithm.GeneratePopulation(populationValue, scaleSelected, measuresValue, semitonesSelected);
+            List<double> ocena = GeneticAlgorithm.OcenaPopulacji(populacja, semitonesSelected);
             string[][] wysel = GeneticAlgorithm.RouletteWheelSelection(populacja, ocena);
             string[][] krzyzowanie = GeneticAlgorithm.Crossover(wysel, 0.755);
 
@@ -75,16 +110,13 @@ namespace GeneticAlgorithmForComposing
         {
             InitializeComponent();
             DataContext = new MainViewModel();
-            Console.Read();
+
             //Buttons
             play.IsEnabled = false;
             saveAsMIDI.IsEnabled = false;
 
             //ComboBox scale values
-            scaleValues = new Dictionary<string, List<string>>();
-            scaleValues.Add("Durowe", new List<string> { "C-dur", "G-dur", "D-dur", "A-dur", "E-dur", "B-dur", "Fis-dur", "Cis-dur", "F-dur", "B-dur", "Es-dur", "As-dur" });
-            scaleValues.Add("Molowe", new List<string> { "A-moll", "E-moll", "H-moll", "Fis-moll", "Cis-moll", "Gis-moll", "Dis-moll", "Ais-moll", "D-moll", "G-moll", "C-moll", "F-moll" });
-            scale.ItemsSource = scaleValues;
+            scale.ItemsSource = Music.scaleValues;
         }
     }
 }

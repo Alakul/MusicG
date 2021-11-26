@@ -9,17 +9,13 @@ namespace GeneticAlgorithmForComposing
 {
     class GeneticAlgorithm
     {
-        public static string[] gamaCdur = new[] { "C", "D", "E", "F", "G", "A", "B", "C" };
-        public static int[] oktawa = new[] { 1, 2, 3, 4, 5, 6, 7 };
         public static double[] czasTrwaniaFull = new[] { 1.0, 0.75, 0.5, 0.375, 0.25, 0.1875, 0.125, 0.09375, 0.0625 };
         public static double[] duration = new[] { 1.0, 0.5, 0.25, 0.125, 0.0625 };
 
-        public static string[] poltonyKrzyzyk = new[] { "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B" };
-        public static string[] poltonyBemol = new[] { "C", "Db", "D", "Eb", "E", "F", "Gb", "G", "Ab", "A", "Bb", "B" };
-        public static int poltony = 12;
+        public static int semitones = Music.semitones;
+        public static int[] octaveValues = Music.octaveValues;
 
         public static Random random = new Random();
-
 
 
         //GENES
@@ -28,8 +24,8 @@ namespace GeneticAlgorithmForComposing
             int noteRandom = random.Next(0, scale.Length);
             string noteValue = scale[noteRandom];
 
-            int oktawaRandom = random.Next(0, oktawa.Length);
-            int octaveValue = oktawa[oktawaRandom];
+            int oktawaRandom = random.Next(0, octaveValues.Length);
+            int octaveValue = octaveValues[oktawaRandom];
 
             int durationRandom = random.Next(0, duration.Length);
             double durationValue = duration[durationRandom];
@@ -38,14 +34,14 @@ namespace GeneticAlgorithmForComposing
             return gene;
         }
 
-        public static string CodeGene(string gene)
+        public static string CodeGene(string gene, string[] semitonesSelected)
         {
             string[] geneValues = gene.Split(';');
             string noteValue = geneValues[0];
             int octaveValue = int.Parse(geneValues[1]);
             double durationValue = double.Parse(geneValues[2]);
 
-            string noteCoding = CodeNote(noteValue);
+            string noteCoding = CodeNote(noteValue, semitonesSelected);
             string octaveCoding = CodeOctave(octaveValue);
             string durationCoding = CodeDuration(durationValue);
             string geneCoded = noteCoding + octaveCoding + durationCoding;
@@ -54,12 +50,12 @@ namespace GeneticAlgorithmForComposing
         }
 
         //Do zmiany "poltony" i "poltonyKrzyzyk"
-        public static string CodeNote(string noteValue)
+        public static string CodeNote(string noteValue, string[] semitonesSelected)
         {
             string noteCoded = "";
-            for (int i = 0; i < poltony; i++){
-                if (noteValue == poltonyKrzyzyk[i]){
-                    for (int j = 0; j < poltony; j++){
+            for (int i = 0; i < semitones; i++){
+                if (noteValue == semitonesSelected[i]){
+                    for (int j = 0; j < semitones; j++){
                         if (j == i){
                             noteCoded += "1";
                         }
@@ -96,13 +92,13 @@ namespace GeneticAlgorithmForComposing
             return durationCoded;
         }
 
-        public static string DecodeGene(string gene)
+        public static string DecodeGene(string gene, string[] semitonesSelected)
         {
             string noteValue = gene.Substring(0, 12);
             string octaveValue = gene.Substring(12, 3);
             string durationValue = gene.Substring(15, duration.Length);
 
-            string noteDecoding = DecodeNote(noteValue);
+            string noteDecoding = DecodeNote(noteValue, semitonesSelected);
             string octaveDecoding = DecodeOctave(octaveValue);
             string durationDecoding = DecodeDuration(durationValue);
 
@@ -110,10 +106,10 @@ namespace GeneticAlgorithmForComposing
             return geneDecoded;
         }
 
-        public static string DecodeNote(string noteValue)
+        public static string DecodeNote(string noteValue, string[] semitonesSelected)
         {
             int noteIndex = noteValue.IndexOf('1');
-            string noteDecoded = poltonyKrzyzyk[noteIndex].ToString();
+            string noteDecoded = semitonesSelected[noteIndex].ToString();
             return noteDecoded;
         }
 
@@ -160,33 +156,33 @@ namespace GeneticAlgorithmForComposing
             return chromosome;
         }
 
-        public static string[] CodeChromosome(string[] chromosome)
+        public static string[] CodeChromosome(string[] chromosome, string[] semitonesSelected)
         {
             string[] chromosomeCoded = new string[chromosome.Length];
             for (int i = 0; i < chromosome.Length; i++){
-                chromosomeCoded[i] = CodeGene(chromosome[i]);
+                chromosomeCoded[i] = CodeGene(chromosome[i], semitonesSelected);
             }
             return chromosomeCoded;
         }
 
-        public static string[] DecodeChromosome(string[] chromosomeCoded)
+        public static string[] DecodeChromosome(string[] chromosomeCoded, string[] semitonesSelected)
         {
             string[] chromosomeDecoded = new string[chromosomeCoded.Length];
             for (int i = 0; i < chromosomeCoded.Length; i++){
-                chromosomeDecoded[i] = DecodeGene(chromosomeCoded[i]);
+                chromosomeDecoded[i] = DecodeGene(chromosomeCoded[i], semitonesSelected);
             }
             return chromosomeDecoded;
         }
 
         //GENETIC ALGORITHM
-        public static string[][] GeneratePopulation(int populationSize, string[] scale, double sumaCzasu)
+        public static string[][] GeneratePopulation(int populationSize, string[] scale, double sumaCzasu, string[] semitonesSelected)
         {
             string[][] population = new string[populationSize][];
             string[] chromosomeGenerated, chromosomeCoded;
 
             for (int i = 0; i < populationSize; i++){
                 chromosomeGenerated = GenerateChromosome(scale, sumaCzasu);
-                chromosomeCoded = CodeChromosome(chromosomeGenerated);
+                chromosomeCoded = CodeChromosome(chromosomeGenerated, semitonesSelected);
                 population[i] = chromosomeCoded;
             }
             return population;
@@ -328,13 +324,13 @@ namespace GeneticAlgorithmForComposing
 
 
 
-        public static double OcenaNuty(string nutaPierwsza, string nutaDruga)
+        public static double OcenaNuty(string nutaPierwsza, string nutaDruga, string[] semitonesSelected)
         {
             //Np. preferowana nuta lub odległości między nutami
 
             //DekodowanieAlleli
-            string dekodowanaPierwsza = DecodeGene(nutaPierwsza);
-            string dekodowanaDruga = DecodeGene(nutaDruga);
+            string dekodowanaPierwsza = DecodeGene(nutaPierwsza, semitonesSelected);
+            string dekodowanaDruga = DecodeGene(nutaDruga, semitonesSelected);
 
             string[] wartosciPierwsza = dekodowanaPierwsza.Split(';');
             string nutaP = wartosciPierwsza[0];
@@ -375,7 +371,7 @@ namespace GeneticAlgorithmForComposing
             return waga;
         }
 
-        public static List<double> OcenaPopulacji(string[][] populacja)
+        public static List<double> OcenaPopulacji(string[][] populacja, string[] semitonesSelected)
         {
             List<double> listaOcen = new List<double>();
             double ocena;
@@ -387,7 +383,7 @@ namespace GeneticAlgorithmForComposing
                 //Przejście przez wszystkie nuty aż do przedostatniej
                 for (int j = 0; j < populacja[i].Length - 1; j++)
                 {
-                    ocena += OcenaNuty(populacja[i][j], populacja[i][j + 1]);
+                    ocena += OcenaNuty(populacja[i][j], populacja[i][j + 1], semitonesSelected);
                 }
                 listaOcen.Add(ocena);
             }
@@ -402,7 +398,7 @@ namespace GeneticAlgorithmForComposing
 
 
         //MIDI
-        public static List<MidiNote> GetNotesSequence(string[] chromosome)
+        public static List<MidiNote> GetNotesSequence(string[] chromosome, string[] semitonesSelected)
         {
             string geneDecoded;
             string[] geneValues;
@@ -417,7 +413,7 @@ namespace GeneticAlgorithmForComposing
 
             for (int i = 0; i < chromosome.Length; i++)
             {
-                geneDecoded = DecodeGene(chromosome[i]);
+                geneDecoded = DecodeGene(chromosome[i], semitonesSelected);
                 geneValues = geneDecoded.Split(';');
                 noteValue = geneValues[0];
                 octaveValue = geneValues[1];
@@ -437,9 +433,9 @@ namespace GeneticAlgorithmForComposing
             return noteMap;
         }
 
-        public static void Play(string[] chromosome)
+        public static void Play(string[] chromosome, string[] semitonesSelected)
         {
-            List<MidiNote> noteMap = GetNotesSequence(chromosome);
+            List<MidiNote> noteMap = GetNotesSequence(chromosome, semitonesSelected);
 
             using (var stream = MidiDevice.Streams[0])
             {

@@ -36,7 +36,7 @@
                     <Label Style="{StaticResource label}" Content="Skala:"/>
                 </Border>
                 <Border Style="{StaticResource border}" Grid.Column="1" Grid.Row="0">
-                    <ComboBox x:Name="scale" Style="{StaticResource comboBox}" ItemsSource="{Binding scaleValues}" IsSynchronizedWithCurrentItem="True" SelectedValuePath="Content" SelectedIndex="0">
+                    <ComboBox x:Name="scale" Style="{StaticResource comboBox}" ItemsSource="{Binding scaleValues}" IsSynchronizedWithCurrentItem="True" SelectedIndex="0">
                         <ComboBox.ItemTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding Key}"/>

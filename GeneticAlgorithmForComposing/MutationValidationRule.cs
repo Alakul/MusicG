@@ -8,7 +8,7 @@ using System.Windows.Controls;
 
 namespace GeneticAlgorithmForComposing
 {
-    class MutationValidationRule : ValidationRule
+    public class MutationValidationRule : ValidationRule
     {
         public double MinValue { get; set; }
         public double MaxValue { get; set; }
@@ -18,7 +18,8 @@ namespace GeneticAlgorithmForComposing
             string mutationValue = value as string;
 
             double mutation = 0;
-            if (double.TryParse(mutationValue, out mutation)){
+            if (double.TryParse(mutationValue, out mutation) || double.TryParse(mutationValue, NumberStyles.Any, cultureInfo, out mutation))
+            {
                 if ((mutation <= MinValue) || (mutation >= MaxValue)){
                     return new ValidationResult(false, "Prawdopodobienstwo powinno zawierać się w przedziale od " + MinValue + " do " + MaxValue + ".");
                 }
