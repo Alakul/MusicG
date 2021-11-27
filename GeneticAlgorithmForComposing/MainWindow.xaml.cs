@@ -47,7 +47,7 @@ namespace GeneticAlgorithmForComposing
             return scaleSelected;
         }
 
-        public static string[] SetSign(string[] scale)
+        public string[] SetSign(string[] scale)
         {
             string[] semitonesSelected = new string[12];
             for (int i = 0; i < scale.Length; i++){
@@ -64,6 +64,16 @@ namespace GeneticAlgorithmForComposing
                 }
             }
             return semitonesSelected;
+        }
+
+        public void GetSelection()
+        {
+
+        }
+
+        public void GetMutation()
+        {
+
         }
 
         private void Compose(object sender, RoutedEventArgs e)

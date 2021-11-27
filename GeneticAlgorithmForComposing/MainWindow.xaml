@@ -11,7 +11,7 @@
     
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="auto"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -23,7 +23,7 @@
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="auto"></ColumnDefinition>
-                    <ColumnDefinition Width="4*"></ColumnDefinition>
+                    <ColumnDefinition Width="auto"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"></RowDefinition>
@@ -33,7 +33,7 @@
 
 
                 <Border Style="{StaticResource border}" Grid.Column="0" Grid.Row="0">
-                    <Label Style="{StaticResource label}" Content="Skala:"/>
+                    <TextBlock Style="{StaticResource textBlock}" Text="Skala:"/>
                 </Border>
                 <Border Style="{StaticResource border}" Grid.Column="1" Grid.Row="0">
                     <ComboBox x:Name="scale" Style="{StaticResource comboBox}" ItemsSource="{Binding scaleValues}" IsSynchronizedWithCurrentItem="True" SelectedIndex="0">
@@ -46,14 +46,14 @@
                 </Border>
                 
                 <Border Style="{StaticResource border}" Grid.Column="0" Grid.Row="1">
-                    <Label Style="{StaticResource label}" Content="Gama:"/>
+                    <TextBlock Style="{StaticResource textBlock}" Text="Gama:"/>
                 </Border>
                 <Border Style="{StaticResource border}" Grid.Column="1" Grid.Row="1">
                     <ComboBox x:Name="scaleValue" Style="{StaticResource comboBox}" ItemsSource="{Binding SelectedItem.Value, ElementName=scale}" IsSynchronizedWithCurrentItem="True" SelectedValuePath="Content" SelectedIndex="0"/>
                 </Border>
 
                 <Border Style="{StaticResource border}" Grid.Column="0" Grid.Row="2">
-                    <Label Style="{StaticResource label}" Content="Liczba taktów:"/>
+                    <TextBlock Style="{StaticResource textBlock}" Text="Liczba taktów:"/>
                 </Border>
                 <Border Style="{StaticResource border}" Grid.Column="1" Grid.Row="2">
                     <TextBox x:Name="measures" Style="{StaticResource textBoxInError}">
@@ -72,8 +72,10 @@
         <GroupBox Style="{StaticResource groupBox}" Header="ALGORYTM GENETYCZNY" Grid.Column="1" Grid.Row="0">
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="auto"></ColumnDefinition>
-                    <ColumnDefinition Width="4*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"></RowDefinition>
@@ -83,7 +85,7 @@
                 </Grid.RowDefinitions>
 
                 <Border Style="{StaticResource border}" Grid.Column="0" Grid.Row="0">
-                    <Label Style="{StaticResource label}" Content="Rozmiar populacji:"/>
+                    <TextBlock Style="{StaticResource textBlock}" Text="Rozmiar populacji:"/>
                 </Border>
                 <Border Style="{StaticResource border}" Grid.Column="1" Grid.Row="0">
                     <TextBox x:Name="populationSize" Style="{StaticResource textBoxInError}">
@@ -98,7 +100,7 @@
                 </Border>
 
                 <Border Style="{StaticResource border}" Grid.Column="0" Grid.Row="1">
-                    <Label Style="{StaticResource label}" Content="Liczba generacji:"/>
+                    <TextBlock Style="{StaticResource textBlock}" Text="Liczba generacji:"/>
                 </Border>
                 <Border Style="{StaticResource border}" Grid.Column="1" Grid.Row="1">
                     <TextBox x:Name="generations" Style="{StaticResource textBoxInError}">
@@ -113,7 +115,10 @@
                 </Border>
 
                 <Border Style="{StaticResource border}" Grid.Column="0" Grid.Row="2">
-                    <Label Style="{StaticResource label}" Content="Prawdopodobieństwo krzyżowania:"/>
+                    <TextBlock Style="{StaticResource textBlock}">
+                        Prawdopodobieństwo<LineBreak/>
+                        krzyżowania:
+                    </TextBlock>
                 </Border>
                 <Border Style="{StaticResource border}" Grid.Column="1" Grid.Row="2">
                     <TextBox x:Name="probCrossover" Style="{StaticResource textBoxInError}">
@@ -128,7 +133,10 @@
                 </Border>
 
                 <Border Style="{StaticResource border}" Grid.Column="0" Grid.Row="3">
-                    <Label Style="{StaticResource label}" Content="Prawdopodobieństwo mutacji:"/>
+                    <TextBlock Style="{StaticResource textBlock}">
+                        Prawdopodobieństwo<LineBreak/>
+                        mutacji:
+                    </TextBlock>
                 </Border>
                 <Border Style="{StaticResource border}" Grid.Column="1" Grid.Row="3">
                     <TextBox x:Name="probMutation" Style="{StaticResource textBoxInError}">
@@ -140,6 +148,29 @@
                             </Binding>
                         </TextBox.Text>
                     </TextBox>
+                </Border>
+
+                
+                <Border Style="{StaticResource border}" Grid.Column="2" Grid.Row="0">
+                    <TextBlock Style="{StaticResource textBlock}" Text="Rodzaj selekcji:"/>
+                </Border>
+
+                <Border Style="{StaticResource border}" Grid.Column="3" Grid.Row="0">
+                    <ComboBox x:Name="selection" Style="{StaticResource comboBox}" SelectedIndex="0">
+                        <ComboBoxItem>Turniejowa</ComboBoxItem>
+                        <ComboBoxItem>Ruletkowa</ComboBoxItem>
+                    </ComboBox>
+                </Border>
+
+                <Border Style="{StaticResource border}" Grid.Column="2" Grid.Row="1">
+                    <TextBlock Style="{StaticResource textBlock}" Text="Rodzaj mutacji:"/>
+                </Border>
+
+                <Border Style="{StaticResource border}" Grid.Column="3" Grid.Row="1">
+                    <ComboBox x:Name="mutation" Style="{StaticResource comboBox}" SelectedIndex="0">
+                        <ComboBoxItem>Nuty</ComboBoxItem>
+                        <ComboBoxItem>Oktawy</ComboBoxItem>
+                    </ComboBox>
                 </Border>
 
             </Grid>

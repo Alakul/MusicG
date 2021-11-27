@@ -6,9 +6,8 @@
 
     <!--Style TextBox-->
     <Style x:Key="textBox" TargetType="{x:Type TextBox}">
-        <Setter Property="Width" Value="120"></Setter>
         <Setter Property="Padding" Value="2"></Setter>
-        <Setter Property="HorizontalAlignment" Value="Left"></Setter>
+        <Setter Property="HorizontalAlignment" Value="Stretch"></Setter>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TextBox}">
@@ -47,9 +46,9 @@
         <Setter Property="Margin" Value="10"></Setter>
     </Style>
 
-    <!--Style Label-->
-    <Style x:Key="label" TargetType="{x:Type Label}">
-        <Setter Property="HorizontalContentAlignment" Value="Right"></Setter>
+    <!--Style TextBlock-->
+    <Style x:Key="textBlock" TargetType="{x:Type TextBlock}">
+        <Setter Property="TextAlignment" Value="Right"></Setter>
     </Style>
 
     <!--Style Grid-->
@@ -59,8 +58,7 @@
 
     <!--Style ComboBox-->
     <Style x:Key="comboBox" TargetType="{x:Type ComboBox}">
-        <Setter Property="HorizontalAlignment" Value="Left"></Setter>
-        <Setter Property="Width" Value="120"></Setter>
+        <Setter Property="HorizontalAlignment" Value="Stretch"></Setter>
     </Style>
     
     

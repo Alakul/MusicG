@@ -148,11 +148,7 @@ namespace GeneticAlgorithmForComposing
                 }
             }
 
-            string[] chromosome = new string[geneList.Count];
-            for (int j = 0; j < geneList.Count; j++){
-                chromosome[j] = geneList[j];
-            }
-
+            string[] chromosome = geneList.ToArray();
             return chromosome;
         }
 
@@ -314,10 +310,69 @@ namespace GeneticAlgorithmForComposing
             return chromosomesAfterCrossover;
         }
 
-        public static void Mutation()
+        public static string[][] MutationSemitones(string[][] chromosomesSelected, double crossoverProbability)
         {
+            string[] chromosome;
+            string[][] chromosomesAfterMutation = new string[chromosomesSelected.Length][];
 
+            for (int i = 0; i < chromosomesSelected.Length; i++){
+                if (random.NextDouble() < crossoverProbability){
+                    chromosome = ChangeNote(chromosomesSelected[i]);
+                    chromosomesAfterMutation[i] = chromosome.ToArray();
+                }
+                else {
+                    chromosomesAfterMutation[i] = chromosomesSelected[i];
+                }
+            }
+            return chromosomesAfterMutation;
         }
+
+        public static string[] ChangeNote(string[] chromosome)
+        {
+            double probability = 0.5;
+            string[] chromosomeChanged = chromosome.ToArray();
+            
+            int geneRadom = random.Next(0, chromosome.Length);
+            string gene = chromosome[geneRadom];
+            string noteValue = gene.Substring(0, 12);
+            int index = noteValue.IndexOf('1');
+            char[] noteArray = noteValue.ToCharArray();
+            string noteCoded = "";
+
+            if (random.NextDouble() < probability){
+                //pol tonu wyzej
+                if (index == 11){
+                    noteArray[11] = '0';
+                    noteArray[0] = '1';
+                }
+                else {
+                    noteArray[index] = '0';
+                    noteArray[index + 1] = '1';
+                }
+            }
+            else {
+                if (index == 0){
+                    noteArray[11] = '1';
+                    noteArray[0] = '0';
+                }
+                else {
+                    noteArray[index] = '0';
+                    noteArray[index - 1] = '1';
+                }
+            }
+
+            for (int i = 0; i < noteArray.Length; i++){
+                noteCoded += noteArray[i];
+            }
+
+            string octaveValue = gene.Substring(12, 3);
+            string durationValue = gene.Substring(15, duration.Length);
+            string geneValue = noteCoded + octaveValue + durationValue;
+
+            chromosomeChanged[geneRadom] = geneValue;
+            return chromosomeChanged;
+        }
+
 
 
 
