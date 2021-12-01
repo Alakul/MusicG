@@ -35,6 +35,21 @@
     </Style>
 
 
+    <Style x:Key="textBoxVisibility" TargetType="TextBox" BasedOn="{StaticResource textBoxInError}">
+        <Setter Property="Visibility" Value="Collapsed"/>
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding ElementName=selection, Path=SelectedValue.Content}" Value="Turniejowa">
+                <DataTrigger.Setters>
+                    <Setter Property="Visibility" Value="Visible"/>
+                </DataTrigger.Setters>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding ElementName=selection, Path=SelectedValue.Content}" Value="Ruletkowa">
+                <Setter Property="Visibility" Value="Collapsed"/>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+
     <!--Style Border-->
     <Style x:Key="border" TargetType="{x:Type Border}">
         <Setter Property="Padding" Value="4"></Setter>
@@ -49,6 +64,20 @@
     <!--Style TextBlock-->
     <Style x:Key="textBlock" TargetType="{x:Type TextBlock}">
         <Setter Property="TextAlignment" Value="Right"></Setter>
+    </Style>
+
+    <Style x:Key="textBlockVisibility" TargetType="TextBlock" BasedOn="{StaticResource textBlock}">
+        <Setter Property="Visibility" Value="Collapsed"/>
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding ElementName=selection, Path=SelectedValue.Content}" Value="Turniejowa">
+                <DataTrigger.Setters>
+                    <Setter Property="Visibility" Value="Visible"/>
+                </DataTrigger.Setters>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding ElementName=selection, Path=SelectedValue.Content}" Value="Ruletkowa">
+                <Setter Property="Visibility" Value="Collapsed"/>
+            </DataTrigger>
+        </Style.Triggers>
     </Style>
 
     <!--Style Grid-->

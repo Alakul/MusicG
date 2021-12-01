@@ -16,6 +16,8 @@ namespace GeneticAlgorithmForComposing
 
             this.CrossoverProbability = 0.755;
             this.MutationProbability = 0.05;
+
+            this.TournamentValue = 2;
         }
 
         public int MeasureValue { get; set; }
@@ -25,5 +27,7 @@ namespace GeneticAlgorithmForComposing
         //Probability
         public double CrossoverProbability { get; set; }
         public double MutationProbability { get; set; }
+
+        public int TournamentValue { get; set; }
     }
 }

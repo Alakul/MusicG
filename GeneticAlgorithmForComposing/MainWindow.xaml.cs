@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -68,6 +69,8 @@ namespace GeneticAlgorithmForComposing
 
         public void GetSelection()
         {
+            
+
 
         }
 
@@ -101,8 +104,19 @@ namespace GeneticAlgorithmForComposing
 
             string[][] populacja = GeneticAlgorithm.GeneratePopulation(populationValue, scaleSelected, measuresValue, semitonesSelected);
             List<double> ocena = GeneticAlgorithm.OcenaPopulacji(populacja, semitonesSelected);
-            string[][] wysel = GeneticAlgorithm.RouletteWheelSelection(populacja, ocena);
-            string[][] krzyzowanie = GeneticAlgorithm.Crossover(wysel, 0.755);
+            string[][] wysel;
+
+
+            int selectedSelection = int.Parse(selection.SelectedIndex.ToString());
+            if (selectedSelection == 0){
+                wysel = GeneticAlgorithm.TournamentSelection(populacja, ocena, 2);
+            }
+            else {
+                wysel = GeneticAlgorithm.RouletteWheelSelection(populacja, ocena);
+            }
+            
+
+            string[][] krzyzowanie = GeneticAlgorithm.Crossover(wysel, 0.755, measuresValue, semitonesSelected);
 
             //**************************
 

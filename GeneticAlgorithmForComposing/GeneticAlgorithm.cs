@@ -9,8 +9,7 @@ namespace GeneticAlgorithmForComposing
 {
     class GeneticAlgorithm
     {
-        public static double[] czasTrwaniaFull = new[] { 1.0, 0.75, 0.5, 0.375, 0.25, 0.1875, 0.125, 0.09375, 0.0625 };
-        public static double[] duration = new[] { 1.0, 0.5, 0.25, 0.125, 0.0625 };
+        public static double[] duration = new[] { 1.0, 0.75, 0.5, 0.375, 0.25, 0.1875, 0.125, 0.0625 };
 
         public static int semitones = Music.semitones;
         public static int[] octaveValues = Music.octaveValues;
@@ -269,38 +268,108 @@ namespace GeneticAlgorithmForComposing
             return chromosomesSelected;
         }
 
-        public static string[][] Crossover(string[][] chromosomesSelected, double crossoverProbability)
+        public static string CheckSum(double sum)
         {
-            int crossPoint = 0;
-            int value1, value2;
-            string[] child1, child2, parent1, parent2;
+            int size = duration.Length;
+            for (int i = 0; i < (size - 1); i++){
+                for (int j = (i + 1); j < size; j++){
+                    if (duration[i] + duration[j] == sum){
+                        return duration[i].ToString() + ";" + duration[j].ToString();
+                    }
+                }
+            }
+            return "";
+        }
 
+        public static string[][] Crossover(string[][] chromosomesSelected, double crossoverProbability, double sumaCzasu, string[] semitonesSelected)
+        {
             string[][] chromosomesAfterCrossover = new string[chromosomesSelected.Length][];
+            string[] parent1, parent2;
+            string[] decodedParent1, decodedParent2;
+            List<string> child1, child2;
+            int size1, size2;
+
+            int crossPoint1, crossPoint2;
 
             for (int i = 0; i < chromosomesSelected.Length; i = i + 2){
                 if (random.NextDouble() < crossoverProbability){
-                    parent1 = chromosomesSelected[i];
-                    parent2 = chromosomesSelected[i + 1];
-                    child1 = parent1.ToArray();
-                    child2 = parent2.ToArray();
+                    size1 = chromosomesSelected[i].Length;
+                    size2 = chromosomesSelected[i + 1].Length;
 
-                    value1 = chromosomesSelected[i].Length;
-                    value2 = chromosomesSelected[i + 1].Length;
+                    parent1 = chromosomesSelected[i].ToArray();
+                    parent2 = chromosomesSelected[i + 1].ToArray();
+                    decodedParent1 = DecodeChromosome(parent1, semitonesSelected);
+                    decodedParent2 = DecodeChromosome(parent2, semitonesSelected);
+                    child1 = new List<string>();
+                    child2 = new List<string>();
 
-                    if (value1 <= value2){
-                        crossPoint = random.Next(0, chromosomesSelected[i].Length - 1);
+                    crossPoint1 = 0;
+                    crossPoint2 = 0;
+
+                    if (size1 <= size2){
+                        crossPoint1 = random.Next(1, chromosomesSelected[i].Length - 1);
+
+                        //Obliczanie sumy od początku do punktu przecięcia
+                        double sum = 0;
+                        for (int j = 0; j < crossPoint1; j++){
+                            string gene = decodedParent1[j];
+                            string[] geneValues = gene.Split(';');
+                            double durationValue = double.Parse(geneValues[2]);
+                            sum += durationValue;
+                        }
+
+                        //Obliczanie punktu przeciecia dla drugiego potomka
+                        double sum2 = 0;
+                        while (sum2 < sum){
+                            string gene = decodedParent2[crossPoint2];
+                            string[] geneValues = gene.Split(';');
+                            double durationValue = double.Parse(geneValues[2]);
+                            sum2 += durationValue;
+                            crossPoint2++;
+                        }
                     }
-                    else if (value1 > value2){
-                        crossPoint = random.Next(0, chromosomesSelected[i + 1].Length - 1);
+                    else if (size1 > size2){
+                        crossPoint2 = random.Next(1, chromosomesSelected[i + 1].Length - 1);
+
+                        double sum = 0;
+                        for (int j = 0; j < crossPoint2; j++){
+                            string gene = decodedParent2[j];
+                            string[] geneValues = gene.Split(';');
+                            double durationValue = double.Parse(geneValues[2]);
+                            sum += durationValue;
+                        }
+
+                        double sum2 = 0;
+                        while (sum2 < sum){
+                            string gene = decodedParent1[crossPoint1];
+                            string[] geneValues = gene.Split(';');
+                            double durationValue = double.Parse(geneValues[2]);
+                            sum2 += durationValue;
+                            crossPoint1++;
+                        }
                     }
 
-                    for (int k = 0; k < crossPoint; k++){
-                        child1[k] = parent2[k];
-                        child2[k] = parent1[k];
+                    //Zapisywanie genów do potomków
+                    for (int j = 0; j < crossPoint1; j++){
+                        child1.Add(parent1[j]);
+                    }
+                    for (int j = crossPoint2; j < parent2.Length; j++){
+                        child1.Add(parent2[j]);
                     }
 
-                    chromosomesAfterCrossover[i] = child1;
-                    chromosomesAfterCrossover[i + 1] = child2;
+                    for (int j = 0; j < crossPoint2; j++){
+                        child2.Add(parent2[j]);
+                    }
+                    for (int j = crossPoint1; j < parent1.Length; j++){
+                        child2.Add(parent1[j]);
+                    }
+
+                    //Sprawdzenie
+                    //string[] pot1 = SprawdzCzasTrwania(potomek1.ToArray(), sumaCzasu, punktPrzeciecia1, poltonyWybrane);
+                    //string[] pot2 = SprawdzCzasTrwania(potomek2.ToArray(), sumaCzasu, punktPrzeciecia2, poltonyWybrane);
+
+                    chromosomesAfterCrossover[i] = child1.ToArray();
+                    chromosomesAfterCrossover[i + 1] = child2.ToArray();
                 }
                 else {
                     chromosomesAfterCrossover[i] = chromosomesSelected[i];
