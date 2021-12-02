@@ -1,4 +1,5 @@
 ﻿using M;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -601,17 +602,23 @@ namespace GeneticAlgorithmForComposing
         public static void SaveToMIDI(string[] chromosome, string fileName, string[] semitonesSelected)
         {
             var file = new MidiFile();
-            var track = new MidiSequence();
 
             List<MidiNote> noteMap = GetNotesSequence(chromosome, semitonesSelected);
-            var trks = new List<MidiSequence>();
-            trks.Add(MidiSequence.FromNoteMap(noteMap));
-            var t = MidiSequence.Merge(trks);
-            track = MidiSequence.Merge(track, t);
+            var sequenceTraks = new List<MidiSequence>();
+            sequenceTraks.Add(MidiSequence.FromNoteMap(noteMap));
+            var track = MidiSequence.Merge(sequenceTraks);
+            var finalTrack = MidiSequence.Merge(track, track);
+            file.Tracks.Add(finalTrack);
 
-            file.Tracks.Add(track);
-            file.WriteTo("D:\\Pulpit\\" + fileName + ".mid");
+            //OPEN DIALOG
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "MIDI file (*.mid)|*.mid";
+            saveFileDialog.FileName = "Melody";
+            saveFileDialog.DefaultExt = ".mid";
+
+            if (saveFileDialog.ShowDialog() == true){
+                file.WriteTo(saveFileDialog.FileName);
+            } 
         }
-
     }
 }
