@@ -14,8 +14,8 @@ namespace GeneticAlgorithmForComposing
             this.PopulationSize = 40;
             this.GenerationValue = 100;
 
-            this.CrossoverProbability = 0.755;
-            this.MutationProbability = 0.05;
+            this.CrossoverProbability = 755;
+            this.MutationProbability = 55;
 
             this.TournamentValue = 2;
         }
@@ -25,8 +25,8 @@ namespace GeneticAlgorithmForComposing
         public int GenerationValue { get; set; }
 
         //Probability
-        public double CrossoverProbability { get; set; }
-        public double MutationProbability { get; set; }
+        public int CrossoverProbability { get; set; }
+        public int MutationProbability { get; set; }
 
         public int TournamentValue { get; set; }
     }

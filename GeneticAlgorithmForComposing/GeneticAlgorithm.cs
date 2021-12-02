@@ -170,24 +170,102 @@ namespace GeneticAlgorithmForComposing
         }
 
         //GENETIC ALGORITHM
-        public static string[][] GeneratePopulation(int populationSize, string[] scale, double sumaCzasu, string[] semitonesSelected)
+        public static string[][] GeneratePopulation(int populationSize, string[] scale, double measuresValue, string[] semitonesSelected)
         {
             string[][] population = new string[populationSize][];
             string[] chromosomeGenerated, chromosomeCoded;
 
             for (int i = 0; i < populationSize; i++){
-                chromosomeGenerated = GenerateChromosome(scale, sumaCzasu);
+                chromosomeGenerated = GenerateChromosome(scale, measuresValue);
                 chromosomeCoded = CodeChromosome(chromosomeGenerated, semitonesSelected);
                 population[i] = chromosomeCoded;
             }
             return population;
         }
 
-        public static void FitnessFunction()
+        //EVALUATION
+        public static List<double> FitnessFunction(string[][] population, string[] semitonesSelected, string[] scale)
         {
+            List<double> evaluationList = new List<double>();
 
+            for (int i = 0; i < population.Length; i++){
+                evaluationList.Add(EvaluateChromosome(population[i], semitonesSelected, scale));
+            }
+            return evaluationList;
         }
 
+        public static double EvaluateChromosome(string[] chromosome, string[] semitonesSelected, string[] scale)
+        {
+            string[] chromosomeDecoded = DecodeChromosome(chromosome, semitonesSelected);
+
+            double evaluationScale = EvaluateScale(chromosomeDecoded, scale);
+            double evaluationOctave = EvaluateOctave(chromosomeDecoded);
+            double evaluationInterval;
+
+            double evaluation = evaluationScale + evaluationOctave;
+            return evaluation;
+        }
+
+        public static double EvaluateScale(string[] chromosomeDecoded, string[] scale)
+        {
+            //Czy nuta należy do skali
+            //Stosunek liczby nut należących/nienależących do licbzy nut
+            double evaluation = 0;
+            double chromosomeLength = chromosomeDecoded.Length;
+
+            for (int i = 0; i < chromosomeDecoded.Length; i++){
+                string[] geneValues = chromosomeDecoded[i].Split(';');
+                string noteValue = geneValues[0];
+
+                if (scale.Contains(noteValue)){
+                    evaluation++;
+                }
+            }
+            double ratio = evaluation / chromosomeLength;
+            return ratio;
+        }
+
+        public static double EvaluateOctave(string[] chromosomeDecoded)
+        {
+            double evaluation = 0;
+            int distance = 0;
+            double chromosomeLength = chromosomeDecoded.Length;
+
+            for (int i = 0; i < chromosomeDecoded.Length - 1; i++)
+            {
+                string[] geneValues1 = chromosomeDecoded[i].Split(';');
+                int oktaveValue1 = int.Parse(geneValues1[1]);
+
+                string[] geneValues2 = chromosomeDecoded[i + 1].Split(';');
+                int oktaveValue2 = int.Parse(geneValues2[1]);
+
+                if (oktaveValue1 < oktaveValue2)
+                    distance = oktaveValue2 - oktaveValue1;
+                else if (oktaveValue1 > oktaveValue2)
+                    distance = oktaveValue1 - oktaveValue2;
+                else if (oktaveValue1 == oktaveValue2)
+                    distance = 0;
+
+                if (distance == 0 || distance == 1){
+                    evaluation++;
+                }
+            }
+            double ratio = evaluation / chromosomeLength;
+            return ratio;
+        }
+
+        public static double EvaluateInterval(string[] chromosomeDecoded)
+        {
+            //Czy interwał jest dobry
+            //Stosunek liczby dobrych/niedobrych interwałów do liczby interwałów
+            double evaluation = 0;
+            double chromosomeLength = chromosomeDecoded.Length;
+
+            double ratio = evaluation / chromosomeLength;
+            return ratio;
+        }
+
+        //SELECTION
         public static double RandomNumber(double minimum, double maximum)
         {
             return random.NextDouble() * (maximum - minimum) + minimum;
@@ -218,7 +296,7 @@ namespace GeneticAlgorithmForComposing
 
             while (loopCounter < fitnessList.Count){
                 drawnNumber = RandomNumber(0, fitnessSum);
-
+                
                 for (int i = 0; i < intervals.Length; i++){
                     if (i == intervals.Length - 1){
                         if (drawnNumber >= intervals[i]){
@@ -281,7 +359,8 @@ namespace GeneticAlgorithmForComposing
             return "";
         }
 
-        public static string[][] Crossover(string[][] chromosomesSelected, double crossoverProbability, double sumaCzasu, string[] semitonesSelected)
+        //CROSSOVER
+        public static string[][] Crossover(string[][] chromosomesSelected, int crossoverProbability, double sumaCzasu, string[] semitonesSelected)
         {
             string[][] chromosomesAfterCrossover = new string[chromosomesSelected.Length][];
             string[] parent1, parent2;
@@ -292,7 +371,7 @@ namespace GeneticAlgorithmForComposing
             int crossPoint1, crossPoint2;
 
             for (int i = 0; i < chromosomesSelected.Length; i = i + 2){
-                if (random.NextDouble() < crossoverProbability){
+                if (random.Next(1, 1001) < crossoverProbability){
                     size1 = chromosomesSelected[i].Length;
                     size2 = chromosomesSelected[i + 1].Length;
 
@@ -379,13 +458,14 @@ namespace GeneticAlgorithmForComposing
             return chromosomesAfterCrossover;
         }
 
-        public static string[][] MutationSemitones(string[][] chromosomesSelected, double crossoverProbability)
+        //MUTATION
+        public static string[][] MutationSemitones(string[][] chromosomesSelected, int crossoverProbability)
         {
             string[] chromosome;
             string[][] chromosomesAfterMutation = new string[chromosomesSelected.Length][];
 
             for (int i = 0; i < chromosomesSelected.Length; i++){
-                if (random.NextDouble() < crossoverProbability){
+                if (random.Next(1, 1001) < crossoverProbability){
                     chromosome = ChangeNote(chromosomesSelected[i]);
                     chromosomesAfterMutation[i] = chromosome.ToArray();
                 }
@@ -398,7 +478,7 @@ namespace GeneticAlgorithmForComposing
 
         public static string[] ChangeNote(string[] chromosome)
         {
-            double probability = 0.5;
+            int probability = 500;
             string[] chromosomeChanged = chromosome.ToArray();
             
             int geneRadom = random.Next(0, chromosome.Length);
@@ -408,7 +488,7 @@ namespace GeneticAlgorithmForComposing
             char[] noteArray = noteValue.ToCharArray();
             string noteCoded = "";
 
-            if (random.NextDouble() < probability){
+            if (random.Next(1, 1001) < probability){
                 //pol tonu wyzej
                 if (index == 11){
                     noteArray[11] = '0';
@@ -441,82 +521,6 @@ namespace GeneticAlgorithmForComposing
             chromosomeChanged[geneRadom] = geneValue;
             return chromosomeChanged;
         }
-
-
-
-
-
-
-
-        public static double OcenaNuty(string nutaPierwsza, string nutaDruga, string[] semitonesSelected)
-        {
-            //Np. preferowana nuta lub odległości między nutami
-
-            //DekodowanieAlleli
-            string dekodowanaPierwsza = DecodeGene(nutaPierwsza, semitonesSelected);
-            string dekodowanaDruga = DecodeGene(nutaDruga, semitonesSelected);
-
-            string[] wartosciPierwsza = dekodowanaPierwsza.Split(';');
-            string nutaP = wartosciPierwsza[0];
-            int oktawaP = int.Parse(wartosciPierwsza[1]);
-            double czasTrwaniaP = double.Parse(wartosciPierwsza[2]);
-
-            string[] wartosciDruga = dekodowanaDruga.Split(';');
-            string nutaD = wartosciDruga[0];
-            int oktawaD = int.Parse(wartosciDruga[1]);
-            double czasTrwaniaD = double.Parse(wartosciDruga[2]);
-
-            //Obliczanie odległości w interwale
-            ///
-
-            double odleglosc = OdlegloscOktawa(oktawaP, oktawaD);
-            return odleglosc;
-        }
-
-        public static double OdlegloscOktawa(int oktawaP, int oktawaD)
-        {
-            int odleglosc = 0;
-            double waga = 0;
-
-            if (oktawaP < oktawaD)
-                odleglosc = oktawaD - oktawaP;
-            else if (oktawaP > oktawaD)
-                odleglosc = oktawaP - oktawaD;
-            else if (oktawaP == oktawaD)
-                odleglosc = 0;
-
-            if (odleglosc == 0)
-                waga = 1.0;
-            else if (odleglosc == 1)
-                waga = 0.7;
-            else if (odleglosc > 1)
-                waga = 0.3;
-
-            return waga;
-        }
-
-        public static List<double> OcenaPopulacji(string[][] populacja, string[] semitonesSelected)
-        {
-            List<double> listaOcen = new List<double>();
-            double ocena;
-
-            for (int i = 0; i < populacja.Length; i++)
-            {
-                ocena = 0;
-
-                //Przejście przez wszystkie nuty aż do przedostatniej
-                for (int j = 0; j < populacja[i].Length - 1; j++)
-                {
-                    ocena += OcenaNuty(populacja[i][j], populacja[i][j + 1], semitonesSelected);
-                }
-                listaOcen.Add(ocena);
-            }
-            return listaOcen;
-        }
-
-
-
-
 
 
 

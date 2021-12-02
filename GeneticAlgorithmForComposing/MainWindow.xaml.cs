@@ -88,15 +88,74 @@ namespace GeneticAlgorithmForComposing
             //GENETIC PARAMETERS
             int populationValue = int.Parse(populationSize.Text);
             int iterationsValue = int.Parse(generations.Text);
-            //double crossoverProbabilityValue = double.Parse(probCrossover.Text);
-            //double MutationProbabilityValue = double.Parse(probMutation.Text);
+            int crossoverProbabilityValue = int.Parse(probCrossover.Text);
+            int mutationProbabilityValue = int.Parse(probMutation.Text);
+            int tournamentSize;
 
             //GENETIC ALGORITHM
             string[] chromosomeChoosen;
-            string[][] population;
+            double chromosomeChoosenEvaluation;//ocena wybranego osobnika
+
+            semitonesSelected = SetSign(scaleSelected);
+            string[][] population = GeneticAlgorithm.GeneratePopulation(populationValue, scaleSelected, measuresValue, semitonesSelected);
+            List<double> evaluationPopulation;
+            string[][] populationAfterSelection;
+            string[][] populationAfterCrossover;
+            string[][] populationAfterMutation;
+            List<double> evaluation = GeneticAlgorithm.FitnessFunction(population, semitonesSelected, scaleSelected);
+            int counter = 0;
+
+            //OPERATORS
+            int selectedSelection = int.Parse(selection.SelectedIndex.ToString());
+            //int selectedMutation = int.Parse(selection.SelectedIndex.ToString());
+
+            chromosomeChoosenEvaluation = evaluation.Max();
+            chromosomeChoosen = population[evaluation.IndexOf(chromosomeChoosenEvaluation)];
+
+            while (counter <= iterationsValue)
+            {
+                //SELECTION
+                if (selectedSelection == 0){
+                    tournamentSize = int.Parse(tournament.Text);
+                    populationAfterSelection = GeneticAlgorithm.TournamentSelection(population, evaluation, tournamentSize);
+                }
+                else {
+                    populationAfterSelection = GeneticAlgorithm.RouletteWheelSelection(population, evaluation);
+                }
+
+                //CROSSOVER
+                populationAfterCrossover = GeneticAlgorithm.Crossover(populationAfterSelection, crossoverProbabilityValue, measuresValue, semitonesSelected);
+
+                //MUTATION
+                if (selectedSelection == 0){
+                    populationAfterMutation = GeneticAlgorithm.MutationSemitones(populationAfterCrossover, mutationProbabilityValue);
+                }
+                else {
+                    populationAfterMutation = GeneticAlgorithm.MutationSemitones(populationAfterCrossover, mutationProbabilityValue);
+                }
+
+                //EVALUATION
+                evaluation = GeneticAlgorithm.FitnessFunction(populationAfterMutation, semitonesSelected, scaleSelected);
+                population = populationAfterMutation;
+                evaluationPopulation = evaluation;
+
+                if (evaluation.Max() > chromosomeChoosenEvaluation){
+                    chromosomeChoosenEvaluation = evaluation.Max();
+                    chromosomeChoosen = population[evaluation.IndexOf(chromosomeChoosenEvaluation)];
+                }
+
+                counter++;
+            }
+
+
+
+            //CHOOSEN
+            string choosen = string.Join(" ", chromosomeChoosen);
+            show.Text = choosen.ToString();
 
 
             //**************************
+            /*
             semitonesSelected = SetSign(scaleSelected);
             string[] chromosom = GeneticAlgorithm.GenerateChromosome(scaleSelected, measuresValue);
             kodowanyChromosom = GeneticAlgorithm.CodeChromosome(chromosom, semitonesSelected);
@@ -107,23 +166,20 @@ namespace GeneticAlgorithmForComposing
             string[][] wysel;
 
 
-            int selectedSelection = int.Parse(selection.SelectedIndex.ToString());
+            
             if (selectedSelection == 0){
-                wysel = GeneticAlgorithm.TournamentSelection(populacja, ocena, 2);
+                tournamentSize = int.Parse(tournament.Text);
+                wysel = GeneticAlgorithm.TournamentSelection(populacja, ocena, tournamentSize);
             }
             else {
                 wysel = GeneticAlgorithm.RouletteWheelSelection(populacja, ocena);
             }
             
 
-            string[][] krzyzowanie = GeneticAlgorithm.Crossover(wysel, 0.755, measuresValue, semitonesSelected);
-
+            string[][] krzyzowanie = GeneticAlgorithm.Crossover(wysel, 755, measuresValue, semitonesSelected);
+            */
             //**************************
 
-
-            //Show
-            string rozw = string.Join(" ", krzyzowanie[0]);
-            show.Text = rozw.ToString();
 
             //Buttons
             play.IsEnabled = true;

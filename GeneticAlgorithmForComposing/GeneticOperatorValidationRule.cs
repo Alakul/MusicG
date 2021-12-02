@@ -8,18 +8,18 @@ using System.Windows.Controls;
 
 namespace GeneticAlgorithmForComposing
 {
-    class CrossoverValidationRule : ValidationRule
+    public class GeneticOperatorValidationRule : ValidationRule
     {
-        public double MinValue { get; set; }
-        public double MaxValue { get; set; }
+        public int MinValue { get; set; }
+        public int MaxValue { get; set; }
 
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
-            string crossoverValue = value as string;
+            string geneticOperatorValue = value as string;
 
-            double crossover = 0;
-            if (double.TryParse(crossoverValue, out crossover) || double.TryParse(crossoverValue, NumberStyles.Any, cultureInfo, out crossover)){
-                if ((crossover <= MinValue) || (crossover >= MaxValue)){
+            int geeticOperator = 0;
+            if (int.TryParse(geneticOperatorValue, out geeticOperator)){
+                if ((geeticOperator <= MinValue) || (geeticOperator >= MaxValue)){
                     return new ValidationResult(false, "Prawdopodobienstwo powinno zawierać się w przedziale od " + MinValue + " do " + MaxValue + ".");
                 }
                 else {
@@ -27,7 +27,7 @@ namespace GeneticAlgorithmForComposing
                 }
             }
             else {
-                return new ValidationResult(false, "Podaj liczbę rzeczywistą dodatnią!");
+                return new ValidationResult(false, "Podaj liczbę całkowitą dodatnią!");
             }
         }
     }

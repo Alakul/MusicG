@@ -116,15 +116,15 @@
                 <Border Style="{StaticResource border}" Grid.Column="0" Grid.Row="2">
                     <TextBlock Style="{StaticResource textBlock}">
                         Prawdopodobieństwo<LineBreak/>
-                        krzyżowania:
+                        krzyżowania (x/1000):
                     </TextBlock>
                 </Border>
                 <Border Style="{StaticResource border}" Grid.Column="1" Grid.Row="2">
                     <TextBox x:Name="probCrossover" Style="{StaticResource textBoxInError}">
                         <TextBox.Text>
-                            <Binding Path="CrossoverProbability" StringFormat="{}{0:#,##}}" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
+                            <Binding Path="CrossoverProbability" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
                                 <Binding.ValidationRules>
-                                    <local:CrossoverValidationRule MinValue="0" MaxValue="1"/>
+                                    <local:GeneticOperatorValidationRule MinValue="0" MaxValue="1001"/>
                                 </Binding.ValidationRules>
                             </Binding>
                         </TextBox.Text>
@@ -134,15 +134,15 @@
                 <Border Style="{StaticResource border}" Grid.Column="0" Grid.Row="3">
                     <TextBlock Style="{StaticResource textBlock}">
                         Prawdopodobieństwo<LineBreak/>
-                        mutacji:
+                        mutacji (x/1000):
                     </TextBlock>
                 </Border>
                 <Border Style="{StaticResource border}" Grid.Column="1" Grid.Row="3">
                     <TextBox x:Name="probMutation" Style="{StaticResource textBoxInError}">
                         <TextBox.Text>
-                            <Binding Path="MutationProbability" StringFormat="{}{0:#,##}}" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
+                            <Binding Path="MutationProbability" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
                                 <Binding.ValidationRules>
-                                    <local:CrossoverValidationRule MinValue="0" MaxValue="1"/>
+                                    <local:GeneticOperatorValidationRule MinValue="0" MaxValue="1001"/>
                                 </Binding.ValidationRules>
                             </Binding>
                         </TextBox.Text>
@@ -204,7 +204,7 @@
                 </Grid.RowDefinitions>
 
                 <Border Style="{StaticResource border}" Grid.Column="0" Grid.Row="0">
-                    <Button x:Name="compose" Content="Komponuj" Click="Compose">
+                    <Button x:Name="compose" Content="Komponuj" Click="Compose" >
                         <Button.Style>
                             <Style TargetType="{x:Type Button}">
                                 <Setter Property="IsEnabled" Value="false" />
