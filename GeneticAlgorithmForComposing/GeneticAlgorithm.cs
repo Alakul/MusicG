@@ -400,11 +400,16 @@ namespace GeneticAlgorithmForComposing
                         //Obliczanie punktu przeciecia dla drugiego potomka
                         double sum2 = 0;
                         while (sum2 < sum){
-                            string gene = decodedParent2[crossPoint2];
-                            string[] geneValues = gene.Split(';');
-                            double durationValue = double.Parse(geneValues[2]);
-                            sum2 += durationValue;
-                            crossPoint2++;
+                            if (crossPoint2 == size2){
+                                break;
+                            }
+                            else {
+                                string gene = decodedParent2[crossPoint2];
+                                string[] geneValues = gene.Split(';');
+                                double durationValue = double.Parse(geneValues[2]);
+                                sum2 += durationValue;
+                                crossPoint2++;
+                            }
                         }
                     }
                     else if (size1 > size2){
@@ -420,11 +425,16 @@ namespace GeneticAlgorithmForComposing
 
                         double sum2 = 0;
                         while (sum2 < sum){
-                            string gene = decodedParent1[crossPoint1];
-                            string[] geneValues = gene.Split(';');
-                            double durationValue = double.Parse(geneValues[2]);
-                            sum2 += durationValue;
-                            crossPoint1++;
+                            if (crossPoint1 == size1){
+                                break;
+                            }
+                            else {
+                                string gene = decodedParent1[crossPoint1];
+                                string[] geneValues = gene.Split(';');
+                                double durationValue = double.Parse(geneValues[2]);
+                                sum2 += durationValue;
+                                crossPoint1++;
+                            }
                         }
                     }
 

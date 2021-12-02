@@ -21,13 +21,13 @@ namespace GeneticAlgorithmForComposing
     /// </summary>
     public partial class MainWindow : Window
     {
-        string[] kodowanyChromosom;
+        string[] chromosomeChoosen;
         string[] semitonesSelected;
 
 
         private void PlayButton(object sender, RoutedEventArgs e)
         {
-            GeneticAlgorithm.Play(kodowanyChromosom, semitonesSelected);
+            GeneticAlgorithm.Play(chromosomeChoosen, semitonesSelected);
         }
 
         private string[] SetDictionary()
@@ -93,7 +93,6 @@ namespace GeneticAlgorithmForComposing
             int tournamentSize;
 
             //GENETIC ALGORITHM
-            string[] chromosomeChoosen;
             double chromosomeChoosenEvaluation;//ocena wybranego osobnika
 
             semitonesSelected = SetSign(scaleSelected);
@@ -151,7 +150,7 @@ namespace GeneticAlgorithmForComposing
 
             //CHOOSEN
             string choosen = string.Join(" ", chromosomeChoosen);
-            show.Text = choosen.ToString();
+            show.Text = choosen.ToString() +" "+ chromosomeChoosenEvaluation.ToString();
 
 
             //**************************
