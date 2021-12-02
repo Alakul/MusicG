@@ -30,6 +30,12 @@ namespace GeneticAlgorithmForComposing
             GeneticAlgorithm.Play(chromosomeChoosen, semitonesSelected);
         }
 
+        private void SaveToMIDIButton(object sender, RoutedEventArgs e)
+        {
+            GeneticAlgorithm.SaveToMIDI(chromosomeChoosen, "nazwa333", semitonesSelected);
+            show.Text = "Zapisano";
+        }
+
         private string[] SetDictionary()
         {
             //SET SCALE DICTIONARY
@@ -149,7 +155,8 @@ namespace GeneticAlgorithmForComposing
 
 
             //CHOOSEN
-            string choosen = string.Join(" ", chromosomeChoosen);
+            string[] chromosomeChoosenDecoded = GeneticAlgorithm.DecodeChromosome(chromosomeChoosen, semitonesSelected);
+            string choosen = string.Join(" ", chromosomeChoosenDecoded);
             show.Text = choosen.ToString() +" "+ chromosomeChoosenEvaluation.ToString();
 
 

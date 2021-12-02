@@ -5,9 +5,9 @@ C:\Users\alicj\Downloads\MidiSlicer\Midi\obj\Debug\Midi.csprojAssemblyReference.
 C:\Users\alicj\Downloads\MidiSlicer\Midi\obj\Debug\Midi.csproj.CoreCompileInputs.cache
 C:\Users\alicj\Downloads\MidiSlicer\Midi\obj\Debug\Midi.dll
 C:\Users\alicj\Downloads\MidiSlicer\Midi\obj\Debug\Midi.pdb
-C:\Users\alicj\source\repos\ProjektMuzyczny\MidiSlicer\Midi\bin\Debug\Midi.xml
-C:\Users\alicj\source\repos\ProjektMuzyczny\MidiSlicer\Midi\bin\Debug\Midi.dll
-C:\Users\alicj\source\repos\ProjektMuzyczny\MidiSlicer\Midi\bin\Debug\Midi.pdb
-C:\Users\alicj\source\repos\ProjektMuzyczny\MidiSlicer\Midi\obj\Debug\Midi.csproj.CoreCompileInputs.cache
-C:\Users\alicj\source\repos\ProjektMuzyczny\MidiSlicer\Midi\obj\Debug\Midi.dll
-C:\Users\alicj\source\repos\ProjektMuzyczny\MidiSlicer\Midi\obj\Debug\Midi.pdb
+C:\Users\alicj\source\repos\GeneticAlgorithmForComposing\MidiSlicer\Midi\bin\Debug\Midi.xml
+C:\Users\alicj\source\repos\GeneticAlgorithmForComposing\MidiSlicer\Midi\bin\Debug\Midi.dll
+C:\Users\alicj\source\repos\GeneticAlgorithmForComposing\MidiSlicer\Midi\bin\Debug\Midi.pdb
+C:\Users\alicj\source\repos\GeneticAlgorithmForComposing\MidiSlicer\Midi\obj\Debug\Midi.csproj.CoreCompileInputs.cache
+C:\Users\alicj\source\repos\GeneticAlgorithmForComposing\MidiSlicer\Midi\obj\Debug\Midi.dll
+C:\Users\alicj\source\repos\GeneticAlgorithmForComposing\MidiSlicer\Midi\obj\Debug\Midi.pdb

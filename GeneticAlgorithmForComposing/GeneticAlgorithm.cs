@@ -538,34 +538,46 @@ namespace GeneticAlgorithmForComposing
         //MIDI
         public static List<MidiNote> GetNotesSequence(string[] chromosome, string[] semitonesSelected)
         {
-            string geneDecoded;
-            string[] geneValues;
-            string noteValue;
-            string octaveValue;
-            double durationValue;
             int counter = 0;
             int value = 60;
 
-            //Tworzenie sekwencji nut
             var noteMap = new List<MidiNote>();
 
-            for (int i = 0; i < chromosome.Length; i++)
-            {
-                geneDecoded = DecodeGene(chromosome[i], semitonesSelected);
-                geneValues = geneDecoded.Split(';');
-                noteValue = geneValues[0];
-                octaveValue = geneValues[1];
-                durationValue = double.Parse(geneValues[2]);
+            for (int i = 0; i < chromosome.Length; i++){
+                string geneDecoded = DecodeGene(chromosome[i], semitonesSelected);
+                string[] geneValues = geneDecoded.Split(';');
+                string noteValue = geneValues[0];
+                string octaveValue = geneValues[1];
+                double durationValue = double.Parse(geneValues[2]);
 
-                //Do poprawy
-                if (durationValue == 0.25){
-                    value = 30;
-                }
-                else {
-                    value = 60;
+                switch (durationValue){
+                    case 1.0:
+                        value = 1920;
+                        break;
+                    case 0.75:
+                        value = 1440;
+                        break;
+                    case 0.5:
+                        value = 960;
+                        break;
+                    case 0.375:
+                        value = 720;
+                        break;
+                    case 0.25:
+                        value = 480;
+                        break;
+                    case 0.1875:
+                        value = 360;
+                        break;
+                    case 0.125:
+                        value = 240;
+                        break;
+                    case 0.0625:
+                        value = 120;
+                        break;
                 }
 
-                noteMap.Add(new MidiNote(counter, 0, noteValue + octaveValue, 127, 240));
+                noteMap.Add(new MidiNote(counter, 0, noteValue + octaveValue, 127, value-1));
                 counter += value;
             }
             return noteMap;
@@ -580,10 +592,26 @@ namespace GeneticAlgorithmForComposing
                 stream.Open();
                 var sequence = MidiSequence.FromNoteMap(noteMap);
                 stream.Start();
-                Console.Error.WriteLine("Press any key to exit...");
+                //Console.Error.WriteLine("Press any key to exit...");
                 stream.Send(sequence.Events);
                 Console.ReadKey();
             }
         }
+
+        public static void SaveToMIDI(string[] chromosome, string fileName, string[] semitonesSelected)
+        {
+            var file = new MidiFile();
+            var track = new MidiSequence();
+
+            List<MidiNote> noteMap = GetNotesSequence(chromosome, semitonesSelected);
+            var trks = new List<MidiSequence>();
+            trks.Add(MidiSequence.FromNoteMap(noteMap));
+            var t = MidiSequence.Merge(trks);
+            track = MidiSequence.Merge(track, t);
+
+            file.Tracks.Add(track);
+            file.WriteTo("D:\\Pulpit\\" + fileName + ".mid");
+        }
+
     }
 }

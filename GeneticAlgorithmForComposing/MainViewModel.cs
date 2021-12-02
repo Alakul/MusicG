@@ -12,7 +12,7 @@ namespace GeneticAlgorithmForComposing
         {
             this.MeasureValue = 4;
             this.PopulationSize = 40;
-            this.GenerationValue = 100;
+            this.GenerationValue = 10;
 
             this.CrossoverProbability = 755;
             this.MutationProbability = 55;

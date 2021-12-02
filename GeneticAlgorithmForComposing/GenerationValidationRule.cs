@@ -13,7 +13,6 @@ namespace GeneticAlgorithmForComposing
         public int MinValue { get; set; }
         public int MaxValue { get; set; }
 
-        //Rozmiar podzielny przez 2
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
             string generationsValue = value as string;
