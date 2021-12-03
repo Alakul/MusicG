@@ -32,8 +32,13 @@ namespace GeneticAlgorithmForComposing
 
         private void SaveToMIDIButton(object sender, RoutedEventArgs e)
         {
-            GeneticAlgorithm.SaveToMIDI(chromosomeChoosen, "nazwa333", semitonesSelected);
-            show.Text = "Zapisano";
+            if (GeneticAlgorithm.SaveToMIDI(chromosomeChoosen, semitonesSelected) == true){
+                show.Text = "Zapisano";
+            }
+            else {
+                show.Text = "Coś poszło nie tak.";
+            }
+            
         }
 
         private string[] SetDictionary()

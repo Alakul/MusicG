@@ -10,10 +10,9 @@ namespace GeneticAlgorithmForComposing
 {
     class GeneticAlgorithm
     {
-        public static double[] duration = new[] { 1.0, 0.75, 0.5, 0.375, 0.25, 0.1875, 0.125, 0.0625 };
-
         public static int semitones = Music.semitones;
         public static int[] octaveValues = Music.octaveValues;
+        public static double[] duration = Music.duration;
 
         public static Random random = new Random();
 
@@ -599,7 +598,7 @@ namespace GeneticAlgorithmForComposing
             }
         }
 
-        public static void SaveToMIDI(string[] chromosome, string fileName, string[] semitonesSelected)
+        public static Boolean SaveToMIDI(string[] chromosome, string[] semitonesSelected)
         {
             var file = new MidiFile();
 
@@ -618,7 +617,11 @@ namespace GeneticAlgorithmForComposing
 
             if (saveFileDialog.ShowDialog() == true){
                 file.WriteTo(saveFileDialog.FileName);
-            } 
+                return true;
+            }
+            else{
+                return false;
+            }
         }
     }
 }

@@ -62,7 +62,7 @@
                         <TextBox.Text>
                             <Binding Path="MeasureValue" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
                                 <Binding.ValidationRules>
-                                    <local:MeasureValidationRule MinValue="1" MaxValue="8"/>
+                                    <local:MainValidationRule MinValue="1" MaxValue="8" Message="Liczba taktów powinna zawierać się w przedziale od"/>
                                 </Binding.ValidationRules>
                             </Binding>
                         </TextBox.Text>
@@ -111,7 +111,7 @@
                         <TextBox.Text>
                             <Binding Path="GenerationValue" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
                                 <Binding.ValidationRules>
-                                    <local:GenerationValidationRule MinValue="0" MaxValue="1000000"/>
+                                    <local:MainValidationRule MinValue="1" MaxValue="1000000" Message="Liczba generacji powinna zawierać się w przedziale od"/>
                                 </Binding.ValidationRules>
                             </Binding>
                         </TextBox.Text>
@@ -130,7 +130,7 @@
                         <TextBox.Text>
                             <Binding Path="CrossoverProbability" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
                                 <Binding.ValidationRules>
-                                    <local:GeneticOperatorValidationRule MinValue="0" MaxValue="1001"/>
+                                    <local:MainValidationRule MinValue="1" MaxValue="1000" Message="Prawdopodobienstwo powinno zawierać się w przedziale od"/>
                                 </Binding.ValidationRules>
                             </Binding>
                         </TextBox.Text>
@@ -149,7 +149,7 @@
                         <TextBox.Text>
                             <Binding Path="MutationProbability" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
                                 <Binding.ValidationRules>
-                                    <local:GeneticOperatorValidationRule MinValue="0" MaxValue="1001"/>
+                                    <local:MainValidationRule MinValue="1" MaxValue="1000" Message="Prawdopodobienstwo powinno zawierać się w przedziale od"/>
                                 </Binding.ValidationRules>
                             </Binding>
                         </TextBox.Text>
@@ -175,7 +175,7 @@
                         <TextBox.Text>
                             <Binding Path="TournamentValue" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
                                 <Binding.ValidationRules>
-                                    <local:TournamentValidationRule MinValue="2" MaxValue="40"/>
+                                    <local:MainValidationRule MinValue="2" MaxValue="40" Message="Rozmiar turnieju powinien zawierać się w przedziale od"/>
                                 </Binding.ValidationRules>
                             </Binding>
                         </TextBox.Text>
@@ -220,6 +220,7 @@
                                             <Condition Binding="{Binding ElementName=generations, Path=(Validation.HasError)}" Value="false" />
                                             <Condition Binding="{Binding ElementName=probCrossover, Path=(Validation.HasError)}" Value="false" />
                                             <Condition Binding="{Binding ElementName=probMutation, Path=(Validation.HasError)}" Value="false" />
+                                            <Condition Binding="{Binding ElementName=tournament, Path=(Validation.HasError)}" Value="false" />
                                         </MultiDataTrigger.Conditions>
                                         <Setter Property="IsEnabled" Value="true" />
                                     </MultiDataTrigger>

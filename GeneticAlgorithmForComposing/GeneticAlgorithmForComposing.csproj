@@ -55,8 +55,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="GenerationValidationRule.cs" />
-    <Compile Include="TournamentValidationRule.cs" />
+    <Compile Include="MainValidationRule.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -77,9 +76,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MeasureValidationRule.cs" />
     <Compile Include="Music.cs" />
-    <Compile Include="GeneticOperatorValidationRule.cs" />
     <Compile Include="PopulationValidationRule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
