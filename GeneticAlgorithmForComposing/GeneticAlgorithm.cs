@@ -1,4 +1,7 @@
 ﻿using M;
+using Manufaktura.Controls.Model;
+using Manufaktura.Music.Model;
+using Manufaktura.Music.Model.MajorAndMinor;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
@@ -10,9 +13,9 @@ namespace GeneticAlgorithmForComposing
 {
     class GeneticAlgorithm
     {
-        public static int semitones = Music.semitones;
-        public static int[] octaveValues = Music.octaveValues;
-        public static double[] duration = Music.duration;
+        public static int semitones = MusicData.semitones;
+        public static int[] octaveValues = MusicData.octaveValues;
+        public static double[] duration = MusicData.duration;
 
         public static Random random = new Random();
 
@@ -535,93 +538,6 @@ namespace GeneticAlgorithmForComposing
 
 
 
-        //MIDI
-        public static List<MidiNote> GetNotesSequence(string[] chromosome, string[] semitonesSelected)
-        {
-            int counter = 0;
-            int value = 60;
-
-            var noteMap = new List<MidiNote>();
-
-            for (int i = 0; i < chromosome.Length; i++){
-                string geneDecoded = DecodeGene(chromosome[i], semitonesSelected);
-                string[] geneValues = geneDecoded.Split(';');
-                string noteValue = geneValues[0];
-                string octaveValue = geneValues[1];
-                double durationValue = double.Parse(geneValues[2]);
-
-                switch (durationValue){
-                    case 1.0:
-                        value = 1920;
-                        break;
-                    case 0.75:
-                        value = 1440;
-                        break;
-                    case 0.5:
-                        value = 960;
-                        break;
-                    case 0.375:
-                        value = 720;
-                        break;
-                    case 0.25:
-                        value = 480;
-                        break;
-                    case 0.1875:
-                        value = 360;
-                        break;
-                    case 0.125:
-                        value = 240;
-                        break;
-                    case 0.0625:
-                        value = 120;
-                        break;
-                }
-
-                noteMap.Add(new MidiNote(counter, 0, noteValue + octaveValue, 127, value-1));
-                counter += value;
-            }
-            return noteMap;
-        }
-
-        public static void Play(string[] chromosome, string[] semitonesSelected)
-        {
-            List<MidiNote> noteMap = GetNotesSequence(chromosome, semitonesSelected);
-
-            using (var stream = MidiDevice.Streams[0])
-            {
-                stream.Open();
-                var sequence = MidiSequence.FromNoteMap(noteMap);
-                stream.Start();
-                //Console.Error.WriteLine("Press any key to exit...");
-                stream.Send(sequence.Events);
-                Console.ReadKey();
-            }
-        }
-
-        public static Boolean SaveToMIDI(string[] chromosome, string[] semitonesSelected)
-        {
-            var file = new MidiFile();
-
-            List<MidiNote> noteMap = GetNotesSequence(chromosome, semitonesSelected);
-            var sequenceTraks = new List<MidiSequence>();
-            sequenceTraks.Add(MidiSequence.FromNoteMap(noteMap));
-            var track = MidiSequence.Merge(sequenceTraks);
-            var finalTrack = MidiSequence.Merge(track, track);
-            file.Tracks.Add(finalTrack);
-
-            //OPEN DIALOG
-            SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.Filter = "MIDI file (*.mid)|*.mid";
-            saveFileDialog.FileName = "Melody";
-            saveFileDialog.DefaultExt = ".mid";
-
-            if (saveFileDialog.ShowDialog() == true){
-                file.WriteTo(saveFileDialog.FileName);
-                return true;
-            }
-            else{
-                return false;
-            }
-        }
+        
     }
 }

@@ -20,3 +20,12 @@ C:\Users\alicj\source\repos\GeneticAlgorithmForComposing\GeneticAlgorithmForComp
 C:\Users\alicj\source\repos\GeneticAlgorithmForComposing\GeneticAlgorithmForComposing\obj\Debug\GeneratedInternalTypeHelper.g.cs
 C:\Users\alicj\source\repos\GeneticAlgorithmForComposing\GeneticAlgorithmForComposing\obj\Debug\App.baml
 C:\Users\alicj\source\repos\GeneticAlgorithmForComposing\GeneticAlgorithmForComposing\obj\Debug\ControlsDictionary.baml
+C:\Users\alicj\source\repos\GeneticAlgorithmForComposing\GeneticAlgorithmForComposing\bin\Debug\Manufaktura.Controls.dll
+C:\Users\alicj\source\repos\GeneticAlgorithmForComposing\GeneticAlgorithmForComposing\bin\Debug\Manufaktura.Controls.WPF.dll
+C:\Users\alicj\source\repos\GeneticAlgorithmForComposing\GeneticAlgorithmForComposing\bin\Debug\Manufaktura.Music.dll
+C:\Users\alicj\source\repos\GeneticAlgorithmForComposing\GeneticAlgorithmForComposing\bin\Debug\Manufaktura.Controls.WPF.pdb
+C:\Users\alicj\source\repos\GeneticAlgorithmForComposing\GeneticAlgorithmForComposing\bin\Debug\Manufaktura.Controls.pdb
+C:\Users\alicj\source\repos\GeneticAlgorithmForComposing\GeneticAlgorithmForComposing\bin\Debug\Manufaktura.Music.pdb
+C:\Users\alicj\source\repos\GeneticAlgorithmForComposing\GeneticAlgorithmForComposing\bin\Debug\Sanford.txt
+C:\Users\alicj\source\repos\GeneticAlgorithmForComposing\GeneticAlgorithmForComposing\bin\Debug\Manufaktura.Controls.Desktop.dll
+C:\Users\alicj\source\repos\GeneticAlgorithmForComposing\GeneticAlgorithmForComposing\bin\Debug\Manufaktura.Controls.Desktop.pdb

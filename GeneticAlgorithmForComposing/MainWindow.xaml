@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GeneticAlgorithmForComposing"
+        xmlns:ManufakturaControls="clr-namespace:Manufaktura.Controls.WPF;assembly=Manufaktura.Controls.WPF"
         mc:Ignorable="d"
         Title="MusicGen" Height="450" Width="800">
 
@@ -208,7 +209,7 @@
                 </Grid.RowDefinitions>
 
                 <Border Style="{StaticResource border}" Grid.Column="0" Grid.Row="0">
-                    <Button x:Name="compose" Content="Komponuj" Click="Compose" >
+                    <Button x:Name="compose" Content="Komponuj" Click="Compose">
                         <Button.Style>
                             <Style TargetType="{x:Type Button}">
                                 <Setter Property="IsEnabled" Value="false" />
@@ -231,15 +232,24 @@
                 </Border>
                 
                 <Border Style="{StaticResource border}" Grid.Column="1" Grid.Row="0">
-                    <Button x:Name="play" Click="PlayButton" Content="Graj"/>
+                    <Button x:Name="play" Click="PlayButton" Content="Odtwórz"/>
                 </Border>
 
                 <Border Style="{StaticResource border}" Grid.ColumnSpan="3" Grid.Column="0" Grid.Row="1">
-                    <TextBlock x:Name="show" TextWrapping="Wrap"/>
+                    <StackPanel>
+                        <StackPanel Grid.Row="1" Orientation="Horizontal">
+                            <Button Content="Stop" Width="100" Click="StopButton"/>
+                        </StackPanel>
+                        <TextBlock x:Name="show" TextWrapping="Wrap"/>
+                        <ManufakturaControls:NoteViewer x:Name="noteViewer" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ScoreSource="{Binding Data}" IsSelectable="False"/>
+                    </StackPanel>
                 </Border>
 
                 <Border Style="{StaticResource border}" Grid.Column="3" Grid.Row="2">
-                    <Button x:Name="saveAsMIDI" Click="SaveToMIDIButton" Content="Zapisz do pliku MIDI" HorizontalAlignment="Right"/>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock x:Name="file" TextWrapping="Wrap" HorizontalAlignment="Stretch" Width="270"/>
+                        <Button x:Name="saveAsMIDI" Click="SaveToMIDIButton" Content="Zapisz do pliku MIDI" HorizontalAlignment="Right"/>
+                    </StackPanel>
                 </Border>
             </Grid>
         </Border>

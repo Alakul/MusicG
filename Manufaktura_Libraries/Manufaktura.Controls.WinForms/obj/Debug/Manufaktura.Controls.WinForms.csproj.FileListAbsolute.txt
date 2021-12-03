@@ -1,0 +1,11 @@
+C:\Users\alicj\Downloads\Manufaktura_Libraries\Manufaktura.Controls.WinForms\bin\Debug\Manufaktura.Controls.WinForms.dll
+C:\Users\alicj\Downloads\Manufaktura_Libraries\Manufaktura.Controls.WinForms\bin\Debug\Manufaktura.Controls.WinForms.pdb
+C:\Users\alicj\Downloads\Manufaktura_Libraries\Manufaktura.Controls.WinForms\bin\Debug\Manufaktura.Controls.dll
+C:\Users\alicj\Downloads\Manufaktura_Libraries\Manufaktura.Controls.WinForms\bin\Debug\Manufaktura.Music.dll
+C:\Users\alicj\Downloads\Manufaktura_Libraries\Manufaktura.Controls.WinForms\bin\Debug\Manufaktura.Controls.pdb
+C:\Users\alicj\Downloads\Manufaktura_Libraries\Manufaktura.Controls.WinForms\bin\Debug\Manufaktura.Music.pdb
+C:\Users\alicj\Downloads\Manufaktura_Libraries\Manufaktura.Controls.WinForms\obj\Debug\Manufaktura.Controls.WinForms.csprojAssemblyReference.cache
+C:\Users\alicj\Downloads\Manufaktura_Libraries\Manufaktura.Controls.WinForms\obj\Debug\Manufaktura.Controls.WinForms.csproj.CoreCompileInputs.cache
+C:\Users\alicj\Downloads\Manufaktura_Libraries\Manufaktura.Controls.WinForms\obj\Debug\Manufaktura.Controls.WinForms.csproj.CopyComplete
+C:\Users\alicj\Downloads\Manufaktura_Libraries\Manufaktura.Controls.WinForms\obj\Debug\Manufaktura.Controls.WinForms.dll
+C:\Users\alicj\Downloads\Manufaktura_Libraries\Manufaktura.Controls.WinForms\obj\Debug\Manufaktura.Controls.WinForms.pdb

@@ -55,7 +55,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="MainValidationRule.cs" />
+    <Compile Include="Commands\OpenCommand.cs" />
+    <Compile Include="Commands\PlayCommand.cs" />
+    <Compile Include="Commands\PlayerCommand.cs" />
+    <Compile Include="Commands\StopCommand.cs" />
+    <Compile Include="MusicController.cs" />
+    <Compile Include="ValidationRules\MainValidationRule.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -76,8 +81,8 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Music.cs" />
-    <Compile Include="PopulationValidationRule.cs" />
+    <Compile Include="MusicData.cs" />
+    <Compile Include="ValidationRules\PopulationValidationRule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -104,6 +109,22 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Manufaktura_Libraries\Manufaktura.Controls.Desktop\Manufaktura.Controls.Desktop.csproj">
+      <Project>{ddb37937-0275-4733-a1f3-50f442d4bc0f}</Project>
+      <Name>Manufaktura.Controls.Desktop</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Manufaktura_Libraries\Manufaktura.Controls.WPF\Manufaktura.Controls.WPF.csproj">
+      <Project>{878452f2-698f-48f8-8ac1-bebfe55cfaf3}</Project>
+      <Name>Manufaktura.Controls.WPF</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Manufaktura_Libraries\Manufaktura.Controls\Manufaktura.Controls.csproj">
+      <Project>{f3ecce69-09a5-4407-b722-d210e071e816}</Project>
+      <Name>Manufaktura.Controls</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Manufaktura_Libraries\Manufaktura.Music\Manufaktura.Music.csproj">
+      <Project>{d4a88326-c1f9-4133-bce5-e0fa2afed90f}</Project>
+      <Name>Manufaktura.Music</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MidiSlicer\Midi\Midi.csproj">
       <Project>{2cee0914-509b-40bf-975c-b523434578db}</Project>
       <Name>Midi</Name>

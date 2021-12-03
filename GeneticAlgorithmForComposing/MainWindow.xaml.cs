@@ -1,4 +1,8 @@
-﻿using System;
+﻿using GeneticAlgorithmForComposing.Commands;
+using Manufaktura.Controls.Audio;
+using Manufaktura.Controls.Desktop.Audio;
+using Manufaktura.Controls.Model;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -13,6 +17,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using static Manufaktura.Controls.Audio.ScorePlayer;
 
 namespace GeneticAlgorithmForComposing
 {
@@ -23,22 +28,38 @@ namespace GeneticAlgorithmForComposing
     {
         string[] chromosomeChoosen;
         string[] semitonesSelected;
-
+        MainViewModel viewModel;
+        public static Score score;
 
         private void PlayButton(object sender, RoutedEventArgs e)
         {
-            GeneticAlgorithm.Play(chromosomeChoosen, semitonesSelected);
+            //Execute command
+            object parameter = null;
+            PlayCommand playCommand = new PlayCommand(viewModel);
+            playCommand.Execute(parameter);
+
+            compose.IsEnabled = false;
+        }
+
+        private void Stop()
+        {
+            //Execute command
+            object parameter = null;
+            StopCommand stopCommand = new StopCommand(viewModel);
+            stopCommand.Execute(parameter);
+        }
+
+        public async void StopButton(object sender, RoutedEventArgs e)
+        {
+            Stop();
+            await Task.Delay(2000);
+
+            compose.IsEnabled = true;
         }
 
         private void SaveToMIDIButton(object sender, RoutedEventArgs e)
         {
-            if (GeneticAlgorithm.SaveToMIDI(chromosomeChoosen, semitonesSelected) == true){
-                show.Text = "Zapisano";
-            }
-            else {
-                show.Text = "Coś poszło nie tak.";
-            }
-            
+            MusicController.SaveToMIDI(chromosomeChoosen, semitonesSelected);
         }
 
         private string[] SetDictionary()
@@ -49,10 +70,10 @@ namespace GeneticAlgorithmForComposing
             Dictionary<string, string[]> selectedScaleDictionary = new Dictionary<string, string[]>();
 
             if (selectedScale == 0){
-                selectedScaleDictionary = new Dictionary<string, string[]>(Music.scaleMajor);
+                selectedScaleDictionary = new Dictionary<string, string[]>(MusicData.scaleMajor);
             }
             else if (selectedScale == 1){
-                selectedScaleDictionary = new Dictionary<string, string[]>(Music.scaleMinor);
+                selectedScaleDictionary = new Dictionary<string, string[]>(MusicData.scaleMinor);
             }
             string[] scaleSelected = selectedScaleDictionary.Values.ElementAt(selectedScaleValue);
 
@@ -64,30 +85,18 @@ namespace GeneticAlgorithmForComposing
             string[] semitonesSelected = new string[12];
             for (int i = 0; i < scale.Length; i++){
                 if (scale[i].Contains('#') == true){
-                    semitonesSelected = Music.semitonesSharp;
+                    semitonesSelected = MusicData.semitonesSharp;
                     break;
                 }
                 else if (scale[i].Contains('b') == true){
-                    semitonesSelected = Music.semitonesFlat;
+                    semitonesSelected = MusicData.semitonesFlat;
                     break;
                 }
                 else {
-                    semitonesSelected = Music.semitonesSharp;
+                    semitonesSelected = MusicData.semitonesSharp;
                 }
             }
             return semitonesSelected;
-        }
-
-        public void GetSelection()
-        {
-            
-
-
-        }
-
-        public void GetMutation()
-        {
-
         }
 
         private void Compose(object sender, RoutedEventArgs e)
@@ -157,57 +166,37 @@ namespace GeneticAlgorithmForComposing
                 counter++;
             }
 
-
-
             //CHOOSEN
             string[] chromosomeChoosenDecoded = GeneticAlgorithm.DecodeChromosome(chromosomeChoosen, semitonesSelected);
             string choosen = string.Join(" ", chromosomeChoosenDecoded);
             show.Text = choosen.ToString() +" "+ chromosomeChoosenEvaluation.ToString();
 
-
-            //**************************
-            /*
-            semitonesSelected = SetSign(scaleSelected);
-            string[] chromosom = GeneticAlgorithm.GenerateChromosome(scaleSelected, measuresValue);
-            kodowanyChromosom = GeneticAlgorithm.CodeChromosome(chromosom, semitonesSelected);
-            string[] dekodowanyChromosom = GeneticAlgorithm.DecodeChromosome(kodowanyChromosom, semitonesSelected);
-
-            string[][] populacja = GeneticAlgorithm.GeneratePopulation(populationValue, scaleSelected, measuresValue, semitonesSelected);
-            List<double> ocena = GeneticAlgorithm.OcenaPopulacji(populacja, semitonesSelected);
-            string[][] wysel;
-
-
-            
-            if (selectedSelection == 0){
-                tournamentSize = int.Parse(tournament.Text);
-                wysel = GeneticAlgorithm.TournamentSelection(populacja, ocena, tournamentSize);
-            }
-            else {
-                wysel = GeneticAlgorithm.RouletteWheelSelection(populacja, ocena);
-            }
-            
-
-            string[][] krzyzowanie = GeneticAlgorithm.Crossover(wysel, 755, measuresValue, semitonesSelected);
-            */
-            //**************************
-
-
             //Buttons
             play.IsEnabled = true;
             saveAsMIDI.IsEnabled = true;
+
+            //Music notation
+            score = MusicController.WriteSheetMusic();
+            noteViewer.ScoreSource = score;
+
+            //Execute command
+            object parameter = null;
+            OpenCommand openCommand = new OpenCommand(viewModel);
+            openCommand.Execute(parameter);
         }
 
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = new MainViewModel();
+            viewModel = new MainViewModel();
+            DataContext = viewModel;
 
             //Buttons
             play.IsEnabled = false;
             saveAsMIDI.IsEnabled = false;
 
             //ComboBox scale values
-            scale.ItemsSource = Music.scaleValues;
+            scale.ItemsSource = MusicData.scaleValues;
         }
     }
 }

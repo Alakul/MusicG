@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>Manufaktura.Controls</id>
+    <version>1.0.0</version>
+    <authors>Manufaktura.Controls</authors>
+    <description>Package Description</description>
+    <dependencies>
+      <group targetFramework=".NETStandard1.1">
+        <dependency id="Manufaktura.Music" version="1.0.0" exclude="Build,Analyzers" />
+        <dependency id="NETStandard.Library" version="1.6.1" exclude="Build,Analyzers" />
+        <dependency id="Newtonsoft.Json" version="9.0.1" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="C:\Users\alicj\source\repos\GeneticAlgorithmForComposing\Manufaktura_Libraries\Manufaktura.Controls\bin\Debug\netstandard1.1\Manufaktura.Controls.dll" target="lib\netstandard1.1\Manufaktura.Controls.dll" />
+  </files>
+</package>
