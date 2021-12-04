@@ -36,14 +36,29 @@ namespace Manufaktura.Music.Model.MajorAndMinor
             get { return new MajorScale(Step.D, false); }
         }
 
+        public static MajorScale Db
+        {
+            get { return new MajorScale(Step.Db, true); }
+        }
+
         public static MajorScale E
         {
             get { return new MajorScale(Step.E, false); }
         }
 
+        public static MajorScale Eb
+        {
+            get { return new MajorScale(Step.Eb, true); }
+        }
+
         public static MajorScale F
         {
             get { return new MajorScale(Step.F, true); }
+        }
+
+        public static MajorScale FSharp
+        {
+            get { return new MajorScale(Step.FSharp, false); }
         }
 
         public static MajorScale G
@@ -54,6 +69,11 @@ namespace Manufaktura.Music.Model.MajorAndMinor
         public static MajorScale A
         {
             get { return new MajorScale(Step.A, false); }
+        }
+
+        public static MajorScale Ab
+        {
+            get { return new MajorScale(Step.Ab, true); }
         }
 
         public static MajorScale B

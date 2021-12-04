@@ -6,6 +6,7 @@ using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -42,20 +43,15 @@ namespace GeneticAlgorithmForComposing
 
                 switch (noteValue){
                     case "Db":
-                        noteValue = "C#";
-                        break;
+                        noteValue = "C#"; break;
                     case "Eb":
-                        noteValue = "D#";
-                        break;
+                        noteValue = "D#"; break;
                     case "Gb":
-                        noteValue = "F#";
-                        break;
+                        noteValue = "F#"; break;
                     case "Ab":
-                        noteValue = "G#";
-                        break;
+                        noteValue = "G#"; break;
                     case "Bb":
-                        noteValue = "A#";
-                        break;
+                        noteValue = "A#"; break;
                     default:
                         break;
                 }
@@ -63,16 +59,12 @@ namespace GeneticAlgorithmForComposing
                 string geneDecoded = noteValue + ";" + octaveValue + ";" + durationValue;
                 chromosomeDecoded[i] = geneDecoded;
             }
-
-            //string[] chromosomeCoded = GeneticAlgorithm.CodeChromosome(chromosomeDecoded, semitonesSelected);
             return chromosomeDecoded;
         }
 
         public static List<MidiNote> GetNotesSequence(string[] chromosome)
         {
             int counter = 0;
-            int value = 60;
-
             var noteMap = new List<MidiNote>();
 
             for (int i = 0; i < chromosome.Length; i++){
@@ -82,33 +74,7 @@ namespace GeneticAlgorithmForComposing
                 string octaveValue = geneValues[1];
                 double durationValue = double.Parse(geneValues[2]);
 
-                switch (durationValue){
-                    case 1.0:
-                        value = 1920;
-                        break;
-                    case 0.75:
-                        value = 1440;
-                        break;
-                    case 0.5:
-                        value = 960;
-                        break;
-                    case 0.375:
-                        value = 720;
-                        break;
-                    case 0.25:
-                        value = 480;
-                        break;
-                    case 0.1875:
-                        value = 360;
-                        break;
-                    case 0.125:
-                        value = 240;
-                        break;
-                    case 0.0625:
-                        value = 120;
-                        break;
-                }
-
+                int value = (int)(durationValue * 1920);
                 noteMap.Add(new MidiNote(counter, 0, noteValue + octaveValue, 127, value - 1));
                 counter += value;
             }
@@ -137,43 +103,133 @@ namespace GeneticAlgorithmForComposing
             }
         }
 
+
+
         //SHEET MUSIC
-        public static void GetNote()
+        public static Score WriteSheetMusic(string[] chromosome, string[] semitonesSelected, string scaleSet, string scaleName)
         {
-            //zwraca nutę w postaci dla notacji
+            string[] chromosomeDecoded = GeneticAlgorithm.DecodeChromosome(chromosome, semitonesSelected);
+            MajorScale scale = GetScale(scaleSet, scaleName);
+            Score score = Score.CreateOneStaffScore(Clef.Treble, scale);
 
-        }
-
-        public static void GetDuration()
-        {
-            //zwraca czas trwania nuty w postaci dla notacji
-
-        }
-
-        public static Score WriteSheetMusic()
-        {/*
-            string[] chromosomeDecoded = DecodeChromosome(chromosome, semitonesSelected);
-
-            for (int i = 0; i < chromosomeDecoded.Length; i++)
-            {
+            for (int i = 0; i < chromosomeDecoded.Length; i++){
                 string gene = chromosomeDecoded[i];
                 string[] geneValues = gene.Split(';');
                 string noteValue = geneValues[0];
-                int octaveValue = int.Parse(geneValues[1]);
+                string octaveValue = geneValues[1];
+
+                if (noteValue.Contains('#') == true){
+                    noteValue = noteValue.Replace("#", "Sharp");
+                }
+
+                string noteFull = noteValue + octaveValue;
                 double durationValue = double.Parse(geneValues[2]);
+
+                Pitch pitch = GetNote(noteFull);
+                RhythmicDuration rhytmicDuration = GetDuration(durationValue);
+
+                score.FirstStaff.Elements.Add(new Note(pitch, rhytmicDuration));
             }
-            */
-            var r = RhythmicDuration.Quarter;
-            Score score = Score.CreateOneStaffScore(Clef.Treble, new MajorScale(Step.G, false));
-            score.FirstStaff.Elements.Add(new Note(Pitch.FSharp4, r));
-            score.FirstStaff.Elements.Add(new Note(Pitch.FSharp2, r));
-            score.FirstStaff.Elements.Add(new Note(Pitch.D4, r));
-            score.FirstStaff.Elements.Add(new Note(Pitch.D4, r));
-            score.FirstStaff.Elements.Add(new Barline());
-            score.FirstStaff.Elements.Add(new Note(Pitch.D4, r));
+
+            //score.FirstStaff.Elements.Add(new Barline());
 
             return score;
         }
 
+        public static MajorScale GetScale(string scaleSet, string scaleName)
+        {
+            MajorScale scale = MajorScale.C;
+
+            if (scaleSet == "minor"){
+                switch (scaleName){
+                    case "A-moll":
+                        scale = MajorScale.C; break;
+                    case "E-moll":
+                        scale = MajorScale.G; break;
+                    case "H-moll":
+                        scale = MajorScale.D; break;
+                    case "Fis-moll":
+                        scale = MajorScale.A; break;
+                    case "Cis-moll":
+                        scale = MajorScale.E; break;
+                    case "Gis-moll":
+                        scale = MajorScale.B; break;
+                    case "D-moll":
+                        scale = MajorScale.F; break;
+                    case "G-moll":
+                        scale = MajorScale.Bb; break;
+                    case "C-moll":
+                        scale = MajorScale.Eb; break;
+                    case "F-moll":
+                        scale = MajorScale.Ab; break;
+                    case "B-moll":
+                        scale = MajorScale.Db; break;
+                    default:
+                        break;
+                }
+            }
+            else if (scaleSet == "major"){
+                switch (scaleName){
+                    case "C-dur":
+                        scale = MajorScale.C; break;
+                    case "G-dur":
+                        scale = MajorScale.G; break;
+                    case "D-dur":
+                        scale = MajorScale.D; break;
+                    case "A-dur":
+                        scale = MajorScale.A; break;
+                    case "E-dur":
+                        scale = MajorScale.E; break;
+                    case "H-dur":
+                        scale = MajorScale.B; break;
+                    case "F-dur":
+                        scale = MajorScale.F; break;
+                    case "B-dur":
+                        scale = MajorScale.Bb; break;
+                    case "Es-dur":
+                        scale = MajorScale.Eb; break;
+                    case "As-dur":
+                        scale = MajorScale.Ab; break;
+                    case "Des-dur":
+                        scale = MajorScale.Db; break;
+                    default:
+                        break;
+                }
+            }
+            return scale;
+        }
+
+        public static Pitch GetNote(string noteValue)
+        {
+            Pitch pitch = new Pitch();
+            Pitch pitchValue = (Pitch)pitch.GetType().GetProperty(noteValue).GetValue(pitch, null);
+
+            return pitchValue;
+        }
+
+        public static RhythmicDuration GetDuration(double durationValue)
+        {
+            RhythmicDuration rhytmicDuration = new RhythmicDuration();
+
+            switch (durationValue){
+                case 1.0:
+                    rhytmicDuration = RhythmicDuration.Whole; break;
+                case 0.75:
+                    rhytmicDuration = RhythmicDuration.HalfDot; break;
+                case 0.5:
+                    rhytmicDuration = RhythmicDuration.Half; break;
+                case 0.375:
+                    rhytmicDuration = RhythmicDuration.QuarterDot; break;
+                case 0.25:
+                    rhytmicDuration = RhythmicDuration.Quarter; break;
+                case 0.1875:
+                    rhytmicDuration = RhythmicDuration.EighthDot; break;
+                case 0.125:
+                    rhytmicDuration = RhythmicDuration.Eighth; break;
+                case 0.0625:
+                    rhytmicDuration = RhythmicDuration.Sixteenth; break;
+            }
+            return rhytmicDuration;
+        }
     }
 }

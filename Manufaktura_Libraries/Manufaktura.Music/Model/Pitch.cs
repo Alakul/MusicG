@@ -28,9 +28,9 @@ namespace Manufaktura.Music.Model
             {"C", 60}, {"D", 62}, {"E", 64}, {"F", 65}, {"G", 67}, {"A", 69}, {"B", 71}
         };
 
-        public static Pitch A1 { get { return Pitch.FromStep(Step.A, 1); } }
+        //public static Pitch A1 { get { return Pitch.FromStep(Step.A, 1); } }
 
-        public static Pitch A2 { get { return Pitch.FromStep(Step.A, 2); } }
+        //public static Pitch A2 { get { return Pitch.FromStep(Step.A, 2); } }
 
         public static Pitch A3 { get { return Pitch.FromStep(Step.A, 3); } }
 
@@ -40,15 +40,21 @@ namespace Manufaktura.Music.Model
 
         public static Pitch A6 { get { return Pitch.FromStep(Step.A, 6); } }
 
-        public static Pitch Ab1 { get { return Pitch.FromStep(Step.Ab, 1); } }
+        //public static Pitch Ab1 { get { return Pitch.FromStep(Step.Ab, 1); } }
 
-        public static Pitch Ab2 { get { return Pitch.FromStep(Step.Ab, 2); } }
+        //public static Pitch Ab2 { get { return Pitch.FromStep(Step.Ab, 2); } }
 
         public static Pitch Ab3 { get { return Pitch.FromStep(Step.Ab, 3); } }
 
-        public static Pitch ASharp1 { get { return Pitch.FromStep(Step.ASharp, 1); } }
+        public static Pitch Ab4 { get { return Pitch.FromStep(Step.Ab, 4); } }
 
-        public static Pitch ASharp2 { get { return Pitch.FromStep(Step.ASharp, 2); } }
+        public static Pitch Ab5 { get { return Pitch.FromStep(Step.Ab, 5); } }
+
+        public static Pitch Ab6 { get { return Pitch.FromStep(Step.Ab, 6); } }
+
+        //public static Pitch ASharp1 { get { return Pitch.FromStep(Step.ASharp, 1); } }
+
+        //public static Pitch ASharp2 { get { return Pitch.FromStep(Step.ASharp, 2); } }
 
         public static Pitch ASharp3 { get { return Pitch.FromStep(Step.ASharp, 3); } }
 
@@ -58,9 +64,9 @@ namespace Manufaktura.Music.Model
 
         public static Pitch ASharp6 { get { return Pitch.FromStep(Step.ASharp, 6); } }
 
-        public static Pitch B1 { get { return Pitch.FromStep(Step.B, 1); } }
+        //public static Pitch B1 { get { return Pitch.FromStep(Step.B, 1); } }
 
-        public static Pitch B2 { get { return Pitch.FromStep(Step.B, 2); } }
+        //public static Pitch B2 { get { return Pitch.FromStep(Step.B, 2); } }
 
         public static Pitch B3 { get { return Pitch.FromStep(Step.B, 3); } }
 
@@ -70,15 +76,21 @@ namespace Manufaktura.Music.Model
 
         public static Pitch B6 { get { return Pitch.FromStep(Step.B, 6); } }
 
-        public static Pitch Bb1 { get { return Pitch.FromStep(Step.Bb, 1); } }
+        //public static Pitch Bb1 { get { return Pitch.FromStep(Step.Bb, 1); } }
 
-        public static Pitch Bb2 { get { return Pitch.FromStep(Step.Bb, 2); } }
+        //public static Pitch Bb2 { get { return Pitch.FromStep(Step.Bb, 2); } }
 
         public static Pitch Bb3 { get { return Pitch.FromStep(Step.Bb, 3); } }
 
-        public static Pitch BSharp1 { get { return Pitch.FromStep(Step.BSharp, 1); } }
+        public static Pitch Bb4 { get { return Pitch.FromStep(Step.Bb, 4); } }
 
-        public static Pitch BSharp2 { get { return Pitch.FromStep(Step.BSharp, 2); } }
+        public static Pitch Bb5 { get { return Pitch.FromStep(Step.Bb, 5); } }
+
+        public static Pitch Bb6 { get { return Pitch.FromStep(Step.Bb, 6); } }
+
+        //public static Pitch BSharp1 { get { return Pitch.FromStep(Step.BSharp, 1); } }
+
+        //public static Pitch BSharp2 { get { return Pitch.FromStep(Step.BSharp, 2); } }
 
         public static Pitch BSharp3 { get { return Pitch.FromStep(Step.BSharp, 3); } }
 
@@ -88,9 +100,9 @@ namespace Manufaktura.Music.Model
 
         public static Pitch BSharp6 { get { return Pitch.FromStep(Step.BSharp, 6); } }
 
-        public static Pitch C1 { get { return Pitch.FromStep(Step.C, 1); } }
+        //public static Pitch C1 { get { return Pitch.FromStep(Step.C, 1); } }
 
-        public static Pitch C2 { get { return Pitch.FromStep(Step.C, 2); } }
+        //public static Pitch C2 { get { return Pitch.FromStep(Step.C, 2); } }
 
         public static Pitch C3 { get { return Pitch.FromStep(Step.C, 3); } }
 
@@ -100,17 +112,21 @@ namespace Manufaktura.Music.Model
 
         public static Pitch C6 { get { return Pitch.FromStep(Step.C, 6); } }
 
-        public static Pitch C7 { get { return Pitch.FromStep(Step.C, 7); } }
+        //public static Pitch Cb1 { get { return Pitch.FromStep(Step.Cb, 1); } }
 
-        public static Pitch Cb1 { get { return Pitch.FromStep(Step.Cb, 1); } }
-
-        public static Pitch Cb2 { get { return Pitch.FromStep(Step.Cb, 2); } }
+        //public static Pitch Cb2 { get { return Pitch.FromStep(Step.Cb, 2); } }
 
         public static Pitch Cb3 { get { return Pitch.FromStep(Step.Cb, 3); } }
 
-        public static Pitch CSharp1 { get { return Pitch.FromStep(Step.CSharp, 1); } }
+        public static Pitch Cb4 { get { return Pitch.FromStep(Step.Cb, 4); } }
 
-        public static Pitch CSharp2 { get { return Pitch.FromStep(Step.CSharp, 2); } }
+        public static Pitch Cb5 { get { return Pitch.FromStep(Step.Cb, 5); } }
+
+        public static Pitch Cb6 { get { return Pitch.FromStep(Step.Cb, 6); } }
+
+        //public static Pitch CSharp1 { get { return Pitch.FromStep(Step.CSharp, 1); } }
+
+        //public static Pitch CSharp2 { get { return Pitch.FromStep(Step.CSharp, 2); } }
 
         public static Pitch CSharp3 { get { return Pitch.FromStep(Step.CSharp, 3); } }
 
@@ -120,11 +136,9 @@ namespace Manufaktura.Music.Model
 
         public static Pitch CSharp6 { get { return Pitch.FromStep(Step.CSharp, 6); } }
 
-        public static Pitch CSharp7 { get { return Pitch.FromStep(Step.CSharp, 7); } }
+        //public static Pitch D1 { get { return Pitch.FromStep(Step.D, 1); } }
 
-        public static Pitch D1 { get { return Pitch.FromStep(Step.D, 1); } }
-
-        public static Pitch D2 { get { return Pitch.FromStep(Step.D, 2); } }
+        //public static Pitch D2 { get { return Pitch.FromStep(Step.D, 2); } }
 
         public static Pitch D3 { get { return Pitch.FromStep(Step.D, 3); } }
 
@@ -134,15 +148,21 @@ namespace Manufaktura.Music.Model
 
         public static Pitch D6 { get { return Pitch.FromStep(Step.D, 6); } }
 
-        public static Pitch Db1 { get { return Pitch.FromStep(Step.Db, 1); } }
+        //public static Pitch Db1 { get { return Pitch.FromStep(Step.Db, 1); } }
 
-        public static Pitch Db2 { get { return Pitch.FromStep(Step.Db, 2); } }
+        //public static Pitch Db2 { get { return Pitch.FromStep(Step.Db, 2); } }
 
         public static Pitch Db3 { get { return Pitch.FromStep(Step.Db, 3); } }
 
-        public static Pitch DSharp1 { get { return Pitch.FromStep(Step.DSharp, 1); } }
+        public static Pitch Db4 { get { return Pitch.FromStep(Step.Db, 4); } }
 
-        public static Pitch DSharp2 { get { return Pitch.FromStep(Step.DSharp, 2); } }
+        public static Pitch Db5 { get { return Pitch.FromStep(Step.Db, 5); } }
+
+        public static Pitch Db6 { get { return Pitch.FromStep(Step.Db, 6); } }
+
+        //public static Pitch DSharp1 { get { return Pitch.FromStep(Step.DSharp, 1); } }
+
+        //public static Pitch DSharp2 { get { return Pitch.FromStep(Step.DSharp, 2); } }
 
         public static Pitch DSharp3 { get { return Pitch.FromStep(Step.DSharp, 3); } }
 
@@ -152,9 +172,9 @@ namespace Manufaktura.Music.Model
 
         public static Pitch DSharp6 { get { return Pitch.FromStep(Step.DSharp, 6); } }
 
-        public static Pitch E1 { get { return Pitch.FromStep(Step.E, 1); } }
+        //public static Pitch E1 { get { return Pitch.FromStep(Step.E, 1); } }
 
-        public static Pitch E2 { get { return Pitch.FromStep(Step.E, 2); } }
+        //public static Pitch E2 { get { return Pitch.FromStep(Step.E, 2); } }
 
         public static Pitch E3 { get { return Pitch.FromStep(Step.E, 3); } }
 
@@ -164,11 +184,23 @@ namespace Manufaktura.Music.Model
 
         public static Pitch E6 { get { return Pitch.FromStep(Step.E, 6); } }
 
-        public static Pitch Eb1 { get { return Pitch.FromStep(Step.Eb, 1); } }
+        //public static Pitch Eb1 { get { return Pitch.FromStep(Step.Eb, 1); } }
 
-        public static Pitch Eb2 { get { return Pitch.FromStep(Step.Eb, 2); } }
+        //public static Pitch Eb2 { get { return Pitch.FromStep(Step.Eb, 2); } }
 
         public static Pitch Eb3 { get { return Pitch.FromStep(Step.Eb, 3); } }
+
+        public static Pitch Eb4 { get { return Pitch.FromStep(Step.Eb, 4); } }
+
+        public static Pitch Eb5 { get { return Pitch.FromStep(Step.Eb, 5); } }
+
+        public static Pitch Eb6 { get { return Pitch.FromStep(Step.Eb, 6); } }
+
+        //public static Pitch ESharp1 { get { return Pitch.FromStep(Step.ESharp, 1); } }
+
+        //public static Pitch ESharp2 { get { return Pitch.FromStep(Step.ESharp, 2); } }
+
+        public static Pitch ESharp3 { get { return Pitch.FromStep(Step.ESharp, 3); } }
 
         public static Pitch ESharp4 { get { return Pitch.FromStep(Step.ESharp, 4); } }
 
@@ -176,9 +208,9 @@ namespace Manufaktura.Music.Model
 
         public static Pitch ESharp6 { get { return Pitch.FromStep(Step.ESharp, 6); } }
 
-        public static Pitch F1 { get { return Pitch.FromStep(Step.F, 1); } }
+        //public static Pitch F1 { get { return Pitch.FromStep(Step.F, 1); } }
 
-        public static Pitch F2 { get { return Pitch.FromStep(Step.F, 2); } }
+        //public static Pitch F2 { get { return Pitch.FromStep(Step.F, 2); } }
 
         public static Pitch F3 { get { return Pitch.FromStep(Step.F, 3); } }
 
@@ -188,15 +220,21 @@ namespace Manufaktura.Music.Model
 
         public static Pitch F6 { get { return Pitch.FromStep(Step.F, 6); } }
 
-        public static Pitch Fb1 { get { return Pitch.FromStep(Step.Fb, 1); } }
+        //public static Pitch Fb1 { get { return Pitch.FromStep(Step.Fb, 1); } }
 
-        public static Pitch Fb2 { get { return Pitch.FromStep(Step.Fb, 2); } }
+        //public static Pitch Fb2 { get { return Pitch.FromStep(Step.Fb, 2); } }
 
         public static Pitch Fb3 { get { return Pitch.FromStep(Step.Fb, 3); } }
 
-        public static Pitch FSharp1 { get { return Pitch.FromStep(Step.FSharp, 1); } }
+        public static Pitch Fb4 { get { return Pitch.FromStep(Step.Fb, 4); } }
 
-        public static Pitch FSharp2 { get { return Pitch.FromStep(Step.FSharp, 2); } }
+        public static Pitch Fb5 { get { return Pitch.FromStep(Step.Fb, 5); } }
+
+        public static Pitch Fb6 { get { return Pitch.FromStep(Step.Fb, 6); } }
+
+        //public static Pitch FSharp1 { get { return Pitch.FromStep(Step.FSharp, 1); } }
+
+        //public static Pitch FSharp2 { get { return Pitch.FromStep(Step.FSharp, 2); } }
 
         public static Pitch FSharp3 { get { return Pitch.FromStep(Step.FSharp, 3); } }
 
@@ -206,9 +244,9 @@ namespace Manufaktura.Music.Model
 
         public static Pitch FSharp6 { get { return Pitch.FromStep(Step.FSharp, 6); } }
 
-        public static Pitch G1 { get { return Pitch.FromStep(Step.G, 1); } }
+        //public static Pitch G1 { get { return Pitch.FromStep(Step.G, 1); } }
 
-        public static Pitch G2 { get { return Pitch.FromStep(Step.G, 2); } }
+        //public static Pitch G2 { get { return Pitch.FromStep(Step.G, 2); } }
 
         public static Pitch G3 { get { return Pitch.FromStep(Step.G, 3); } }
 
@@ -218,15 +256,21 @@ namespace Manufaktura.Music.Model
 
         public static Pitch G6 { get { return Pitch.FromStep(Step.G, 6); } }
 
-        public static Pitch Gb1 { get { return Pitch.FromStep(Step.Gb, 1); } }
+        //public static Pitch Gb1 { get { return Pitch.FromStep(Step.Gb, 1); } }
 
-        public static Pitch Gb2 { get { return Pitch.FromStep(Step.Gb, 2); } }
+        //public static Pitch Gb2 { get { return Pitch.FromStep(Step.Gb, 2); } }
 
         public static Pitch Gb3 { get { return Pitch.FromStep(Step.Gb, 3); } }
 
-        public static Pitch GSharp1 { get { return Pitch.FromStep(Step.GSharp, 1); } }
+        public static Pitch Gb4 { get { return Pitch.FromStep(Step.Gb, 4); } }
 
-        public static Pitch GSharp2 { get { return Pitch.FromStep(Step.GSharp, 2); } }
+        public static Pitch Gb5 { get { return Pitch.FromStep(Step.Gb, 5); } }
+
+        public static Pitch Gb6 { get { return Pitch.FromStep(Step.Gb, 6); } }
+
+        //public static Pitch GSharp1 { get { return Pitch.FromStep(Step.GSharp, 1); } }
+
+        //public static Pitch GSharp2 { get { return Pitch.FromStep(Step.GSharp, 2); } }
 
         public static Pitch GSharp3 { get { return Pitch.FromStep(Step.GSharp, 3); } }
 
@@ -253,8 +297,8 @@ namespace Manufaktura.Music.Model
             MidiPitch = pitches[stepName] + alter + (octaveNumber - 4) * 12;
             Octave = octaveNumber;
         }
-
-        protected Pitch()
+        //protected
+        public Pitch()
         {
         }
 

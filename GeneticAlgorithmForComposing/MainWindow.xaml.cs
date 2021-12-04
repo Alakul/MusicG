@@ -31,6 +31,8 @@ namespace GeneticAlgorithmForComposing
 
         string[] semitonesSelected;
         int selectedScaleValue;
+        string scaleSet;
+        string scaleName;
         Dictionary<string, string[]> selectedScaleDictionary;
         MainViewModel viewModel;
         public static Score score;
@@ -63,7 +65,6 @@ namespace GeneticAlgorithmForComposing
 
         private void SaveToMIDIButton(object sender, RoutedEventArgs e)
         {
-            string scaleName = selectedScaleDictionary.ElementAt(selectedScaleValue).Key;
             chromosomeChanged = MusicController.CheckNote(chromosomeChoosen, semitonesSelected);
             MusicController.SaveToMIDI(chromosomeChanged, scaleName);
         }
@@ -77,9 +78,11 @@ namespace GeneticAlgorithmForComposing
 
             if (selectedScale == 0){
                 selectedScaleDictionary = new Dictionary<string, string[]>(MusicData.scaleMajor);
+                scaleSet = "major";
             }
             else if (selectedScale == 1){
                 selectedScaleDictionary = new Dictionary<string, string[]>(MusicData.scaleMinor);
+                scaleSet = "minor";
             }
             string[] scaleSelected = selectedScaleDictionary.Values.ElementAt(selectedScaleValue);
             
@@ -163,7 +166,8 @@ namespace GeneticAlgorithmForComposing
             saveAsMIDI.IsEnabled = true;
 
             //Music notation
-            score = MusicController.WriteSheetMusic();
+            scaleName = selectedScaleDictionary.ElementAt(selectedScaleValue).Key;
+            score = MusicController.WriteSheetMusic(chromosomeChoosen, semitonesSelected, scaleSet, scaleName);
             noteViewer.ScoreSource = score;
 
             //Execute command
@@ -177,6 +181,8 @@ namespace GeneticAlgorithmForComposing
             InitializeComponent();
             viewModel = new MainViewModel();
             DataContext = viewModel;
+
+            scaleSet = "major";
 
             //Buttons
             play.IsEnabled = false;

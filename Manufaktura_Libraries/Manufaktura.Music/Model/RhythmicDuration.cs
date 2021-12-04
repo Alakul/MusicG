@@ -61,15 +61,21 @@ namespace Manufaktura.Music.Model
         /// </summary>
         public static RhythmicDuration Eighth { get { return new RhythmicDuration(3); } }
 
+        public static RhythmicDuration EighthDot { get { return new RhythmicDuration(3, 1); } }
+
         /// <summary>
         /// Rhythmic duration of half note or rest.
         /// </summary>
         public static RhythmicDuration Half { get { return new RhythmicDuration(1); } }
 
+        public static RhythmicDuration HalfDot { get { return new RhythmicDuration(1, 1); } }
+
         /// <summary>
         /// Rhythmic duration of quarter note or rest.
         /// </summary>
         public static RhythmicDuration Quarter { get { return new RhythmicDuration(2); } }
+
+        public static RhythmicDuration QuarterDot { get { return new RhythmicDuration(2, 1); } }
 
         /// <summary>
         /// Rhythmic duration of sixteenth note or rest.
