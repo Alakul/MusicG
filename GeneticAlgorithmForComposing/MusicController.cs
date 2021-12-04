@@ -14,23 +14,75 @@ namespace GeneticAlgorithmForComposing
     class MusicController
     {
         //MIDI
-        public static List<MidiNote> GetNotesSequence(string[] chromosome, string[] semitonesSelected)
+        public static string[] CheckNote(string[] chromosome, string[] semitonesSelected)
+        {
+            string[] chromosomeChanged = chromosome.ToArray();
+            for (int i = 0; i < semitonesSelected.Length; i++){   
+                if (semitonesSelected[i].Contains('b') == true){
+                    chromosomeChanged = ChangeNote(chromosome, semitonesSelected);
+                    break;
+                }
+                else {
+                    chromosomeChanged = GeneticAlgorithm.DecodeChromosome(chromosome, semitonesSelected);
+                }
+            } 
+            return chromosomeChanged;
+        }
+
+        public static string[] ChangeNote(string[] chromosome, string[] semitonesSelected)
+        {
+            string[] chromosomeDecoded = GeneticAlgorithm.DecodeChromosome(chromosome, semitonesSelected);
+
+            for (int i = 0; i < chromosomeDecoded.Length; i++){
+                string gene = chromosomeDecoded[i];
+                string[] geneValues = gene.Split(';');
+                string noteValue = geneValues[0];
+                int octaveValue = int.Parse(geneValues[1]);
+                double durationValue = double.Parse(geneValues[2]);
+
+                switch (noteValue){
+                    case "Db":
+                        noteValue = "C#";
+                        break;
+                    case "Eb":
+                        noteValue = "D#";
+                        break;
+                    case "Gb":
+                        noteValue = "F#";
+                        break;
+                    case "Ab":
+                        noteValue = "G#";
+                        break;
+                    case "Bb":
+                        noteValue = "A#";
+                        break;
+                    default:
+                        break;
+                }
+
+                string geneDecoded = noteValue + ";" + octaveValue + ";" + durationValue;
+                chromosomeDecoded[i] = geneDecoded;
+            }
+
+            //string[] chromosomeCoded = GeneticAlgorithm.CodeChromosome(chromosomeDecoded, semitonesSelected);
+            return chromosomeDecoded;
+        }
+
+        public static List<MidiNote> GetNotesSequence(string[] chromosome)
         {
             int counter = 0;
             int value = 60;
 
             var noteMap = new List<MidiNote>();
 
-            for (int i = 0; i < chromosome.Length; i++)
-            {
-                string geneDecoded = GeneticAlgorithm.DecodeGene(chromosome[i], semitonesSelected);
-                string[] geneValues = geneDecoded.Split(';');
+            for (int i = 0; i < chromosome.Length; i++){
+                string gene = chromosome[i];
+                string[] geneValues = gene.Split(';');
                 string noteValue = geneValues[0];
                 string octaveValue = geneValues[1];
                 double durationValue = double.Parse(geneValues[2]);
 
-                switch (durationValue)
-                {
+                switch (durationValue){
                     case 1.0:
                         value = 1920;
                         break;
@@ -63,11 +115,11 @@ namespace GeneticAlgorithmForComposing
             return noteMap;
         }
 
-        public static void SaveToMIDI(string[] chromosome, string[] semitonesSelected)
+        public static void SaveToMIDI(string[] chromosome, string scaleName)
         {
             var file = new MidiFile();
 
-            List<MidiNote> noteMap = GetNotesSequence(chromosome, semitonesSelected);
+            List<MidiNote> noteMap = GetNotesSequence(chromosome);
             var sequenceTraks = new List<MidiSequence>();
             sequenceTraks.Add(MidiSequence.FromNoteMap(noteMap));
             var track = MidiSequence.Merge(sequenceTraks);
@@ -77,11 +129,10 @@ namespace GeneticAlgorithmForComposing
             //OPEN DIALOG
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.Filter = "MIDI file (*.mid)|*.mid";
-            saveFileDialog.FileName = "Melody";
+            saveFileDialog.FileName = "Melodia "+ scaleName;
             saveFileDialog.DefaultExt = ".mid";
 
-            if (saveFileDialog.ShowDialog() == true)
-            {
+            if (saveFileDialog.ShowDialog() == true){
                 file.WriteTo(saveFileDialog.FileName);
             }
         }
@@ -113,9 +164,9 @@ namespace GeneticAlgorithmForComposing
             }
             */
             var r = RhythmicDuration.Quarter;
-            Score score = Score.CreateOneStaffScore(Clef.Treble, new MajorScale(Step.C, false));
-            score.FirstStaff.Elements.Add(new Note(Pitch.C4, r));
-            score.FirstStaff.Elements.Add(new Note(Pitch.E4, r));
+            Score score = Score.CreateOneStaffScore(Clef.Treble, new MajorScale(Step.G, false));
+            score.FirstStaff.Elements.Add(new Note(Pitch.FSharp4, r));
+            score.FirstStaff.Elements.Add(new Note(Pitch.FSharp2, r));
             score.FirstStaff.Elements.Add(new Note(Pitch.D4, r));
             score.FirstStaff.Elements.Add(new Note(Pitch.D4, r));
             score.FirstStaff.Elements.Add(new Barline());

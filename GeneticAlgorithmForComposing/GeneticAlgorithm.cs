@@ -19,6 +19,25 @@ namespace GeneticAlgorithmForComposing
 
         public static Random random = new Random();
 
+        //SET
+        public static string[] SetSign(string[] scale)
+        {
+            string[] semitonesSelected = new string[12];
+            for (int i = 0; i < scale.Length; i++){
+                if (scale[i].Contains('#') == true){
+                    semitonesSelected = MusicData.semitonesSharp;
+                    break;
+                }
+                else if (scale[i].Contains('b') == true){
+                    semitonesSelected = MusicData.semitonesFlat;
+                    break;
+                }
+                else {
+                    semitonesSelected = MusicData.semitonesSharp;
+                }
+            }
+            return semitonesSelected;
+        }
 
         //GENES
         public static string GenerateGene(string[] scale)
@@ -534,10 +553,5 @@ namespace GeneticAlgorithmForComposing
             chromosomeChanged[geneRadom] = geneValue;
             return chromosomeChanged;
         }
-
-
-
-
-        
     }
 }

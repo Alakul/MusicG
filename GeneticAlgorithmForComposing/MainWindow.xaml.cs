@@ -27,7 +27,11 @@ namespace GeneticAlgorithmForComposing
     public partial class MainWindow : Window
     {
         string[] chromosomeChoosen;
+        string[] chromosomeChanged;
+
         string[] semitonesSelected;
+        int selectedScaleValue;
+        Dictionary<string, string[]> selectedScaleDictionary;
         MainViewModel viewModel;
         public static Score score;
 
@@ -59,15 +63,17 @@ namespace GeneticAlgorithmForComposing
 
         private void SaveToMIDIButton(object sender, RoutedEventArgs e)
         {
-            MusicController.SaveToMIDI(chromosomeChoosen, semitonesSelected);
+            string scaleName = selectedScaleDictionary.ElementAt(selectedScaleValue).Key;
+            chromosomeChanged = MusicController.CheckNote(chromosomeChoosen, semitonesSelected);
+            MusicController.SaveToMIDI(chromosomeChanged, scaleName);
         }
 
         private string[] SetDictionary()
         {
             //SET SCALE DICTIONARY
             int selectedScale = int.Parse(scale.SelectedIndex.ToString());
-            int selectedScaleValue = int.Parse(scaleValue.SelectedIndex.ToString());
-            Dictionary<string, string[]> selectedScaleDictionary = new Dictionary<string, string[]>();
+            selectedScaleValue = int.Parse(scaleValue.SelectedIndex.ToString());
+            selectedScaleDictionary = new Dictionary<string, string[]>();
 
             if (selectedScale == 0){
                 selectedScaleDictionary = new Dictionary<string, string[]>(MusicData.scaleMajor);
@@ -76,27 +82,8 @@ namespace GeneticAlgorithmForComposing
                 selectedScaleDictionary = new Dictionary<string, string[]>(MusicData.scaleMinor);
             }
             string[] scaleSelected = selectedScaleDictionary.Values.ElementAt(selectedScaleValue);
-
+            
             return scaleSelected;
-        }
-
-        public string[] SetSign(string[] scale)
-        {
-            string[] semitonesSelected = new string[12];
-            for (int i = 0; i < scale.Length; i++){
-                if (scale[i].Contains('#') == true){
-                    semitonesSelected = MusicData.semitonesSharp;
-                    break;
-                }
-                else if (scale[i].Contains('b') == true){
-                    semitonesSelected = MusicData.semitonesFlat;
-                    break;
-                }
-                else {
-                    semitonesSelected = MusicData.semitonesSharp;
-                }
-            }
-            return semitonesSelected;
         }
 
         private void Compose(object sender, RoutedEventArgs e)
@@ -115,7 +102,7 @@ namespace GeneticAlgorithmForComposing
             //GENETIC ALGORITHM
             double chromosomeChoosenEvaluation;//ocena wybranego osobnika
 
-            semitonesSelected = SetSign(scaleSelected);
+            semitonesSelected = GeneticAlgorithm.SetSign(scaleSelected);
             string[][] population = GeneticAlgorithm.GeneratePopulation(populationValue, scaleSelected, measuresValue, semitonesSelected);
             List<double> evaluationPopulation;
             string[][] populationAfterSelection;
