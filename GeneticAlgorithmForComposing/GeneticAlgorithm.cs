@@ -382,7 +382,7 @@ namespace GeneticAlgorithmForComposing
         }
 
         //CROSSOVER
-        public static string[][] Crossover(string[][] chromosomesSelected, int crossoverProbability, double sumaCzasu, string[] semitonesSelected)
+        public static string[][] Crossover(string[][] chromosomesSelected, int crossoverProbability, double measuresValue, string[] semitonesSelected)
         {
             string[][] chromosomesAfterCrossover = new string[chromosomesSelected.Length][];
             string[] parent1, parent2;
@@ -476,11 +476,11 @@ namespace GeneticAlgorithmForComposing
                     }
 
                     //Sprawdzenie
-                    //string[] pot1 = SprawdzCzasTrwania(potomek1.ToArray(), sumaCzasu, punktPrzeciecia1, poltonyWybrane);
-                    //string[] pot2 = SprawdzCzasTrwania(potomek2.ToArray(), sumaCzasu, punktPrzeciecia2, poltonyWybrane);
+                    string[] childRepair1 = CheckDuration(child1.ToArray(), measuresValue, crossPoint1, semitonesSelected);
+                    string[] childRepair2 = CheckDuration(child2.ToArray(), measuresValue, crossPoint2, semitonesSelected);
 
-                    chromosomesAfterCrossover[i] = child1.ToArray();
-                    chromosomesAfterCrossover[i + 1] = child2.ToArray();
+                    chromosomesAfterCrossover[i] = childRepair1;
+                    chromosomesAfterCrossover[i + 1] = childRepair2;
                 }
                 else {
                     chromosomesAfterCrossover[i] = chromosomesSelected[i];
@@ -489,6 +489,142 @@ namespace GeneticAlgorithmForComposing
             }
             return chromosomesAfterCrossover;
         }
+
+        public static string[] CheckDuration(string[] child, double measuresValue, int crossPoint, string[] semitonesSelected)
+        { 
+            string[] chromosomeDecoded = DecodeChromosome(child, semitonesSelected);
+            string[] chromosomeRepaired;
+            double sum = 0;
+
+            for (int i = 0; i < chromosomeDecoded.Length; i++){
+                string gene = chromosomeDecoded[i];
+                string[] geneValues = gene.Split(';');
+                double durationValue = double.Parse(geneValues[2]);
+                sum += durationValue;
+            }
+            double difference = measuresValue - sum;
+
+            List<string> chromosomeList = new List<string>(chromosomeDecoded);
+            List<double> genesDuration = new List<double>();
+
+            List<int> indexes;
+            int index = 0;
+
+            if (difference < 0){
+                double differenceValue = Math.Abs(difference);
+                indexes = CheckMeasure(chromosomeDecoded, crossPoint, differenceValue);
+
+                while (differenceValue != 0){
+                    for (int j = 0; j < indexes.Count; j++){
+                        index = indexes[0];
+                        if (indexes[j] <= crossPoint){
+                            index = indexes[j];
+                        }
+                    }
+
+                    string gene = chromosomeDecoded[index];
+                    string[] geneValues = gene.Split(';');
+                    string noteValue = geneValues[0];
+                    int octaveValue = int.Parse(geneValues[1]);
+                    double durationValue = double.Parse(geneValues[2]);
+
+                    if (durationValue == differenceValue){
+                        chromosomeList.RemoveAt(index);
+                        differenceValue = 0;
+                    }
+                    else if (durationValue > differenceValue){
+                        double newValue = durationValue - differenceValue;
+                        if (duration.Contains(newValue)){
+                            string nowaAllela = noteValue + ";" + octaveValue.ToString() + ";" + newValue.ToString();
+                            chromosomeList[index] = nowaAllela;
+                            differenceValue = 0;
+                        }
+                        else {
+                            string duration = CheckSum(newValue);
+                            string[] durationValues = duration.Split(';');
+                            double duration1 = double.Parse(durationValues[0]);
+                            double duration2 = double.Parse(durationValues[1]);
+
+                            chromosomeList.RemoveAt(index);
+                            genesDuration.Add(duration1);
+                            genesDuration.Add(duration2);
+
+                            for (int i = 0; i < genesDuration.Count; i++){
+                                string newGene = noteValue + ";" + octaveValue.ToString() + ";" + genesDuration[i].ToString();
+                                chromosomeList.Insert(index + i, newGene);
+                            }
+                            differenceValue = 0;
+                        }
+                    }
+                    else if (durationValue < differenceValue){
+                        chromosomeList.RemoveAt(index);
+                        indexes.RemoveAt(indexes.IndexOf(index));
+
+                        differenceValue = differenceValue - durationValue;
+                    }
+                }
+            }
+            else if (difference > 0){
+                if (duration.Contains(difference)){
+                    genesDuration.Add(difference);
+                }
+                else{
+                    string duration = CheckSum(difference);
+                    string[] durationValues = duration.Split(';');
+                    double duration1 = double.Parse(durationValues[0]);
+                    double duration2 = double.Parse(durationValues[1]);
+
+                    genesDuration.Add(duration1);
+                    genesDuration.Add(duration2);
+                }
+
+                string gene = chromosomeDecoded[crossPoint - 1];
+                string[] geneValues = gene.Split(';');
+                string noteValue = geneValues[0];
+                int octaveValue = int.Parse(geneValues[1]);
+
+                for (int i = 0; i < genesDuration.Count; i++){
+                    string newGene = noteValue + ";" + octaveValue.ToString() + ";" + genesDuration[i].ToString();
+                    chromosomeList.Insert(crossPoint + i, newGene);
+                }
+            }
+
+            chromosomeRepaired = chromosomeList.ToArray();
+            chromosomeRepaired = CodeChromosome(chromosomeRepaired, semitonesSelected);
+
+            return chromosomeRepaired;
+        }
+
+        public static List<int> CheckMeasure(string[] chromosomeDecoded, int crossPoint, double difference)
+        {
+            List<int> indexes = new List<int>();
+            double sum = 0;
+            double sum2 = 0;
+
+            for (int i = 0; i < crossPoint; i++){
+                string gene = chromosomeDecoded[i];
+                string[] geneValues = gene.Split(';');
+                double durationValue = double.Parse(geneValues[2]);
+
+                sum += durationValue;
+            }
+
+            int measure = (int)Math.Ceiling(sum);
+
+            for (int i = 0; i < chromosomeDecoded.Length; i++){
+                string gene = chromosomeDecoded[i];
+                string[] geneValues  = gene.Split(';');
+                double durationValue = double.Parse(geneValues[2]);
+
+                sum2 += durationValue;
+
+                if (sum2 <= (measure + difference) && sum2 > measure - 1){
+                    indexes.Add(i);
+                }
+            }
+            return indexes;
+        }
+
 
         //MUTATION
         public static string[][] MutationSemitones(string[][] chromosomesSelected, int crossoverProbability)
