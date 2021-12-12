@@ -408,7 +408,7 @@ namespace GeneticAlgorithmForComposing
                     crossPoint2 = 0;
 
                     if (size1 <= size2){
-                        crossPoint1 = random.Next(1, chromosomesSelected[i].Length - 1);
+                        crossPoint1 = random.Next(1, size1 - 1);
 
                         //Obliczanie sumy od początku do punktu przecięcia
                         double sum = 0;
@@ -435,7 +435,7 @@ namespace GeneticAlgorithmForComposing
                         }
                     }
                     else if (size1 > size2){
-                        crossPoint2 = random.Next(1, chromosomesSelected[i + 1].Length - 1);
+                        crossPoint2 = random.Next(1, size2 - 1);
 
                         double sum = 0;
                         for (int j = 0; j < crossPoint2; j++){
@@ -516,9 +516,11 @@ namespace GeneticAlgorithmForComposing
 
                 while (differenceValue != 0){
                     for (int j = 0; j < indexes.Count; j++){
-                        index = indexes[0];
                         if (indexes[j] <= crossPoint){
                             index = indexes[j];
+                        }
+                        else if (indexes[0] > crossPoint){
+                            index = indexes[0];
                         }
                     }
 
@@ -535,8 +537,13 @@ namespace GeneticAlgorithmForComposing
                     else if (durationValue > differenceValue){
                         double newValue = durationValue - differenceValue;
                         if (duration.Contains(newValue)){
-                            string nowaAllela = noteValue + ";" + octaveValue.ToString() + ";" + newValue.ToString();
-                            chromosomeList[index] = nowaAllela;
+                            string newGene = noteValue + ";" + octaveValue.ToString() + ";" + newValue.ToString();
+                            if (index == chromosomeList.Count){
+                                chromosomeList.Add(newGene);
+                            }
+                            else {
+                                chromosomeList[index] = newGene;
+                            } 
                             differenceValue = 0;
                         }
                         else {
@@ -568,7 +575,7 @@ namespace GeneticAlgorithmForComposing
                 if (duration.Contains(difference)){
                     genesDuration.Add(difference);
                 }
-                else{
+                else {
                     string duration = CheckSum(difference);
                     string[] durationValues = duration.Split(';');
                     double duration1 = double.Parse(durationValues[0]);

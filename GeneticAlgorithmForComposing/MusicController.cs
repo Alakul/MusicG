@@ -111,6 +111,7 @@ namespace GeneticAlgorithmForComposing
             string[] chromosomeDecoded = GeneticAlgorithm.DecodeChromosome(chromosome, semitonesSelected);
             MajorScale scale = GetScale(scaleSet, scaleName);
             Score score = Score.CreateOneStaffScore(Clef.Treble, scale);
+            double sum = 0;
 
             for (int i = 0; i < chromosomeDecoded.Length; i++){
                 string gene = chromosomeDecoded[i];
@@ -124,15 +125,16 @@ namespace GeneticAlgorithmForComposing
 
                 string noteFull = noteValue + octaveValue;
                 double durationValue = double.Parse(geneValues[2]);
+                sum += durationValue;
 
                 Pitch pitch = GetNote(noteFull);
                 RhythmicDuration rhytmicDuration = GetDuration(durationValue);
 
                 score.FirstStaff.Elements.Add(new Note(pitch, rhytmicDuration));
+                if (sum % 1 == 0){
+                    score.FirstStaff.Elements.Add(new Barline());
+                }
             }
-
-            //score.FirstStaff.Elements.Add(new Barline());
-
             return score;
         }
 

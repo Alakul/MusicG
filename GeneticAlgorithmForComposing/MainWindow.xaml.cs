@@ -37,6 +37,13 @@ namespace GeneticAlgorithmForComposing
         MainViewModel viewModel;
         public static Score score;
 
+        private void OnComboBoxChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (selection.SelectedIndex.ToString() == "1"){
+                tournament.Text = "2";
+            }
+        }
+
         private void PlayButton(object sender, RoutedEventArgs e)
         {
             //Execute command

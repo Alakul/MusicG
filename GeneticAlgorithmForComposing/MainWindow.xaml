@@ -162,7 +162,7 @@
                     <TextBlock Style="{StaticResource textBlock}" Text="Rodzaj selekcji:"/>
                 </Border>
                 <Border Style="{StaticResource border}" Grid.Column="3" Grid.Row="0">
-                    <ComboBox x:Name="selection" Style="{StaticResource comboBox}" SelectedIndex="0">
+                    <ComboBox x:Name="selection" Style="{StaticResource comboBox}" SelectedIndex="0" SelectionChanged="OnComboBoxChanged">
                         <ComboBoxItem>Turniejowa</ComboBoxItem>
                         <ComboBoxItem>Ruletkowa</ComboBoxItem>
                     </ComboBox>
@@ -199,6 +199,7 @@
         <Border Grid.ColumnSpan="2" Grid.Column="0" Grid.Row="1">
             <Grid Style="{StaticResource grid}">
                 <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"></ColumnDefinition>
                     <ColumnDefinition Width="*"></ColumnDefinition>
                     <ColumnDefinition Width="*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
@@ -208,6 +209,7 @@
                     <RowDefinition Height="auto"></RowDefinition>
                 </Grid.RowDefinitions>
 
+                <!--Buttons-->
                 <Border Style="{StaticResource border}" Grid.Column="0" Grid.Row="0">
                     <Button x:Name="compose" Content="Komponuj" Click="Compose">
                         <Button.Style>
@@ -230,26 +232,23 @@
                         </Button.Style>
                     </Button>
                 </Border>
-                
                 <Border Style="{StaticResource border}" Grid.Column="1" Grid.Row="0">
                     <Button x:Name="play" Click="PlayButton" Content="Odtwórz"/>
                 </Border>
-
+                <Border Style="{StaticResource border}" Grid.Column="2" Grid.Row="0">
+                    <Button x:Name="stop" Click="StopButton" Content="Stop"/>
+                </Border>
+                
                 <Border Style="{StaticResource border}" Grid.ColumnSpan="3" Grid.Column="0" Grid.Row="1">
                     <StackPanel>
-                        <StackPanel Grid.Row="1" Orientation="Horizontal">
-                            <Button Content="Stop" Width="100" Click="StopButton"/>
-                        </StackPanel>
                         <TextBlock x:Name="show" TextWrapping="Wrap"/>
-                        <ManufakturaControls:NoteViewer x:Name="noteViewer" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ScoreSource="{Binding Data}" IsSelectable="False"/>
+                        <ManufakturaControls:NoteViewer x:Name="noteViewer" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ScoreSource="{Binding Data}" IsSelectable="False" PlaybackCursorPosition="{Binding Player.CurrentPosition}"/>
                     </StackPanel>
                 </Border>
 
-                <Border Style="{StaticResource border}" Grid.Column="3" Grid.Row="2">
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock x:Name="file" TextWrapping="Wrap" HorizontalAlignment="Stretch" Width="270"/>
-                        <Button x:Name="saveAsMIDI" Click="SaveToMIDIButton" Content="Zapisz do pliku MIDI" HorizontalAlignment="Right"/>
-                    </StackPanel>
+                <!--Save File-->
+                <Border Style="{StaticResource border}" Grid.Column="2" Grid.Row="2">
+                    <Button x:Name="saveAsMIDI" Click="SaveToMIDIButton" Content="Zapisz do pliku MIDI" HorizontalAlignment="Stretch"/>
                 </Border>
             </Grid>
         </Border>
