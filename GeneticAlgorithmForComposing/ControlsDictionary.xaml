@@ -85,17 +85,44 @@
         <Setter Property="Margin" Value="10"></Setter>
     </Style>
 
+    
+    
+    
+    
+    
+    
     <!--Style ComboBox-->
     <Style x:Key="comboBox" TargetType="{x:Type ComboBox}">
         <Setter Property="HorizontalAlignment" Value="Stretch"></Setter>
     </Style>
     
     
-    
-    
     <!--Style Button-->
     <Style x:Key="button" TargetType="{x:Type Button}">
-        <Setter Property="HorizontalAlignment" Value="Left"></Setter>
+        <Setter Property="Background" Value="#FFF1F1F1"/>
+        <Setter Property="Foreground" Value="#000"/>
+        <Setter Property="Margin" Value="5"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}" 
+                            BorderThickness="1"
+                            Padding="5"
+                            BorderBrush="#000">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center">
+                        </ContentPresenter>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#FFD9D9D9"/>
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="false">
+                <Setter Property="Background" Value="White"/>
+            </Trigger>
+        </Style.Triggers>
     </Style>
 
     

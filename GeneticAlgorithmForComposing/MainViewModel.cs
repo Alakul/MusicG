@@ -41,10 +41,7 @@ namespace GeneticAlgorithmForComposing
 
 
 
-
-
 		private ScorePlayer player;
-
 		private Score score;
 
 		public OpenCommand OpenCommand { get; }
@@ -53,12 +50,10 @@ namespace GeneticAlgorithmForComposing
 
 		public Score Score
 		{
-			get
-			{
+			get {
 				return score;
 			}
-			set
-			{
+			set {
 				score = value;
 				if (player != null) ((IDisposable)player).Dispose();
 				player = new MidiTaskScorePlayer(score);
@@ -70,9 +65,5 @@ namespace GeneticAlgorithmForComposing
 		}
 
 		public StopCommand StopCommand { get; }
-
-
-
-
 	}
 }

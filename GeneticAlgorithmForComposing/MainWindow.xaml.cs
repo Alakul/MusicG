@@ -51,7 +51,9 @@ namespace GeneticAlgorithmForComposing
             PlayCommand playCommand = new PlayCommand(viewModel);
             playCommand.Execute(parameter);
 
-            compose.IsEnabled = false;
+            tmp.IsEnabled = false;
+            play.IsEnabled = false;
+            stop.IsEnabled = true;
         }
 
         private void Stop()
@@ -67,7 +69,9 @@ namespace GeneticAlgorithmForComposing
             Stop();
             await Task.Delay(2000);
 
-            compose.IsEnabled = true;
+            stop.IsEnabled = false;
+            tmp.IsEnabled = true;
+            play.IsEnabled = true;
         }
 
         private void SaveToMIDIButton(object sender, RoutedEventArgs e)
@@ -171,6 +175,8 @@ namespace GeneticAlgorithmForComposing
             //Buttons
             play.IsEnabled = true;
             saveAsMIDI.IsEnabled = true;
+            stop.IsEnabled = false;
+            tmp.IsEnabled = true;
 
             //Music notation
             scaleName = selectedScaleDictionary.ElementAt(selectedScaleValue).Key;
@@ -194,6 +200,7 @@ namespace GeneticAlgorithmForComposing
             //Buttons
             play.IsEnabled = false;
             saveAsMIDI.IsEnabled = false;
+            stop.IsEnabled = false;
 
             //ComboBox scale values
             scale.ItemsSource = MusicData.scaleValues;

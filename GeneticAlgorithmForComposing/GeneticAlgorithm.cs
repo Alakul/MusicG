@@ -220,26 +220,26 @@ namespace GeneticAlgorithmForComposing
         {
             string[] chromosomeDecoded = DecodeChromosome(chromosome, semitonesSelected);
 
-            double evaluationScale = EvaluateScale(chromosomeDecoded, scale);
-            double evaluationOctave = EvaluateOctave(chromosomeDecoded);
-            double evaluationInterval;
-
-            double evaluation = evaluationScale + evaluationOctave;
+            double evaluationDuration = EvaluateDuration(chromosomeDecoded);
+            //double evaluationOctave = EvaluateOctave(chromosomeDecoded);
+            double evaluationInterval = EvaluateInterval(chromosomeDecoded, scale);
+            
+            double evaluation = evaluationDuration  + evaluationInterval;
             return evaluation;
         }
 
-        public static double EvaluateScale(string[] chromosomeDecoded, string[] scale)
+        public static double EvaluateDuration(string[] chromosomeDecoded)
         {
-            //Czy nuta należy do skali
-            //Stosunek liczby nut należących/nienależących do licbzy nut
+            //Czy nuta ma wartość z kropką
+            //Stosunek liczby nut należących/nienależących do liczby nut
             double evaluation = 0;
             double chromosomeLength = chromosomeDecoded.Length;
 
             for (int i = 0; i < chromosomeDecoded.Length; i++){
                 string[] geneValues = chromosomeDecoded[i].Split(';');
-                string noteValue = geneValues[0];
+                string durationValue = geneValues[2];
 
-                if (scale.Contains(noteValue)){
+                if (durationValue!="0.75" || durationValue != "0.375" || durationValue != "0.1875"){
                     evaluation++;
                 }
             }
@@ -276,12 +276,79 @@ namespace GeneticAlgorithmForComposing
             return ratio;
         }
 
-        public static double EvaluateInterval(string[] chromosomeDecoded)
+        public static double EvaluateInterval(string[] chromosomeDecoded, string[] scale)
         {
             //Czy interwał jest dobry
             //Stosunek liczby dobrych/niedobrych interwałów do liczby interwałów
             double evaluation = 0;
+            int distance = 0;
             double chromosomeLength = chromosomeDecoded.Length;
+
+            //do przedostatniego
+            for (int i = 0; i < chromosomeDecoded.Length - 2; i++)
+            {
+                string[] geneValues1 = chromosomeDecoded[i].Split(';');
+                string noteValue1 = geneValues1[0];
+                int oktaveValue1 = int.Parse(geneValues1[1]);
+
+                string[] geneValues2 = chromosomeDecoded[i + 1].Split(';');
+                string noteValue2 = geneValues2[0];
+                int oktaveValue2 = int.Parse(geneValues2[1]);
+
+                if (oktaveValue1 < oktaveValue2)
+                    distance = oktaveValue2 - oktaveValue1;
+                else if (oktaveValue1 > oktaveValue2)
+                    distance = oktaveValue1 - oktaveValue2;
+                else if (oktaveValue1 == oktaveValue2)
+                    distance = 0;
+
+
+                int interval = 0;
+                int indexNote1 = Array.IndexOf(scale, noteValue1);
+                int indexNote2 = Array.IndexOf(scale, noteValue2);
+                if (distance == 0){
+                    if (indexNote1 > indexNote2){
+                        interval = indexNote1 - indexNote2;
+                    }
+                    else if (indexNote1 < indexNote2){
+                        interval = indexNote2 - indexNote1;
+                    }
+
+                    if (interval == 2  || interval == 3 || interval == 4 || interval == 5){
+                        evaluation++;
+                    }
+                    else if (interval == 4 || interval == 5){
+                        evaluation += 0.75;
+                    }
+                    else{
+                        evaluation += 0.3;
+                    }
+
+                    //evaluation++;
+                }
+                else if (distance == 1){
+                    if (indexNote1 > indexNote2){
+                        interval = 8 + indexNote1 - indexNote2;
+                    }
+                    else if (indexNote1 < indexNote2){
+                        interval = 8 + indexNote2 - indexNote1;
+                    }
+
+                    if (interval == 8 || interval == 9){
+                        evaluation+=0.2;
+                    }
+                    else if (interval == 10 || interval == 12){
+                        evaluation += 0.1;
+                    }
+                    else {
+                        evaluation += 0;
+                    }
+                }
+                else {
+                    evaluation += 0;
+                }
+
+            }
 
             double ratio = evaluation / chromosomeLength;
             return ratio;
@@ -408,7 +475,7 @@ namespace GeneticAlgorithmForComposing
                     crossPoint2 = 0;
 
                     if (size1 <= size2){
-                        crossPoint1 = random.Next(1, size1 - 1);
+                        crossPoint1 = random.Next(0, size1 - 1);
 
                         //Obliczanie sumy od początku do punktu przecięcia
                         double sum = 0;
@@ -435,7 +502,7 @@ namespace GeneticAlgorithmForComposing
                         }
                     }
                     else if (size1 > size2){
-                        crossPoint2 = random.Next(1, size2 - 1);
+                        crossPoint2 = random.Next(0, size2 - 1);
 
                         double sum = 0;
                         for (int j = 0; j < crossPoint2; j++){
@@ -516,10 +583,10 @@ namespace GeneticAlgorithmForComposing
 
                 while (differenceValue != 0){
                     for (int j = 0; j < indexes.Count; j++){
-                        if (indexes[j] <= crossPoint){
+                        if (indexes[j] < crossPoint){
                             index = indexes[j];
                         }
-                        else if (indexes[0] > crossPoint){
+                        else if (indexes[0] >= crossPoint){
                             index = indexes[0];
                         }
                     }
@@ -655,7 +722,7 @@ namespace GeneticAlgorithmForComposing
         {
             int probability = 500;
             string[] chromosomeChanged = chromosome.ToArray();
-            
+
             int geneRadom = random.Next(0, chromosome.Length);
             string gene = chromosome[geneRadom];
             string noteValue = gene.Substring(0, 12);
@@ -696,5 +763,8 @@ namespace GeneticAlgorithmForComposing
             chromosomeChanged[geneRadom] = geneValue;
             return chromosomeChanged;
         }
+
+
+
     }
 }
