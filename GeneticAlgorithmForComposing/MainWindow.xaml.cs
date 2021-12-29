@@ -127,7 +127,7 @@ namespace GeneticAlgorithmForComposing
 
             //OPERATORS
             int selectedSelection = int.Parse(selection.SelectedIndex.ToString());
-            //int selectedMutation = int.Parse(selection.SelectedIndex.ToString());
+            int selectedMutation = int.Parse(mutation.SelectedIndex.ToString());
 
             chromosomeChoosenEvaluation = evaluation.Max();
             chromosomeChoosen = population[evaluation.IndexOf(chromosomeChoosenEvaluation)];
@@ -147,17 +147,17 @@ namespace GeneticAlgorithmForComposing
                 populationAfterCrossover = GeneticAlgorithm.Crossover(populationAfterSelection, crossoverProbabilityValue, measuresValue, semitonesSelected);
 
                 //MUTATION
-                if (selectedSelection == 0){
+                if (selectedMutation == 0){
                     populationAfterMutation = GeneticAlgorithm.MutationSemitones(populationAfterCrossover, mutationProbabilityValue);
                 }
                 else {
-                    populationAfterMutation = GeneticAlgorithm.MutationSemitones(populationAfterCrossover, mutationProbabilityValue);
+                    populationAfterMutation = GeneticAlgorithm.MutationOctave(populationAfterCrossover, mutationProbabilityValue);
                 }
 
                 //EVALUATION
                 evaluation = GeneticAlgorithm.FitnessFunction(populationAfterMutation, semitonesSelected, scaleSelected);
                 population = populationAfterMutation;
-                evaluationPopulation = evaluation;
+                //evaluationPopulation = evaluation;
 
                 if (evaluation.Max() > chromosomeChoosenEvaluation){
                     chromosomeChoosenEvaluation = evaluation.Max();

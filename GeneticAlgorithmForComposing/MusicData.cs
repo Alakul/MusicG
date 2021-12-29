@@ -47,6 +47,7 @@ namespace GeneticAlgorithmForComposing
         public static int semitones = 12;
 
         public static double[] duration = new[] { 1.0, 0.75, 0.5, 0.375, 0.25, 0.1875, 0.125, 0.0625 };
+        public static double[] durationBase = new[] { 1.0, 0.5, 0.25, 0.125 };
         public static int[] octaveValues = new[] { 3, 4, 5, 6 };
     }
 }

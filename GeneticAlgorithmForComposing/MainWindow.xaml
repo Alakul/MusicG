@@ -189,8 +189,8 @@
                 </Border>
                 <Border Style="{StaticResource border}" Grid.Column="3" Grid.Row="2">
                     <ComboBox x:Name="mutation" Style="{StaticResource comboBox}" SelectedIndex="0">
-                        <ComboBoxItem>Nuty</ComboBoxItem>
-                        <ComboBoxItem>Oktawy</ComboBoxItem>
+                        <ComboBoxItem>Zmiana o pół tonu</ComboBoxItem>
+                        <ComboBoxItem>Zmiana o oktawę</ComboBoxItem>
                     </ComboBox>
                 </Border>
             </Grid>
