@@ -224,7 +224,7 @@ namespace GeneticAlgorithmForComposing
             double evaluationNote = EvaluateNote(chromosomeDecoded, scale);
             double evaluationDuration = EvaluateDuration(chromosomeDecoded);
             double evaluationOctave = EvaluateOctave(chromosomeDecoded);
-            double evaluationInterval = EvaluateInterval(chromosomeDecoded, scale);
+            double evaluationInterval = EvaluateInterval(chromosomeDecoded, semitonesSelected);
             
             double evaluation = evaluationNote + evaluationDuration + evaluationOctave + evaluationInterval;
             return evaluation;
@@ -312,12 +312,11 @@ namespace GeneticAlgorithmForComposing
             return ratio;
         }
 
-        public static double EvaluateInterval(string[] chromosomeDecoded, string[] scale)
+        public static double EvaluateInterval(string[] chromosomeDecoded, string[] semitonesSelected)
         {
             //Czy interwał jest dobry
             //Stosunek liczby dobrych/niedobrych interwałów do liczby interwałów
             double evaluation = 0;
-            int distance = 0;
             double chromosomeLength = chromosomeDecoded.Length;
 
             //do przedostatniego
@@ -331,59 +330,75 @@ namespace GeneticAlgorithmForComposing
                 string noteValue2 = geneValues2[0];
                 int oktaveValue2 = int.Parse(geneValues2[1]);
 
-                if (oktaveValue1 < oktaveValue2)
-                    distance = oktaveValue2 - oktaveValue1;
-                else if (oktaveValue1 > oktaveValue2)
-                    distance = oktaveValue1 - oktaveValue2;
-                else if (oktaveValue1 == oktaveValue2)
-                    distance = 0;
-
                 int interval = 0;
-                int indexNote1 = Array.IndexOf(scale, noteValue1);
-                int indexNote2 = Array.IndexOf(scale, noteValue2);
-                if (distance == 0){
+                int indexNote1 = Array.IndexOf(semitonesSelected, noteValue1);
+                int indexNote2 = Array.IndexOf(semitonesSelected, noteValue2);
+
+                //Oblczenie interwału
+                if (oktaveValue1 < oktaveValue2 && oktaveValue2-oktaveValue1 == 1){
+                    interval = semitonesSelected.Length - 1 - indexNote1 + indexNote2 + 1;
+                } 
+                else if (oktaveValue1 > oktaveValue2 && oktaveValue1-oktaveValue2 == 1){
+                    interval = semitonesSelected.Length - 1 - indexNote2 + indexNote1 + 1;
+                }
+                else if (oktaveValue1 == oktaveValue2){
                     if (indexNote1 > indexNote2){
                         interval = indexNote1 - indexNote2;
                     }
                     else if (indexNote1 < indexNote2){
                         interval = indexNote2 - indexNote1;
-                    }
-
-                    if (interval == 2  || interval == 3){
-                        evaluation++;
-                    }
-                    else if (interval == 4 || interval == 5){
-                        evaluation += 0.75;
-                    }
-                    else {
-                        evaluation += 0.5;
-                    }
+                    } 
                 }
-                else if (distance == 1){
-                    if (indexNote1 > indexNote2){
-                        interval = 8 + indexNote1 - indexNote2;
-                    }
-                    else if (indexNote1 < indexNote2){
-                        interval = 8 + indexNote2 - indexNote1;
-                    }
-
-                    if (interval == 8 || interval == 9){
-                        evaluation += 0.25;
-                    }
-                    else if (interval == 10 || interval == 11 || interval == 12){
-                        evaluation += 0.10;
-                    }
-                    else {
-                        evaluation += 0;
-                    }
+                else if ((oktaveValue1<oktaveValue2 && oktaveValue2-oktaveValue1 > 1) || (oktaveValue1>oktaveValue2 && oktaveValue1-oktaveValue2 > 1)){
+                    interval = 13;
                 }
-                else {
+
+                if (interval == 0){
+                    evaluation += 0.25;
+                }
+                else if (interval == 1 || interval == 2 || interval == 3 || interval == 4){
+                    evaluation += 1;
+                }
+                else if (interval == 5 || interval == 6 || interval == 7){
+                    evaluation += 0.75;
+                }
+                else if (interval == 8 || interval == 9){
+                    evaluation += 0.5;
+                }
+                else if (interval == 10 || interval == 11){
+                    evaluation += 0.5;
+                }
+                else if (interval == 12){
+                    evaluation += 0.2;
+                }
+                else if (interval > 12){
                     evaluation += 0;
                 }
 
+                /*
+                //perfect consonants
+                if (interval == 0 || interval == 5 || interval == 7 || interval == 12){
+                    evaluation += 1;
+                }
+                //inferfect c
+                else if (interval == 3 || interval == 4 || interval == 8 || interval == 9){
+                    evaluation += 0.75;
+                }
+                //seconds
+                else if (interval == 1 || interval == 2){
+                    evaluation += 0.5;
+                }
+                //sevenths
+                else if (interval == 10 || interval == 11){
+                    evaluation += 0.25;
+                }
+                else if (interval > 12){
+                    evaluation += 0;
+                }
+                */
             }
 
-            double ratio = evaluation / chromosomeLength;
+            double ratio = evaluation / (chromosomeLength - 1);
             return ratio;
         }
 
@@ -761,7 +776,7 @@ namespace GeneticAlgorithmForComposing
                         //pol tonu wyzej
                         if (index == 11){
                             noteArray[11] = '0';
-                            noteArray[0] = '1';
+                            noteArray[10] = '1';
                         }
                         else {
                             noteArray[index] = '0';
@@ -770,7 +785,7 @@ namespace GeneticAlgorithmForComposing
                     }
                     else {
                         if (index == 0){
-                            noteArray[11] = '1';
+                            noteArray[1] = '1';
                             noteArray[0] = '0';
                         }
                         else {
