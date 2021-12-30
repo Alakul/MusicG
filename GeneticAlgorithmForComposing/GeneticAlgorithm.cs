@@ -258,7 +258,7 @@ namespace GeneticAlgorithmForComposing
                 string[] geneValues = chromosomeDecoded[i].Split(';');
                 string durationValue = geneValues[2];
 
-                if (durationValue == "0.25"){
+                if (durationValue != "0.75" || durationValue != "0.375" || durationValue != "0.1875"){
                     evaluation++;
                 }
             }
@@ -508,7 +508,7 @@ namespace GeneticAlgorithmForComposing
             int crossPoint1, crossPoint2;
 
             for (int i = 0; i < chromosomesSelected.Length; i = i + 2){
-                if (random.Next(1, 1001) < crossoverProbability){
+                if (random.Next(1, 1001) <= crossoverProbability){
                     size1 = chromosomesSelected[i].Length;
                     size2 = chromosomesSelected[i + 1].Length;
 
@@ -765,7 +765,7 @@ namespace GeneticAlgorithmForComposing
             string[] chromosomeChanged = chromosome.ToArray();
 
             for (int i = 0; i < chromosome.Length; i++){
-                if (random.Next(1, 1001) < mutationProbability){
+                if (random.Next(1, 1001) <= mutationProbability){
                     string gene = chromosome[i];
                     string noteValue = gene.Substring(0, 12);
                     int index = noteValue.IndexOf('1');
@@ -824,7 +824,7 @@ namespace GeneticAlgorithmForComposing
             string[] chromosomeChanged = chromosome.ToArray();
 
             for (int i = 0; i < chromosome.Length; i++){
-                if (random.Next(1, 1001) < mutationProbability){
+                if (random.Next(1, 1001) <= mutationProbability){
                     string gene = chromosome[i];
                     string octaveValue = gene.Substring(12, 3);
 

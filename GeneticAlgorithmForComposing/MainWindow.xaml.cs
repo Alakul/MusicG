@@ -28,12 +28,26 @@ namespace GeneticAlgorithmForComposing
     {
         string[] chromosomeChoosen;
         string[] chromosomeChanged;
+        double chromosomeChoosenEvaluation;
+
+        List<double> evaluation;
+        string[][] population;
+
+        string[][] populationAfterSelection;
+        string[][] populationAfterCrossover;
+        string[][] populationAfterMutation;
+
+        double measuresValue;
+        string[] scaleSelected;
+
 
         string[] semitonesSelected;
         int selectedScaleValue;
         string scaleSet;
         string scaleName;
         Dictionary<string, string[]> selectedScaleDictionary;
+
+        //MUSIC
         MainViewModel viewModel;
         public static Score score;
 
@@ -100,29 +114,38 @@ namespace GeneticAlgorithmForComposing
             return scaleSelected;
         }
 
-        private void Compose(object sender, RoutedEventArgs e)
+        private void ComposeButton(object sender, RoutedEventArgs e)
         {
             //MUSIC PARAMETERS
-            double measuresValue = double.Parse(measures.Text);
-            string[] scaleSelected = SetDictionary();
+            measuresValue = double.Parse(measures.Text);
+            scaleSelected = SetDictionary();
 
             //GENETIC PARAMETERS
             int populationValue = int.Parse(populationSize.Text);
+
+            //GENETIC ALGORITHM
+            semitonesSelected = GeneticAlgorithm.SetSign(scaleSelected);
+            population = GeneticAlgorithm.GeneratePopulation(populationValue, scaleSelected, measuresValue, semitonesSelected);
+            StartGeneticAlgorithm();
+            Set();
+        }
+
+        private void ContinueButton(object sender, RoutedEventArgs e)
+        {
+            StartGeneticAlgorithm();
+            Set();
+        }
+
+        private void StartGeneticAlgorithm()
+        {
+            //GENETIC PARAMETERS
             int iterationsValue = int.Parse(generations.Text);
             int crossoverProbabilityValue = int.Parse(probCrossover.Text);
             int mutationProbabilityValue = int.Parse(probMutation.Text);
             int tournamentSize;
 
             //GENETIC ALGORITHM
-            double chromosomeChoosenEvaluation;//ocena wybranego osobnika
-
-            semitonesSelected = GeneticAlgorithm.SetSign(scaleSelected);
-            string[][] population = GeneticAlgorithm.GeneratePopulation(populationValue, scaleSelected, measuresValue, semitonesSelected);
-            List<double> evaluationPopulation;
-            string[][] populationAfterSelection;
-            string[][] populationAfterCrossover;
-            string[][] populationAfterMutation;
-            List<double> evaluation = GeneticAlgorithm.FitnessFunction(population, semitonesSelected, scaleSelected);
+            evaluation = GeneticAlgorithm.FitnessFunction(population, semitonesSelected, scaleSelected);
             int counter = 0;
 
             //OPERATORS
@@ -132,8 +155,7 @@ namespace GeneticAlgorithmForComposing
             chromosomeChoosenEvaluation = evaluation.Max();
             chromosomeChoosen = population[evaluation.IndexOf(chromosomeChoosenEvaluation)];
 
-            while (counter <= iterationsValue)
-            {
+            while (counter <= iterationsValue){
                 //SELECTION
                 if (selectedSelection == 0){
                     tournamentSize = int.Parse(tournament.Text);
@@ -157,20 +179,27 @@ namespace GeneticAlgorithmForComposing
                 //EVALUATION
                 evaluation = GeneticAlgorithm.FitnessFunction(populationAfterMutation, semitonesSelected, scaleSelected);
                 population = populationAfterMutation;
-                //evaluationPopulation = evaluation;
 
+                chromosomeChoosenEvaluation = evaluation.Max();
+                chromosomeChoosen = population[evaluation.IndexOf(chromosomeChoosenEvaluation)];
+
+                /*
                 if (evaluation.Max() > chromosomeChoosenEvaluation){
                     chromosomeChoosenEvaluation = evaluation.Max();
                     chromosomeChoosen = population[evaluation.IndexOf(chromosomeChoosenEvaluation)];
                 }
-
+                */
                 counter++;
             }
+        }
 
+        private void Set()
+        {
             //CHOOSEN
             string[] chromosomeChoosenDecoded = GeneticAlgorithm.DecodeChromosome(chromosomeChoosen, semitonesSelected);
             string choosen = string.Join(" ", chromosomeChoosenDecoded);
-            show.Text = choosen.ToString() +" "+ chromosomeChoosenEvaluation.ToString();
+            //show.Text = choosen.ToString() + " " + chromosomeChoosenEvaluation.ToString();
+            showEvaluation.Text = "Ocena: " + Math.Round(chromosomeChoosenEvaluation, 2).ToString();
 
             //Buttons
             play.IsEnabled = true;

@@ -199,7 +199,8 @@
         <Border Grid.ColumnSpan="2" Grid.Column="0" Grid.Row="1">
             <Grid Style="{StaticResource grid}">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
                     <ColumnDefinition Width="*"></ColumnDefinition>
                     <ColumnDefinition Width="*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
@@ -211,7 +212,7 @@
 
                 <!--Buttons-->
                 <Border Style="{StaticResource border}" Grid.Column="0" Grid.Row="0">
-                    <Button x:Name="compose" Content="Komponuj" Click="Compose">
+                    <Button x:Name="compose" Content="Komponuj" Click="ComposeButton">
                         <Button.Style>
                             <Style TargetType="{x:Type Button}">
                                 <Setter Property="IsEnabled" Value="false" />
@@ -235,24 +236,54 @@
                     </Button>
                 </Border>
                 <Border Style="{StaticResource border}" Grid.Column="1" Grid.Row="0">
+                    <Button x:Name="continue" Click="ContinueButton" Content="Kontynuuj komponowanie">
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="IsEnabled" Value="false" />
+                                <Style.Triggers>
+                                    <MultiDataTrigger>
+                                        <MultiDataTrigger.Conditions>
+                                            <Condition Binding="{Binding ElementName=generations, Path=(Validation.HasError)}" Value="false" />
+                                            <Condition Binding="{Binding ElementName=probCrossover, Path=(Validation.HasError)}" Value="false" />
+                                            <Condition Binding="{Binding ElementName=probMutation, Path=(Validation.HasError)}" Value="false" />
+                                            <Condition Binding="{Binding ElementName=tournament, Path=(Validation.HasError)}" Value="false" />
+
+                                            <Condition Binding="{Binding ElementName=play, Path=(Button.IsEnabled)}" Value="true" />
+                                        </MultiDataTrigger.Conditions>
+                                        <Setter Property="IsEnabled" Value="true" />
+                                    </MultiDataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                </Border>
+                
+                <Border Style="{StaticResource border}" Grid.Column="2" Grid.Row="0">
                     <Button x:Name="play" Click="PlayButton" Content="Odtwórz"/>
                 </Border>
-                <Border Style="{StaticResource border}" Grid.Column="2" Grid.Row="0">
+                <Border Style="{StaticResource border}" Grid.Column="3" Grid.Row="0">
                     <Button x:Name="stop" Click="StopButton" Content="Stop"/>
                 </Border>
                 
-                <Border Style="{StaticResource border}" Grid.ColumnSpan="3" Grid.Column="0" Grid.Row="1">
+                <Border Style="{StaticResource border}" Grid.ColumnSpan="4" Grid.Column="0" Grid.Row="1">
                     <StackPanel>
                         <TextBlock x:Name="show" TextWrapping="Wrap"/>
-                        <ManufakturaControls:NoteViewer x:Name="noteViewer" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ScoreSource="{Binding Data}" IsSelectable="False" PlaybackCursorPosition="{Binding Player.CurrentPosition}"/>
+                        <Border Style="{StaticResource border}">
+                            <ManufakturaControls:NoteViewer x:Name="noteViewer" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ScoreSource="{Binding Data}" IsSelectable="False" PlaybackCursorPosition="{Binding Player.CurrentPosition}"/>
+                        </Border>
                     </StackPanel>
                 </Border>
 
+                <Border Style="{StaticResource border}" Grid.Column="0" Grid.Row="2">
+                    <TextBlock x:Name="showEvaluation" TextWrapping="Wrap"/>
+                </Border>
+
+                
                 <!--Save File-->
-                <Border Style="{StaticResource border}" Grid.Column="1" Grid.Row="2">
+                <Border Style="{StaticResource border}" Grid.Column="2" Grid.Row="2">
                     <Button x:Name="tmp" Content="" Visibility="Hidden" HorizontalAlignment="Stretch"/>
                 </Border>
-                <Border Style="{StaticResource border}" Grid.Column="2" Grid.Row="2">
+                <Border Style="{StaticResource border}" Grid.Column="3" Grid.Row="2">
                     <Button x:Name="saveAsMIDI" Click="SaveToMIDIButton" Content="Zapisz do pliku MIDI" HorizontalAlignment="Stretch"/>
                 </Border>
             </Grid>
