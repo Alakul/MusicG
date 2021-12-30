@@ -207,23 +207,23 @@ namespace GeneticAlgorithmForComposing
         }
 
         //EVALUATION
-        public static List<double> FitnessFunction(string[][] population, string[] semitonesSelected, string[] scale)
+        public static List<double> FitnessFunction(string[][] population, string[] semitonesSelected, string[] scale, int prefferedOctave)
         {
             List<double> evaluationList = new List<double>();
 
             for (int i = 0; i < population.Length; i++){
-                evaluationList.Add(EvaluateChromosome(population[i], semitonesSelected, scale));
+                evaluationList.Add(EvaluateChromosome(population[i], semitonesSelected, scale, prefferedOctave));
             }
             return evaluationList;
         }
 
-        public static double EvaluateChromosome(string[] chromosome, string[] semitonesSelected, string[] scale)
+        public static double EvaluateChromosome(string[] chromosome, string[] semitonesSelected, string[] scale, int prefferedOctave)
         {
             string[] chromosomeDecoded = DecodeChromosome(chromosome, semitonesSelected);
 
             double evaluationNote = EvaluateNote(chromosomeDecoded, scale);
             double evaluationDuration = EvaluateDuration(chromosomeDecoded);
-            double evaluationOctave = EvaluateOctave(chromosomeDecoded);
+            double evaluationOctave = EvaluateOctave(chromosomeDecoded, prefferedOctave);
             double evaluationInterval = EvaluateInterval(chromosomeDecoded, semitonesSelected);
             
             double evaluation = evaluationNote + evaluationDuration + evaluationOctave + evaluationInterval;
@@ -266,7 +266,7 @@ namespace GeneticAlgorithmForComposing
             return ratio;
         }
 
-        public static double EvaluateOctave(string[] chromosomeDecoded)
+        public static double EvaluateOctave(string[] chromosomeDecoded, int prefferedOctave)
         {
             /*
             double evaluation = 0;
@@ -304,7 +304,7 @@ namespace GeneticAlgorithmForComposing
                 string[] geneValues = chromosomeDecoded[i].Split(';');
                 int oktaveValue = int.Parse(geneValues[1]);
 
-                if (oktaveValue == 4){
+                if (oktaveValue == prefferedOctave){
                     evaluation++;
                 }
             }

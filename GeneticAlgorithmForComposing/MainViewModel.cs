@@ -15,7 +15,8 @@ namespace GeneticAlgorithmForComposing
     {
         public MainViewModel()
         {
-            this.MeasureValue = 4;
+			this.OctaveValue = 4;
+			this.MeasureValue = 4;
             this.PopulationSize = 40;
             this.GenerationValue = 10;
 
@@ -29,7 +30,8 @@ namespace GeneticAlgorithmForComposing
 			StopCommand = new StopCommand(this);
 		}
 
-        public int MeasureValue { get; set; }
+		public int OctaveValue { get; set; }
+		public int MeasureValue { get; set; }
         public int PopulationSize { get; set; }
         public int GenerationValue { get; set; }
 

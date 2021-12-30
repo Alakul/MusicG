@@ -30,6 +30,7 @@
                     <RowDefinition Height="auto"></RowDefinition>
                     <RowDefinition Height="auto"></RowDefinition>
                     <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition Height="auto"></RowDefinition>
                 </Grid.RowDefinitions>
 
                 <!--Scale-->
@@ -69,6 +70,7 @@
                         </TextBox.Text>
                     </TextBox>
                 </Border>
+
             </Grid>
         </GroupBox>
 
@@ -193,6 +195,22 @@
                         <ComboBoxItem>Zmiana o oktawę</ComboBoxItem>
                     </ComboBox>
                 </Border>
+
+                <!--Preffered octave-->
+                <Border Style="{StaticResource border}" Grid.Column="2" Grid.Row="3">
+                    <TextBlock Style="{StaticResource textBlock}" Text="Preferowana oktawa:"/>
+                </Border>
+                <Border Style="{StaticResource border}" Grid.Column="3" Grid.Row="3">
+                    <TextBox x:Name="octave" Style="{StaticResource textBoxInError}">
+                        <TextBox.Text>
+                            <Binding Path="OctaveValue" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <local:MainValidationRule MinValue="3" MaxValue="6" Message="Numer oktawy powinien zawierać się w przedziale od"/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+                </Border>
             </Grid>
         </GroupBox>
 
@@ -225,6 +243,7 @@
                                             <Condition Binding="{Binding ElementName=probCrossover, Path=(Validation.HasError)}" Value="false" />
                                             <Condition Binding="{Binding ElementName=probMutation, Path=(Validation.HasError)}" Value="false" />
                                             <Condition Binding="{Binding ElementName=tournament, Path=(Validation.HasError)}" Value="false" />
+                                            <Condition Binding="{Binding ElementName=octave, Path=(Validation.HasError)}" Value="false" />
 
                                             <Condition Binding="{Binding ElementName=tmp, Path=(Button.IsEnabled)}" Value="true" />
                                         </MultiDataTrigger.Conditions>

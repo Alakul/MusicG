@@ -33,10 +33,6 @@ namespace GeneticAlgorithmForComposing
         List<double> evaluation;
         string[][] population;
 
-        string[][] populationAfterSelection;
-        string[][] populationAfterCrossover;
-        string[][] populationAfterMutation;
-
         double measuresValue;
         string[] scaleSelected;
 
@@ -143,14 +139,19 @@ namespace GeneticAlgorithmForComposing
             int crossoverProbabilityValue = int.Parse(probCrossover.Text);
             int mutationProbabilityValue = int.Parse(probMutation.Text);
             int tournamentSize;
+            int prefferedOctave = int.Parse(octave.Text);
 
             //GENETIC ALGORITHM
-            evaluation = GeneticAlgorithm.FitnessFunction(population, semitonesSelected, scaleSelected);
+            evaluation = GeneticAlgorithm.FitnessFunction(population, semitonesSelected, scaleSelected, prefferedOctave);
             int counter = 0;
 
             //OPERATORS
             int selectedSelection = int.Parse(selection.SelectedIndex.ToString());
             int selectedMutation = int.Parse(mutation.SelectedIndex.ToString());
+
+            string[][] populationAfterSelection;
+            string[][] populationAfterCrossover;
+            string[][] populationAfterMutation;
 
             chromosomeChoosenEvaluation = evaluation.Max();
             chromosomeChoosen = population[evaluation.IndexOf(chromosomeChoosenEvaluation)];
@@ -177,7 +178,7 @@ namespace GeneticAlgorithmForComposing
                 }
 
                 //EVALUATION
-                evaluation = GeneticAlgorithm.FitnessFunction(populationAfterMutation, semitonesSelected, scaleSelected);
+                evaluation = GeneticAlgorithm.FitnessFunction(populationAfterMutation, semitonesSelected, scaleSelected, prefferedOctave);
                 population = populationAfterMutation;
 
                 chromosomeChoosenEvaluation = evaluation.Max();
