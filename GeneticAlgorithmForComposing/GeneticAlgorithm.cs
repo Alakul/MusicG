@@ -41,10 +41,10 @@ namespace GeneticAlgorithmForComposing
         }
 
         //GENES
-        public static string GenerateGene(string[] scale)
+        public static string GenerateGene(string[] semitonesSelected)
         {
-            int noteRandom = random.Next(0, scale.Length);
-            string noteValue = scale[noteRandom];
+            int noteRandom = random.Next(0, semitonesSelected.Length);
+            string noteValue = semitonesSelected[noteRandom];
 
             int oktawaRandom = random.Next(0, octaveValues.Length);
             int octaveValue = octaveValues[oktawaRandom];
@@ -149,17 +149,16 @@ namespace GeneticAlgorithmForComposing
         }
 
         //CHROMOSOME
-        //Zmienic "sumaCzasu"
-        public static string[] GenerateChromosome(string[] scale, double sumaCzasu)
+        public static string[] GenerateChromosome(string[] semitonesSelected, double measuresValue)
         {
             List<string> geneList = new List<string>();
             double sum = 0;
             double durationValue;
             string[] geneValues;
 
-            for (int i = 1; i <= sumaCzasu; i++){
+            for (int i = 1; i <= measuresValue; i++){
                 while (sum != i){
-                    string geneGenerated = GenerateGene(scale);
+                    string geneGenerated = GenerateGene(semitonesSelected);
                     geneValues = geneGenerated.Split(';');
                     durationValue = double.Parse(geneValues[2]);
 
@@ -199,7 +198,7 @@ namespace GeneticAlgorithmForComposing
             string[] chromosomeGenerated, chromosomeCoded;
 
             for (int i = 0; i < populationSize; i++){
-                chromosomeGenerated = GenerateChromosome(scale, measuresValue);
+                chromosomeGenerated = GenerateChromosome(semitonesSelected, measuresValue);
                 chromosomeCoded = CodeChromosome(chromosomeGenerated, semitonesSelected);
                 population[i] = chromosomeCoded;
             }
@@ -226,7 +225,7 @@ namespace GeneticAlgorithmForComposing
             double evaluationOctave = EvaluateOctave(chromosomeDecoded, prefferedOctave);
             double evaluationInterval = EvaluateInterval(chromosomeDecoded, semitonesSelected);
             
-            double evaluation = evaluationNote + evaluationDuration + evaluationOctave + evaluationInterval;
+            double evaluation = (1*evaluationNote) + (1*evaluationDuration) + (0.75*evaluationOctave) + (0.5*evaluationInterval);
             return evaluation;
         }
 
@@ -250,7 +249,6 @@ namespace GeneticAlgorithmForComposing
         public static double EvaluateDuration(string[] chromosomeDecoded)
         {
             //Czy nuta ma wartość z kropką
-            //Stosunek liczby nut należących/nienależących do liczby nut
             double evaluation = 0;
             double chromosomeLength = chromosomeDecoded.Length;
 

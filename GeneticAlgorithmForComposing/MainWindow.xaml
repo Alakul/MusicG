@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:GeneticAlgorithmForComposing"
         xmlns:ManufakturaControls="clr-namespace:Manufaktura.Controls.WPF;assembly=Manufaktura.Controls.WPF"
         mc:Ignorable="d"
-        Title="MusicGen" Height="450" Width="800">
+        Title="MusicG" Height="450" Width="800">
 
 
     <Grid>
@@ -98,7 +98,7 @@
                         <TextBox.Text>
                             <Binding Path="PopulationSize" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
                                 <Binding.ValidationRules>
-                                    <local:PopulationValidationRule MinValue="4" MaxValue="50"/>
+                                    <local:PopulationValidationRule MinValue="4" MaxValue="100"/>
                                 </Binding.ValidationRules>
                             </Binding>
                         </TextBox.Text>
@@ -114,7 +114,7 @@
                         <TextBox.Text>
                             <Binding Path="GenerationValue" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
                                 <Binding.ValidationRules>
-                                    <local:MainValidationRule MinValue="1" MaxValue="1000000" Message="Liczba generacji powinna zawierać się w przedziale od"/>
+                                    <local:MainValidationRule MinValue="1" MaxValue="1000" Message="Liczba generacji powinna zawierać się w przedziale od"/>
                                 </Binding.ValidationRules>
                             </Binding>
                         </TextBox.Text>
@@ -294,7 +294,10 @@
                 </Border>
 
                 <Border Style="{StaticResource border}" Grid.Column="0" Grid.Row="2">
-                    <TextBlock x:Name="showEvaluation" TextWrapping="Wrap"/>
+                    <StackPanel>
+                        <TextBlock x:Name="showEvaluation" TextWrapping="Wrap"/>
+                        <TextBlock x:Name="showGenerations" TextWrapping="Wrap"/>
+                    </StackPanel>
                 </Border>
 
                 

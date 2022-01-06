@@ -35,7 +35,7 @@ namespace GeneticAlgorithmForComposing
 
         double measuresValue;
         string[] scaleSelected;
-
+        int generationsSum;
 
         string[] semitonesSelected;
         int selectedScaleValue;
@@ -122,6 +122,7 @@ namespace GeneticAlgorithmForComposing
             //GENETIC ALGORITHM
             semitonesSelected = GeneticAlgorithm.SetSign(scaleSelected);
             population = GeneticAlgorithm.GeneratePopulation(populationValue, scaleSelected, measuresValue, semitonesSelected);
+            generationsSum = 0;
             StartGeneticAlgorithm();
             Set();
         }
@@ -155,6 +156,7 @@ namespace GeneticAlgorithmForComposing
 
             chromosomeChoosenEvaluation = evaluation.Max();
             chromosomeChoosen = population[evaluation.IndexOf(chromosomeChoosenEvaluation)];
+            generationsSum += iterationsValue;
 
             while (counter <= iterationsValue){
                 //SELECTION
@@ -198,9 +200,12 @@ namespace GeneticAlgorithmForComposing
         {
             //CHOOSEN
             string[] chromosomeChoosenDecoded = GeneticAlgorithm.DecodeChromosome(chromosomeChoosen, semitonesSelected);
+
             string choosen = string.Join(" ", chromosomeChoosenDecoded);
             //show.Text = choosen.ToString() + " " + chromosomeChoosenEvaluation.ToString();
+
             showEvaluation.Text = "Ocena: " + Math.Round(chromosomeChoosenEvaluation, 2).ToString();
+            showGenerations.Text = "Generacje: " + generationsSum.ToString();
 
             //Buttons
             play.IsEnabled = true;
