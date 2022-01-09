@@ -178,7 +178,7 @@
                         <TextBox.Text>
                             <Binding Path="TournamentValue" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
                                 <Binding.ValidationRules>
-                                    <local:MainValidationRule MinValue="2" MaxValue="40" Message="Rozmiar turnieju powinien zawierać się w przedziale od"/>
+                                    <local:MainValidationRule MinValue="2" MaxValue="100" Message="Rozmiar turnieju powinien zawierać się w przedziale od"/>
                                 </Binding.ValidationRules>
                             </Binding>
                         </TextBox.Text>

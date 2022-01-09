@@ -113,6 +113,23 @@ namespace GeneticAlgorithmForComposing
             Score score = Score.CreateOneStaffScore(Clef.Treble, scale);
             double sum = 0;
 
+            Dictionary<string, string[]> selectedScaleDictionary = new Dictionary<string, string[]>(MusicData.scaleMajor);
+            if (scaleSet == "minor"){
+                selectedScaleDictionary = new Dictionary<string, string[]>(MusicData.scaleMinor);
+            }
+            else if (scaleSet == "major"){
+                selectedScaleDictionary = new Dictionary<string, string[]>(MusicData.scaleMajor);
+            }
+
+            List<string> scaleValuesSign = new List<string>();
+            List<string> scaleValues = selectedScaleDictionary[scaleName].ToList();
+
+            for (int i = 0; i < scaleValues.Count; i++){
+                if (scaleValues[i].Contains("#") || scaleValues[i].Contains("b")){
+                    scaleValuesSign.Add(scaleValues[i].ToString().Replace("#", "").Replace("b", ""));
+                }
+            }
+
             for (int i = 0; i < chromosomeDecoded.Length; i++){
                 string gene = chromosomeDecoded[i];
                 string[] geneValues = gene.Split(';');
@@ -130,7 +147,12 @@ namespace GeneticAlgorithmForComposing
                 Pitch pitch = GetNote(noteFull);
                 RhythmicDuration rhytmicDuration = GetDuration(durationValue);
 
-                score.FirstStaff.Elements.Add(new Note(pitch, rhytmicDuration));
+                Note note = new Note(pitch, rhytmicDuration);
+                if (scaleValuesSign.Contains(noteValue)){
+                    note.hasNatural = true;
+                }
+
+                score.FirstStaff.Elements.Add(note);
                 if (sum % 1 == 0){
                     score.FirstStaff.Elements.Add(new Barline());
                 }

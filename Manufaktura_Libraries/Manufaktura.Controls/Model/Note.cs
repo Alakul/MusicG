@@ -44,7 +44,7 @@ namespace Manufaktura.Controls.Model
 
         private GraceNoteType graceNoteType;
 
-        private bool hasNatural = false;
+        public bool hasNatural = false;
 
         private bool isChordElement = false;
 
