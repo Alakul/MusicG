@@ -770,21 +770,18 @@ namespace GeneticAlgorithmForComposing
                     char[] noteArray = noteValue.ToCharArray();
                     string noteCoded = "";
 
-                    if (random.Next(1, 1001) < probability){
-                        //pol tonu wyzej
-                        if (index == 11){
-                            noteArray[11] = '0';
-                            noteArray[10] = '1';
-                        }
-                        else {
-                            noteArray[index] = '0';
-                            noteArray[index + 1] = '1';
-                        }
+                    if (index == 11){
+                        noteArray[11] = '0';
+                        noteArray[10] = '1';
+                    }
+                    else if (index == 0){
+                        noteArray[1] = '1';
+                        noteArray[0] = '0';
                     }
                     else {
-                        if (index == 0){
-                            noteArray[1] = '1';
-                            noteArray[0] = '0';
+                        if (random.Next(1, 1001) < probability){
+                            noteArray[index] = '0';
+                            noteArray[index + 1] = '1';       
                         }
                         else {
                             noteArray[index] = '0';
