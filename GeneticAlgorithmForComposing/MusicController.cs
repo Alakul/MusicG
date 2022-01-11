@@ -111,6 +111,9 @@ namespace GeneticAlgorithmForComposing
             string[] chromosomeDecoded = GeneticAlgorithm.DecodeChromosome(chromosome, semitonesSelected);
             MajorScale scale = GetScale(scaleSet, scaleName);
             Score score = Score.CreateOneStaffScore(Clef.Treble, scale);
+            var firstStaff = score.FirstStaff;
+            firstStaff.Elements.Add(new TimeSignature(TimeSignatureType.Numbers, 4, 4));
+
             double sum = 0;
 
             Dictionary<string, string[]> selectedScaleDictionary = new Dictionary<string, string[]>(MusicData.scaleMajor);

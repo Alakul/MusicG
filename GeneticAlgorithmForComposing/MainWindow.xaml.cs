@@ -202,7 +202,7 @@ namespace GeneticAlgorithmForComposing
             string[] chromosomeChoosenDecoded = GeneticAlgorithm.DecodeChromosome(chromosomeChoosen, semitonesSelected);
 
             string choosen = string.Join(" ", chromosomeChoosenDecoded);
-            show.Text = choosen.ToString() + " " + chromosomeChoosenEvaluation.ToString();
+            //show.Text = choosen.ToString() + " " + chromosomeChoosenEvaluation.ToString();
 
             showEvaluation.Text = "Ocena: " + Math.Round(chromosomeChoosenEvaluation, 2).ToString();
             showGenerations.Text = "Generacje: " + generationsSum.ToString();
