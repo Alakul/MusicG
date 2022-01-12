@@ -823,11 +823,34 @@ namespace GeneticAlgorithmForComposing
                     string gene = chromosome[i];
                     string octaveValue = gene.Substring(12, 3);
 
-                    int index;
                     char[] octaveArray;
-                    string octaveCoded;
-                    int counter = 0;
+                    string octaveCoded = "";
+                    
+                    for (int j = 0; j < 3; j++){
+                        octaveCoded = "";
+                        octaveArray = octaveValue.ToCharArray();
+                        if (octaveArray[j] == '0'){
+                            octaveArray[j] = '1';
+                        }
+                        else if (octaveArray[j] == '1'){
+                            octaveArray[j] = '0';
+                        }
 
+                        for (int k = 0; k < octaveArray.Length; k++){
+                            octaveCoded += octaveArray[k];
+                        }
+                        if (octaveValues.Contains(Convert.ToInt32(octaveCoded, 2)) == true){
+                            break;
+                        }
+                    }
+
+                    if (octaveValues.Contains(Convert.ToInt32(octaveCoded, 2)) == false){
+                        octaveCoded = octaveValue;
+                    }
+
+                    //int index;
+                    //int counter = 0;
+                    /*
                     do {
                         octaveCoded = "";
                         octaveArray = octaveValue.ToCharArray();
@@ -850,6 +873,7 @@ namespace GeneticAlgorithmForComposing
                     if (counter == 3){
                         octaveCoded = octaveValue;
                     }
+                    */
 
                     string noteValue = gene.Substring(0, 12);
                     string durationValue = gene.Substring(15, duration.Length);
