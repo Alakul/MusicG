@@ -133,6 +133,38 @@ namespace GeneticAlgorithmForComposing
             Set();
         }
 
+        private double[] SetWeight()
+        {
+            double[] criteria = new double[4];
+
+            for (int i = 0; i < criteria.Length; i++){
+                criteria[i] = GetWeight(criterion1Weight.Text);
+            }
+
+            return criteria;
+        }
+
+        private double GetWeight(string value)
+        {
+            double weight = 0;
+            if (value == "1"){
+                weight = 1.0;
+            } else if (value == "0.75"){
+                weight = 0.75;
+            }
+            else if (value == "0.50"){
+                weight = 0.50;
+            }
+            else if (value == "0.25"){
+                weight = 0.25;
+            }
+            else if (value == "0"){
+                weight = 0.0;
+            }
+
+            return weight;
+        }
+
         private void StartGeneticAlgorithm()
         {
             //GENETIC PARAMETERS
@@ -141,9 +173,15 @@ namespace GeneticAlgorithmForComposing
             int mutationProbabilityValue = int.Parse(probMutation.Text);
             int tournamentSize;
             int prefferedOctave = int.Parse(octave.Text);
+      
+            double[] criteriaWeight = { Convert.ToDouble(criterion1Weight.Text), Convert.ToDouble(criterion2Weight.Text), Convert.ToDouble(criterion3Weight.Text), Convert.ToDouble(criterion4Weight.Text) };
+            double[] intervalWeight = { Convert.ToDouble(step1Weight.Text), Convert.ToDouble(step2Weight.Text), Convert.ToDouble(step3Weight.Text), 
+                Convert.ToDouble(step4Weight.Text), Convert.ToDouble(step5Weight.Text), Convert.ToDouble(step6Weight.Text),
+                Convert.ToDouble(step7Weight.Text), Convert.ToDouble(step8Weight.Text), Convert.ToDouble(step9Weight.Text) };
 
             //GENETIC ALGORITHM
-            evaluation = GeneticAlgorithm.FitnessFunction(population, semitonesSelected, scaleSelected, prefferedOctave);
+            (List<double> evaluationValue, double[,] evaluationArray) = GeneticAlgorithm.FitnessFunction(population, semitonesSelected, scaleSelected, prefferedOctave, criteriaWeight, intervalWeight);
+            evaluation = evaluationValue;
             int counter = 0;
 
             //OPERATORS
@@ -180,7 +218,8 @@ namespace GeneticAlgorithmForComposing
                 }
 
                 //EVALUATION
-                evaluation = GeneticAlgorithm.FitnessFunction(populationAfterMutation, semitonesSelected, scaleSelected, prefferedOctave);
+                (evaluationValue, evaluationArray) = GeneticAlgorithm.FitnessFunction(populationAfterMutation, semitonesSelected, scaleSelected, prefferedOctave, criteriaWeight, intervalWeight);
+                evaluation = evaluationValue;
                 population = populationAfterMutation;
 
                 chromosomeChoosenEvaluation = evaluation.Max();
@@ -194,6 +233,33 @@ namespace GeneticAlgorithmForComposing
                 */
                 counter++;
             }
+            SetDetails(criteriaWeight, evaluationArray, evaluation.IndexOf(chromosomeChoosenEvaluation));
+        }
+
+        private void SetDetails(double[] criteriaWeight, double[,] evaluationArray, int evaluation)
+        {
+            criterion1Text.Text = "Kryterium 1";
+            criterion2Text.Text = "Kryterium 2";
+            criterion3Text.Text = "Kryterium 3";
+            criterion4Text.Text = "Kryterium 4";
+            criterion1WText.Text = "Waga";
+            criterion1EText.Text = "Ocena";
+            criterion1MText.Text = "Maksymalna ocena";
+
+            criterion1W.Text = criteriaWeight[0].ToString();
+            criterion2W.Text = criteriaWeight[1].ToString();
+            criterion3W.Text = criteriaWeight[2].ToString();
+            criterion4W.Text = criteriaWeight[3].ToString();
+
+            criterion1E.Text = Math.Round(evaluationArray[evaluation, 0], 2).ToString();
+            criterion2E.Text = Math.Round(evaluationArray[evaluation, 1], 2).ToString();
+            criterion3E.Text = Math.Round(evaluationArray[evaluation, 2], 2).ToString();
+            criterion4E.Text = Math.Round(evaluationArray[evaluation, 3], 2).ToString();
+
+            criterion1M.Text = "1";
+            criterion2M.Text = "1";
+            criterion3M.Text = "1";
+            criterion4M.Text = "1";
         }
 
         private void Set()
@@ -201,7 +267,7 @@ namespace GeneticAlgorithmForComposing
             //CHOOSEN
             string[] chromosomeChoosenDecoded = GeneticAlgorithm.DecodeChromosome(chromosomeChoosen, semitonesSelected);
 
-            string choosen = string.Join(" ", chromosomeChoosenDecoded);
+            //string choosen = string.Join(" ", chromosomeChoosenDecoded);
             //show.Text = choosen.ToString() + " " + chromosomeChoosenEvaluation.ToString();
 
             showEvaluation.Text = "Ocena: " + Math.Round(chromosomeChoosenEvaluation, 2).ToString();

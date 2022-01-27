@@ -206,27 +206,34 @@ namespace GeneticAlgorithmForComposing
         }
 
         //EVALUATION
-        public static List<double> FitnessFunction(string[][] population, string[] semitonesSelected, string[] scale, int prefferedOctave)
+        public static (List<double>, double[,]) FitnessFunction(string[][] population, string[] semitonesSelected, string[] scale, int prefferedOctave, double[] criteriaWeight, double[] intervalWeight)
         {
             List<double> evaluationList = new List<double>();
+            double[,] evaluationArray = new double[population.Length, 4];
 
             for (int i = 0; i < population.Length; i++){
-                evaluationList.Add(EvaluateChromosome(population[i], semitonesSelected, scale, prefferedOctave));
+                double[] evaluationValues = EvaluateChromosome(population[i], semitonesSelected, scale, prefferedOctave, criteriaWeight, intervalWeight);
+                evaluationList.Add(evaluationValues[4]);
+                evaluationArray[i, 0] = evaluationValues[0];
+                evaluationArray[i, 1] = evaluationValues[1];
+                evaluationArray[i, 2] = evaluationValues[2];
+                evaluationArray[i, 3] = evaluationValues[3];
             }
-            return evaluationList;
+            return (evaluationList, evaluationArray);
         }
 
-        public static double EvaluateChromosome(string[] chromosome, string[] semitonesSelected, string[] scale, int prefferedOctave)
+        public static double[] EvaluateChromosome(string[] chromosome, string[] semitonesSelected, string[] scale, int prefferedOctave, double[] criteriaWeight, double[] intervalWeight)
         {
             string[] chromosomeDecoded = DecodeChromosome(chromosome, semitonesSelected);
 
             double evaluationNote = EvaluateNote(chromosomeDecoded, scale);
             double evaluationDuration = EvaluateDuration(chromosomeDecoded);
             double evaluationOctave = EvaluateOctave(chromosomeDecoded, prefferedOctave);
-            double evaluationInterval = EvaluateInterval(chromosomeDecoded, semitonesSelected);
+            double evaluationInterval = EvaluateInterval(chromosomeDecoded, semitonesSelected, intervalWeight);
             
-            double evaluation = (1*evaluationNote) + (1*evaluationDuration) + (0.75*evaluationOctave) + (0.5*evaluationInterval);
-            return evaluation;
+            double evaluation = (criteriaWeight[0] * evaluationNote) + (criteriaWeight[1] * evaluationDuration) + (criteriaWeight[2] * evaluationOctave) + (criteriaWeight[3] * evaluationInterval);
+            double[] evaluationValues = { evaluationNote, evaluationDuration, evaluationOctave, evaluationInterval, evaluation };
+            return evaluationValues;
         }
 
         public static double EvaluateNote(string[] chromosomeDecoded, string[] scale)
@@ -254,9 +261,9 @@ namespace GeneticAlgorithmForComposing
 
             for (int i = 0; i < chromosomeDecoded.Length; i++){
                 string[] geneValues = chromosomeDecoded[i].Split(';');
-                string durationValue = geneValues[2];
+                double durationValue = double.Parse(geneValues[2]);
 
-                if (durationValue != "0.75" || durationValue != "0.375" || durationValue != "0.1875"){
+                if (durationValue != 0.75 && durationValue != 0.375 && durationValue != 0.1875){
                     evaluation++;
                 }
             }
@@ -266,34 +273,6 @@ namespace GeneticAlgorithmForComposing
 
         public static double EvaluateOctave(string[] chromosomeDecoded, int prefferedOctave)
         {
-            /*
-            double evaluation = 0;
-            int distance = 0;
-            double chromosomeLength = chromosomeDecoded.Length;
-
-            for (int i = 0; i < chromosomeDecoded.Length - 1; i++)
-            {
-                string[] geneValues1 = chromosomeDecoded[i].Split(';');
-                int oktaveValue1 = int.Parse(geneValues1[1]);
-
-                string[] geneValues2 = chromosomeDecoded[i + 1].Split(';');
-                int oktaveValue2 = int.Parse(geneValues2[1]);
-
-                if (oktaveValue1 < oktaveValue2)
-                    distance = oktaveValue2 - oktaveValue1;
-                else if (oktaveValue1 > oktaveValue2)
-                    distance = oktaveValue1 - oktaveValue2;
-                else if (oktaveValue1 == oktaveValue2)
-                    distance = 0;
-
-                if (distance == 0 || distance == 1){
-                    evaluation++;
-                }
-            }
-            double ratio = evaluation / chromosomeLength;
-            return ratio;
-            */
-
             double evaluation = 0;
             double chromosomeLength = chromosomeDecoded.Length;
 
@@ -310,7 +289,7 @@ namespace GeneticAlgorithmForComposing
             return ratio;
         }
 
-        public static double EvaluateInterval(string[] chromosomeDecoded, string[] semitonesSelected)
+        public static double EvaluateInterval(string[] chromosomeDecoded, string[] semitonesSelected, double[] intervalWeight)
         {
             //Czy interwał jest dobry
             //Stosunek liczby dobrych/niedobrych interwałów do liczby interwałów
@@ -350,7 +329,47 @@ namespace GeneticAlgorithmForComposing
                 else if ((oktaveValue1<oktaveValue2 && oktaveValue2-oktaveValue1 > 1) || (oktaveValue1>oktaveValue2 && oktaveValue1-oktaveValue2 > 1)){
                     interval = 13;
                 }
+                
 
+                if (interval == 0 || interval == 5 || interval == 7 || interval == 12)
+                {
+                    evaluation += intervalWeight[0];
+                }
+                else if (interval == 1 || interval == 2)
+                {
+                    evaluation += intervalWeight[1];
+                }
+                else if (interval == 3 || interval == 4)
+                {
+                    evaluation += intervalWeight[2];
+                }
+                else if (interval == 5 || interval == 6)
+                {
+                    evaluation += intervalWeight[3];
+                }
+                else if (interval == 7)
+                {
+                    evaluation += intervalWeight[4];
+                }
+                else if (interval == 8 || interval == 9)
+                {
+                    evaluation += intervalWeight[5];
+                }
+                else if (interval == 10 || interval == 11)
+                {
+                    evaluation += intervalWeight[6];
+                }
+                else if (interval == 12)
+                {
+                    evaluation += intervalWeight[7];
+                }
+                else if (interval > 12)
+                {
+                    evaluation += intervalWeight[8];
+                }
+
+
+                /*
                 if (interval == 0){
                     evaluation += 0.25;
                 }
@@ -372,7 +391,7 @@ namespace GeneticAlgorithmForComposing
                 else if (interval > 12){
                     evaluation += 0;
                 }
-
+                */
                 /*
                 //perfect consonants
                 if (interval == 0 || interval == 5 || interval == 7 || interval == 12){
