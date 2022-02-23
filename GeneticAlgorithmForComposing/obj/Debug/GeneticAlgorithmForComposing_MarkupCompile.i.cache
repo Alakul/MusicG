@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\alicj\source\repos\GeneticAlgorithmForComposing\GeneticAlgorithmForComposing\App.xaml
-21901406993
+61598908651
 
-16-786534717
+212138431555
 122-1686376166
-MainWindow.xaml;ControlsDictionary.xaml;
+AppWindow.xaml;MainWindow.xaml;Dictionaries\ControlsDictionary.xaml;Menu\GenerateMusic.xaml;Menu\About.xaml;Menu\MainMenu.xaml;
 
-True
+False
 

@@ -1,13 +1,6 @@
-﻿using M;
-using Manufaktura.Controls.Model;
-using Manufaktura.Music.Model;
-using Manufaktura.Music.Model.MajorAndMinor;
-using Microsoft.Win32;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GeneticAlgorithmForComposing
 {
@@ -367,52 +360,6 @@ namespace GeneticAlgorithmForComposing
                 {
                     evaluation += intervalWeight[8];
                 }
-
-
-                /*
-                if (interval == 0){
-                    evaluation += 0.25;
-                }
-                else if (interval == 1 || interval == 2 || interval == 3 || interval == 4){
-                    evaluation += 1;
-                }
-                else if (interval == 5 || interval == 6 || interval == 7){
-                    evaluation += 0.75;
-                }
-                else if (interval == 8 || interval == 9){
-                    evaluation += 0.5;
-                }
-                else if (interval == 10 || interval == 11){
-                    evaluation += 0.5;
-                }
-                else if (interval == 12){
-                    evaluation += 0.2;
-                }
-                else if (interval > 12){
-                    evaluation += 0;
-                }
-                */
-                /*
-                //perfect consonants
-                if (interval == 0 || interval == 5 || interval == 7 || interval == 12){
-                    evaluation += 1;
-                }
-                //inferfect c
-                else if (interval == 3 || interval == 4 || interval == 8 || interval == 9){
-                    evaluation += 0.75;
-                }
-                //seconds
-                else if (interval == 1 || interval == 2){
-                    evaluation += 0.5;
-                }
-                //sevenths
-                else if (interval == 10 || interval == 11){
-                    evaluation += 0.25;
-                }
-                else if (interval > 12){
-                    evaluation += 0;
-                }
-                */
             }
 
             double ratio = evaluation / (chromosomeLength - 1);
@@ -458,7 +405,7 @@ namespace GeneticAlgorithmForComposing
                             counter++;
                         }
                     }
-                    else{
+                    else {
                         if (drawnNumber >= intervals[i] && drawnNumber < intervals[i + 1]){
                             chromosomesSelected[counter] = population[i];
                             counter++;
@@ -866,33 +813,6 @@ namespace GeneticAlgorithmForComposing
                     if (octaveValues.Contains(Convert.ToInt32(octaveCoded, 2)) == false){
                         octaveCoded = octaveValue;
                     }
-
-                    //int index;
-                    //int counter = 0;
-                    /*
-                    do {
-                        octaveCoded = "";
-                        octaveArray = octaveValue.ToCharArray();
-                        index = random.Next(0, octaveValue.Length);
-
-                        if (octaveArray[index] == '0'){
-                            octaveArray[index] = '1';
-                        }
-                        else if (octaveArray[index] == '1'){
-                            octaveArray[index] = '0';
-                        }
-
-                        for (int j = 0; j < octaveArray.Length; j++){
-                            octaveCoded += octaveArray[j];
-                        }
-                        counter++;
-
-                    } while (octaveValues.Contains(Convert.ToInt32(octaveCoded, 2)) == false && counter != 3);
-
-                    if (counter == 3){
-                        octaveCoded = octaveValue;
-                    }
-                    */
 
                     string noteValue = gene.Substring(0, 12);
                     string durationValue = gene.Substring(15, duration.Length);

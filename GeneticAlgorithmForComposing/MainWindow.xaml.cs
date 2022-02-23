@@ -1,23 +1,11 @@
 ﻿using GeneticAlgorithmForComposing.Commands;
-using Manufaktura.Controls.Audio;
-using Manufaktura.Controls.Desktop.Audio;
 using Manufaktura.Controls.Model;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using static Manufaktura.Controls.Audio.ScorePlayer;
 
 namespace GeneticAlgorithmForComposing
 {
@@ -131,38 +119,6 @@ namespace GeneticAlgorithmForComposing
         {
             StartGeneticAlgorithm();
             Set();
-        }
-
-        private double[] SetWeight()
-        {
-            double[] criteria = new double[4];
-
-            for (int i = 0; i < criteria.Length; i++){
-                criteria[i] = GetWeight(criterion1Weight.Text);
-            }
-
-            return criteria;
-        }
-
-        private double GetWeight(string value)
-        {
-            double weight = 0;
-            if (value == "1"){
-                weight = 1.0;
-            } else if (value == "0.75"){
-                weight = 0.75;
-            }
-            else if (value == "0.50"){
-                weight = 0.50;
-            }
-            else if (value == "0.25"){
-                weight = 0.25;
-            }
-            else if (value == "0"){
-                weight = 0.0;
-            }
-
-            return weight;
         }
 
         private void StartGeneticAlgorithm()

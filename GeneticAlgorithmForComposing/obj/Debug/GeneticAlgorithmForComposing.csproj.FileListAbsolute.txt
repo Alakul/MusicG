@@ -19,7 +19,6 @@ C:\Users\alicj\source\repos\GeneticAlgorithmForComposing\GeneticAlgorithmForComp
 C:\Users\alicj\source\repos\GeneticAlgorithmForComposing\GeneticAlgorithmForComposing\obj\Debug\GeneticAlgorithmForComposing.csproj.CopyComplete
 C:\Users\alicj\source\repos\GeneticAlgorithmForComposing\GeneticAlgorithmForComposing\obj\Debug\GeneratedInternalTypeHelper.g.cs
 C:\Users\alicj\source\repos\GeneticAlgorithmForComposing\GeneticAlgorithmForComposing\obj\Debug\App.baml
-C:\Users\alicj\source\repos\GeneticAlgorithmForComposing\GeneticAlgorithmForComposing\obj\Debug\ControlsDictionary.baml
 C:\Users\alicj\source\repos\GeneticAlgorithmForComposing\GeneticAlgorithmForComposing\bin\Debug\Manufaktura.Controls.dll
 C:\Users\alicj\source\repos\GeneticAlgorithmForComposing\GeneticAlgorithmForComposing\bin\Debug\Manufaktura.Controls.WPF.dll
 C:\Users\alicj\source\repos\GeneticAlgorithmForComposing\GeneticAlgorithmForComposing\bin\Debug\Manufaktura.Music.dll
@@ -29,3 +28,12 @@ C:\Users\alicj\source\repos\GeneticAlgorithmForComposing\GeneticAlgorithmForComp
 C:\Users\alicj\source\repos\GeneticAlgorithmForComposing\GeneticAlgorithmForComposing\bin\Debug\Sanford.txt
 C:\Users\alicj\source\repos\GeneticAlgorithmForComposing\GeneticAlgorithmForComposing\bin\Debug\Manufaktura.Controls.Desktop.dll
 C:\Users\alicj\source\repos\GeneticAlgorithmForComposing\GeneticAlgorithmForComposing\bin\Debug\Manufaktura.Controls.Desktop.pdb
+C:\Users\alicj\source\repos\GeneticAlgorithmForComposing\GeneticAlgorithmForComposing\obj\Debug\Menu\GenerateMusic.g.cs
+C:\Users\alicj\source\repos\GeneticAlgorithmForComposing\GeneticAlgorithmForComposing\obj\Debug\Menu\MainMenu.g.cs
+C:\Users\alicj\source\repos\GeneticAlgorithmForComposing\GeneticAlgorithmForComposing\obj\Debug\Menu\GenerateMusic.baml
+C:\Users\alicj\source\repos\GeneticAlgorithmForComposing\GeneticAlgorithmForComposing\obj\Debug\Menu\MainMenu.baml
+C:\Users\alicj\source\repos\GeneticAlgorithmForComposing\GeneticAlgorithmForComposing\obj\Debug\AppWindow.g.cs
+C:\Users\alicj\source\repos\GeneticAlgorithmForComposing\GeneticAlgorithmForComposing\obj\Debug\AppWindow.baml
+C:\Users\alicj\source\repos\GeneticAlgorithmForComposing\GeneticAlgorithmForComposing\obj\Debug\Dictionaries\ControlsDictionary.baml
+C:\Users\alicj\source\repos\GeneticAlgorithmForComposing\GeneticAlgorithmForComposing\obj\Debug\Menu\About.g.cs
+C:\Users\alicj\source\repos\GeneticAlgorithmForComposing\GeneticAlgorithmForComposing\obj\Debug\Menu\About.baml

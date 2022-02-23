@@ -19,7 +19,7 @@ namespace GeneticAlgorithmForComposing.Commands
 
         public override void Execute(object parameter)
         {
-            viewModel.Score = MainWindow.score;
+            viewModel.Score = AppWindow.score;
         }
     }
 }

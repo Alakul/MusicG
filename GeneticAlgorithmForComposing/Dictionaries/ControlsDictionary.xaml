@@ -34,7 +34,6 @@
         </Style.Triggers>
     </Style>
 
-
     <Style x:Key="textBoxVisibility" TargetType="TextBox" BasedOn="{StaticResource textBoxInError}">
         <Setter Property="Visibility" Value="Collapsed"/>
         <Style.Triggers>
@@ -48,7 +47,6 @@
             </DataTrigger>
         </Style.Triggers>
     </Style>
-
 
     <!--Style Border-->
     <Style x:Key="border" TargetType="{x:Type Border}">
@@ -80,35 +78,39 @@
         </Style.Triggers>
     </Style>
 
+    <Style x:Key="textBlockText" TargetType="{x:Type TextBlock}">
+        <Setter Property="TextAlignment" Value="Justify"></Setter>
+        <Setter Property="TextWrapping" Value="Wrap"></Setter>
+        <Setter Property="Margin" Value="0,4,0,4"></Setter>
+    </Style>
+
     <!--Style Grid-->
     <Style x:Key="grid" TargetType="{x:Type Grid}">
         <Setter Property="Margin" Value="10"></Setter>
     </Style>
 
-    
-    
-    
-    
-    
-    
     <!--Style ComboBox-->
     <Style x:Key="comboBox" TargetType="{x:Type ComboBox}">
         <Setter Property="HorizontalAlignment" Value="Stretch"></Setter>
     </Style>
     
-    
     <!--Style Button-->
     <Style x:Key="button" TargetType="{x:Type Button}">
-        <Setter Property="Background" Value="#FFF1F1F1"/>
+        <Setter Property="Background" Value="White"/>
         <Setter Property="Foreground" Value="#000"/>
-        <Setter Property="Margin" Value="5"/>
+        <Setter Property="Margin" Value="0,20,0,20"/>
+        <Setter Property="Height" Value="50" />
+        <Setter Property="Width" Value="220" />
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="FontSize" Value="18" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
                     <Border Background="{TemplateBinding Background}" 
                             BorderThickness="1"
+                            CornerRadius="20"
                             Padding="5"
-                            BorderBrush="#000">
+                            BorderBrush="Gray">
                         <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center">
                         </ContentPresenter>
                     </Border>
@@ -117,7 +119,7 @@
         </Setter>
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="#FFD9D9D9"/>
+                <Setter Property="Background" Value="#FFF1F1F1"/>
             </Trigger>
             <Trigger Property="IsEnabled" Value="false">
                 <Setter Property="Background" Value="White"/>
@@ -125,5 +127,4 @@
         </Style.Triggers>
     </Style>
 
-    
 </ResourceDictionary>
