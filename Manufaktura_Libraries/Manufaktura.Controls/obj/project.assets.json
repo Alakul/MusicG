@@ -2826,22 +2826,25 @@
   },
   "packageFolders": {
     "C:\\Users\\alicj\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\alicj\\source\\repos\\GeneticAlgorithmForComposing\\Manufaktura_Libraries\\Manufaktura.Controls\\Manufaktura.Controls.csproj",
+      "projectUniqueName": "C:\\Users\\alicj\\source\\repos\\MusicG\\Manufaktura_Libraries\\Manufaktura.Controls\\Manufaktura.Controls.csproj",
       "projectName": "Manufaktura.Controls",
-      "projectPath": "C:\\Users\\alicj\\source\\repos\\GeneticAlgorithmForComposing\\Manufaktura_Libraries\\Manufaktura.Controls\\Manufaktura.Controls.csproj",
+      "projectPath": "C:\\Users\\alicj\\source\\repos\\MusicG\\Manufaktura_Libraries\\Manufaktura.Controls\\Manufaktura.Controls.csproj",
       "packagesPath": "C:\\Users\\alicj\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\alicj\\source\\repos\\GeneticAlgorithmForComposing\\Manufaktura_Libraries\\Manufaktura.Controls\\obj\\",
+      "outputPath": "C:\\Users\\alicj\\source\\repos\\MusicG\\Manufaktura_Libraries\\Manufaktura.Controls\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
         "C:\\Users\\alicj\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -2855,8 +2858,8 @@
         "netstandard1.1": {
           "targetAlias": "netstandard1.1",
           "projectReferences": {
-            "C:\\Users\\alicj\\source\\repos\\GeneticAlgorithmForComposing\\Manufaktura_Libraries\\Manufaktura.Music\\Manufaktura.Music.csproj": {
-              "projectPath": "C:\\Users\\alicj\\source\\repos\\GeneticAlgorithmForComposing\\Manufaktura_Libraries\\Manufaktura.Music\\Manufaktura.Music.csproj"
+            "C:\\Users\\alicj\\source\\repos\\MusicG\\Manufaktura_Libraries\\Manufaktura.Music\\Manufaktura.Music.csproj": {
+              "projectPath": "C:\\Users\\alicj\\source\\repos\\MusicG\\Manufaktura_Libraries\\Manufaktura.Music\\Manufaktura.Music.csproj"
             }
           }
         }
@@ -2881,7 +2884,7 @@
             "version": "[9.0.1, )"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.405\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.406\\RuntimeIdentifierGraph.json"
       }
     }
   }

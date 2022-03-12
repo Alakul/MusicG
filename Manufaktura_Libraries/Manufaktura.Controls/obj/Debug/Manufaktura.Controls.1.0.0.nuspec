@@ -14,6 +14,6 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="C:\Users\alicj\source\repos\GeneticAlgorithmForComposing\Manufaktura_Libraries\Manufaktura.Controls\bin\Debug\netstandard1.1\Manufaktura.Controls.dll" target="lib\netstandard1.1\Manufaktura.Controls.dll" />
+    <file src="C:\Users\alicj\source\repos\MusicG\Manufaktura_Libraries\Manufaktura.Controls\bin\Debug\netstandard1.1\Manufaktura.Controls.dll" target="lib\netstandard1.1\Manufaktura.Controls.dll" />
   </files>
 </package>

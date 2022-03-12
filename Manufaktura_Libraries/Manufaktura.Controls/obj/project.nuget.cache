@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "t7EtzDtFRn/XZWi4xIG1/mXFl2vTJBdDaBOGDITScZTVdqkApc1ZfRBKCTE/7gxOpcjQKqWFljtUU1DTr2edEg==",
+  "dgSpecHash": "KsbSFHGqUm+XO3EVl8P0AW2ubwz10u7RGGVNcKWQZEy1v94/Ow0K83Pp1o1IwKgYw12bwTR+zEUMUCpAz7ZbOQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\alicj\\source\\repos\\GeneticAlgorithmForComposing\\Manufaktura_Libraries\\Manufaktura.Controls\\Manufaktura.Controls.csproj",
+  "projectFilePath": "C:\\Users\\alicj\\source\\repos\\MusicG\\Manufaktura_Libraries\\Manufaktura.Controls\\Manufaktura.Controls.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\alicj\\.nuget\\packages\\microsoft.csharp\\4.0.1\\microsoft.csharp.4.0.1.nupkg.sha512",
     "C:\\Users\\alicj\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
