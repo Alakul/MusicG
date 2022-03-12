@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\alicj\source\repos\MusicG\GeneticAlgorithmForComposing\obj\Debug\
+C:\Users\alicj\source\repos\MusicG\MusicG\obj\Debug\
 MusicG
 none
 false
 DEBUG;TRACE
-C:\Users\alicj\source\repos\MusicG\GeneticAlgorithmForComposing\App.xaml
-61598908651
+C:\Users\alicj\source\repos\MusicG\MusicG\App.xaml
+5447360526
 
-212138431555
+201227571878
 1221280156867
-AppWindow.xaml;MainWindow.xaml;Dictionaries\ControlsDictionary.xaml;Menu\GenerateMusic.xaml;Menu\About.xaml;Menu\MainMenu.xaml;
+AppWindow.xaml;Dictionaries\ControlsDictionary.xaml;Menu\GenerateMusic.xaml;Menu\About.xaml;Menu\MainMenu.xaml;
 
-False
+True
 
