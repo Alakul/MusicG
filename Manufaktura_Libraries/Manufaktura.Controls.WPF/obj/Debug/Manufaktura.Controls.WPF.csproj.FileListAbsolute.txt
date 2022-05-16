@@ -35,3 +35,21 @@ C:\Users\alicj\source\repos\MusicG\Manufaktura_Libraries\Manufaktura.Controls.WP
 C:\Users\alicj\source\repos\MusicG\Manufaktura_Libraries\Manufaktura.Controls.WPF\obj\Debug\Manufaktura.Controls.WPF.csproj.CopyComplete
 C:\Users\alicj\source\repos\MusicG\Manufaktura_Libraries\Manufaktura.Controls.WPF\obj\Debug\Manufaktura.Controls.WPF.dll
 C:\Users\alicj\source\repos\MusicG\Manufaktura_Libraries\Manufaktura.Controls.WPF\obj\Debug\Manufaktura.Controls.WPF.pdb
+C:\Users\alicj\source\repos\WPF - MusicG\Manufaktura_Libraries\Manufaktura.Controls.WPF\bin\Debug\Manufaktura.Controls.WPF.dll
+C:\Users\alicj\source\repos\WPF - MusicG\Manufaktura_Libraries\Manufaktura.Controls.WPF\bin\Debug\Manufaktura.Controls.WPF.pdb
+C:\Users\alicj\source\repos\WPF - MusicG\Manufaktura_Libraries\Manufaktura.Controls.WPF\bin\Debug\Manufaktura.Controls.dll
+C:\Users\alicj\source\repos\WPF - MusicG\Manufaktura_Libraries\Manufaktura.Controls.WPF\bin\Debug\Manufaktura.Music.dll
+C:\Users\alicj\source\repos\WPF - MusicG\Manufaktura_Libraries\Manufaktura.Controls.WPF\bin\Debug\Manufaktura.Controls.pdb
+C:\Users\alicj\source\repos\WPF - MusicG\Manufaktura_Libraries\Manufaktura.Controls.WPF\bin\Debug\Manufaktura.Music.pdb
+C:\Users\alicj\source\repos\WPF - MusicG\Manufaktura_Libraries\Manufaktura.Controls.WPF\obj\Debug\Manufaktura.Controls.WPF.csproj.AssemblyReference.cache
+C:\Users\alicj\source\repos\WPF - MusicG\Manufaktura_Libraries\Manufaktura.Controls.WPF\obj\Debug\NoteViewer.g.cs
+C:\Users\alicj\source\repos\WPF - MusicG\Manufaktura_Libraries\Manufaktura.Controls.WPF\obj\Debug\RadialChart.g.cs
+C:\Users\alicj\source\repos\WPF - MusicG\Manufaktura_Libraries\Manufaktura.Controls.WPF\obj\Debug\Manufaktura.Controls.WPF_MarkupCompile.cache
+C:\Users\alicj\source\repos\WPF - MusicG\Manufaktura_Libraries\Manufaktura.Controls.WPF\obj\Debug\Manufaktura.Controls.WPF_MarkupCompile.lref
+C:\Users\alicj\source\repos\WPF - MusicG\Manufaktura_Libraries\Manufaktura.Controls.WPF\obj\Debug\NoteViewer.baml
+C:\Users\alicj\source\repos\WPF - MusicG\Manufaktura_Libraries\Manufaktura.Controls.WPF\obj\Debug\RadialChart.baml
+C:\Users\alicj\source\repos\WPF - MusicG\Manufaktura_Libraries\Manufaktura.Controls.WPF\obj\Debug\Manufaktura.Controls.WPF.g.resources
+C:\Users\alicj\source\repos\WPF - MusicG\Manufaktura_Libraries\Manufaktura.Controls.WPF\obj\Debug\Manufaktura.Controls.WPF.csproj.CoreCompileInputs.cache
+C:\Users\alicj\source\repos\WPF - MusicG\Manufaktura_Libraries\Manufaktura.Controls.WPF\obj\Debug\Manufaktura.Controls.WPF.csproj.CopyComplete
+C:\Users\alicj\source\repos\WPF - MusicG\Manufaktura_Libraries\Manufaktura.Controls.WPF\obj\Debug\Manufaktura.Controls.WPF.dll
+C:\Users\alicj\source\repos\WPF - MusicG\Manufaktura_Libraries\Manufaktura.Controls.WPF\obj\Debug\Manufaktura.Controls.WPF.pdb

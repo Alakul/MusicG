@@ -25,3 +25,16 @@ C:\Users\alicj\source\repos\MusicG\Manufaktura_Libraries\Manufaktura.Controls.De
 C:\Users\alicj\source\repos\MusicG\Manufaktura_Libraries\Manufaktura.Controls.Desktop\obj\Debug\Manufaktura.Controls.Desktop.csproj.CopyComplete
 C:\Users\alicj\source\repos\MusicG\Manufaktura_Libraries\Manufaktura.Controls.Desktop\obj\Debug\Manufaktura.Controls.Desktop.dll
 C:\Users\alicj\source\repos\MusicG\Manufaktura_Libraries\Manufaktura.Controls.Desktop\obj\Debug\Manufaktura.Controls.Desktop.pdb
+C:\Users\alicj\source\repos\WPF - MusicG\Manufaktura_Libraries\Manufaktura.Controls.Desktop\bin\Debug\Sanford.txt
+C:\Users\alicj\source\repos\WPF - MusicG\Manufaktura_Libraries\Manufaktura.Controls.Desktop\bin\Debug\Manufaktura.Controls.Desktop.dll
+C:\Users\alicj\source\repos\WPF - MusicG\Manufaktura_Libraries\Manufaktura.Controls.Desktop\bin\Debug\Manufaktura.Controls.Desktop.pdb
+C:\Users\alicj\source\repos\WPF - MusicG\Manufaktura_Libraries\Manufaktura.Controls.Desktop\bin\Debug\Manufaktura.Controls.dll
+C:\Users\alicj\source\repos\WPF - MusicG\Manufaktura_Libraries\Manufaktura.Controls.Desktop\bin\Debug\Manufaktura.Music.dll
+C:\Users\alicj\source\repos\WPF - MusicG\Manufaktura_Libraries\Manufaktura.Controls.Desktop\bin\Debug\Manufaktura.Controls.pdb
+C:\Users\alicj\source\repos\WPF - MusicG\Manufaktura_Libraries\Manufaktura.Controls.Desktop\bin\Debug\Manufaktura.Music.pdb
+C:\Users\alicj\source\repos\WPF - MusicG\Manufaktura_Libraries\Manufaktura.Controls.Desktop\obj\Debug\Manufaktura.Controls.Desktop.csproj.AssemblyReference.cache
+C:\Users\alicj\source\repos\WPF - MusicG\Manufaktura_Libraries\Manufaktura.Controls.Desktop\obj\Debug\Manufaktura.Controls.Desktop.g.resources
+C:\Users\alicj\source\repos\WPF - MusicG\Manufaktura_Libraries\Manufaktura.Controls.Desktop\obj\Debug\Manufaktura.Controls.Desktop.csproj.CoreCompileInputs.cache
+C:\Users\alicj\source\repos\WPF - MusicG\Manufaktura_Libraries\Manufaktura.Controls.Desktop\obj\Debug\Manufaktura.Controls.Desktop.csproj.CopyComplete
+C:\Users\alicj\source\repos\WPF - MusicG\Manufaktura_Libraries\Manufaktura.Controls.Desktop\obj\Debug\Manufaktura.Controls.Desktop.dll
+C:\Users\alicj\source\repos\WPF - MusicG\Manufaktura_Libraries\Manufaktura.Controls.Desktop\obj\Debug\Manufaktura.Controls.Desktop.pdb

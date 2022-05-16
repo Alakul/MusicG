@@ -18,3 +18,10 @@ C:\Users\alicj\source\repos\MusicG\Midi\obj\Debug\Midi.csproj.AssemblyReference.
 C:\Users\alicj\source\repos\MusicG\Midi\obj\Debug\Midi.csproj.CoreCompileInputs.cache
 C:\Users\alicj\source\repos\MusicG\Midi\obj\Debug\Midi.dll
 C:\Users\alicj\source\repos\MusicG\Midi\obj\Debug\Midi.pdb
+C:\Users\alicj\source\repos\WPF - MusicG\Midi\bin\Debug\Midi.xml
+C:\Users\alicj\source\repos\WPF - MusicG\Midi\bin\Debug\Midi.dll
+C:\Users\alicj\source\repos\WPF - MusicG\Midi\bin\Debug\Midi.pdb
+C:\Users\alicj\source\repos\WPF - MusicG\Midi\obj\Debug\Midi.csproj.AssemblyReference.cache
+C:\Users\alicj\source\repos\WPF - MusicG\Midi\obj\Debug\Midi.csproj.CoreCompileInputs.cache
+C:\Users\alicj\source\repos\WPF - MusicG\Midi\obj\Debug\Midi.dll
+C:\Users\alicj\source\repos\WPF - MusicG\Midi\obj\Debug\Midi.pdb

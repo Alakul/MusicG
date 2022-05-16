@@ -2520,11 +2520,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\alicj\\source\\repos\\MusicG\\Manufaktura_Libraries\\Manufaktura.Music\\Manufaktura.Music.csproj",
+      "projectUniqueName": "C:\\Users\\alicj\\source\\repos\\WPF - MusicG\\Manufaktura_Libraries\\Manufaktura.Music\\Manufaktura.Music.csproj",
       "projectName": "Manufaktura.Music",
-      "projectPath": "C:\\Users\\alicj\\source\\repos\\MusicG\\Manufaktura_Libraries\\Manufaktura.Music\\Manufaktura.Music.csproj",
+      "projectPath": "C:\\Users\\alicj\\source\\repos\\WPF - MusicG\\Manufaktura_Libraries\\Manufaktura.Music\\Manufaktura.Music.csproj",
       "packagesPath": "C:\\Users\\alicj\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\alicj\\source\\repos\\MusicG\\Manufaktura_Libraries\\Manufaktura.Music\\obj\\",
+      "outputPath": "C:\\Users\\alicj\\source\\repos\\WPF - MusicG\\Manufaktura_Libraries\\Manufaktura.Music\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
@@ -2564,7 +2564,7 @@
             "autoReferenced": true
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.406\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.202\\RuntimeIdentifierGraph.json"
       }
     }
   }
