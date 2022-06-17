@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace MusicG
 {
-    class GeneticAlgorithm
+    public class GeneticAlgorithm
     {
         public static int semitones = MusicData.semitones;
         public static int[] octaveValues = MusicData.octaveValues;

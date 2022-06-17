@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace MusicG
 {
-    class MusicController
+    public class MusicController
     {
         //MIDI
         public static string[] CheckNote(string[] chromosome, string[] semitonesSelected)
