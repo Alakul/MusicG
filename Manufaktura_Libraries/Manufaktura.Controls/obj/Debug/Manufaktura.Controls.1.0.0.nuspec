@@ -9,7 +9,7 @@
       <group targetFramework=".NETStandard1.1">
         <dependency id="Manufaktura.Music" version="1.0.0" exclude="Build,Analyzers" />
         <dependency id="NETStandard.Library" version="1.6.1" exclude="Build,Analyzers" />
-        <dependency id="Newtonsoft.Json" version="9.0.1" exclude="Build,Analyzers" />
+        <dependency id="Newtonsoft.Json" version="13.0.1" exclude="Build,Analyzers" />
       </group>
     </dependencies>
   </metadata>

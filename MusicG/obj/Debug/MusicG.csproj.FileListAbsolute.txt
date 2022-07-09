@@ -113,3 +113,5 @@ C:\Users\alicj\source\repos\WPF - MusicG\MusicG\obj\Debug\MusicG.csproj.CoreComp
 C:\Users\alicj\source\repos\WPF - MusicG\MusicG\obj\Debug\MusicG.csproj.CopyComplete
 C:\Users\alicj\source\repos\WPF - MusicG\MusicG\obj\Debug\MusicG.exe
 C:\Users\alicj\source\repos\WPF - MusicG\MusicG\obj\Debug\MusicG.pdb
+C:\Users\alicj\source\repos\WPF - MusicG\MusicG\bin\Debug\Newtonsoft.Json.dll
+C:\Users\alicj\source\repos\WPF - MusicG\MusicG\obj\Debug\MusicG.csproj.SuggestedBindingRedirects.cache

@@ -53,3 +53,4 @@ C:\Users\alicj\source\repos\WPF - MusicG\Manufaktura_Libraries\Manufaktura.Contr
 C:\Users\alicj\source\repos\WPF - MusicG\Manufaktura_Libraries\Manufaktura.Controls.WPF\obj\Debug\Manufaktura.Controls.WPF.csproj.CopyComplete
 C:\Users\alicj\source\repos\WPF - MusicG\Manufaktura_Libraries\Manufaktura.Controls.WPF\obj\Debug\Manufaktura.Controls.WPF.dll
 C:\Users\alicj\source\repos\WPF - MusicG\Manufaktura_Libraries\Manufaktura.Controls.WPF\obj\Debug\Manufaktura.Controls.WPF.pdb
+C:\Users\alicj\source\repos\WPF - MusicG\Manufaktura_Libraries\Manufaktura.Controls.WPF\bin\Debug\Newtonsoft.Json.dll
