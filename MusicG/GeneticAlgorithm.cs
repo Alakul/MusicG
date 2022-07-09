@@ -184,7 +184,7 @@ namespace MusicG
         }
 
         //GENETIC ALGORITHM
-        public static string[][] GeneratePopulation(int populationSize, string[] scale, double measuresValue, string[] semitonesSelected)
+        public static string[][] GeneratePopulation(int populationSize, double measuresValue, string[] semitonesSelected)
         {
             string[][] population = new string[populationSize][];
             string[] chromosomeGenerated, chromosomeCoded;

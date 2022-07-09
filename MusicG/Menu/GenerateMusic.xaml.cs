@@ -127,7 +127,7 @@ namespace MusicG.Menu
 
             //GENETIC ALGORITHM
             semitonesSelected = GeneticAlgorithm.SetSign(scaleSelected);
-            population = GeneticAlgorithm.GeneratePopulation(populationValue, scaleSelected, measuresValue, semitonesSelected);
+            population = GeneticAlgorithm.GeneratePopulation(populationValue, measuresValue, semitonesSelected);
             generationsSum = 0;
             StartGeneticAlgorithm();
             Set();
@@ -204,12 +204,6 @@ namespace MusicG.Menu
                 chromosomeChoosenEvaluation = evaluation.Max();
                 chromosomeChoosen = population[evaluation.IndexOf(chromosomeChoosenEvaluation)];
 
-                /*
-                if (evaluation.Max() > chromosomeChoosenEvaluation){
-                    chromosomeChoosenEvaluation = evaluation.Max();
-                    chromosomeChoosen = population[evaluation.IndexOf(chromosomeChoosenEvaluation)];
-                }
-                */
                 counter++;
             }
             SetDetails(criteriaWeight, evaluationArray, evaluation.IndexOf(chromosomeChoosenEvaluation));
