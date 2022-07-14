@@ -39,6 +39,7 @@ C:\Users\alicj\source\repos\WPF - MusicG\Manufaktura_Libraries\Manufaktura.Contr
 C:\Users\alicj\source\repos\WPF - MusicG\Manufaktura_Libraries\Manufaktura.Controls.WPF\bin\Debug\Manufaktura.Controls.WPF.pdb
 C:\Users\alicj\source\repos\WPF - MusicG\Manufaktura_Libraries\Manufaktura.Controls.WPF\bin\Debug\Manufaktura.Controls.dll
 C:\Users\alicj\source\repos\WPF - MusicG\Manufaktura_Libraries\Manufaktura.Controls.WPF\bin\Debug\Manufaktura.Music.dll
+C:\Users\alicj\source\repos\WPF - MusicG\Manufaktura_Libraries\Manufaktura.Controls.WPF\bin\Debug\Newtonsoft.Json.dll
 C:\Users\alicj\source\repos\WPF - MusicG\Manufaktura_Libraries\Manufaktura.Controls.WPF\bin\Debug\Manufaktura.Controls.pdb
 C:\Users\alicj\source\repos\WPF - MusicG\Manufaktura_Libraries\Manufaktura.Controls.WPF\bin\Debug\Manufaktura.Music.pdb
 C:\Users\alicj\source\repos\WPF - MusicG\Manufaktura_Libraries\Manufaktura.Controls.WPF\obj\Debug\Manufaktura.Controls.WPF.csproj.AssemblyReference.cache
@@ -53,4 +54,3 @@ C:\Users\alicj\source\repos\WPF - MusicG\Manufaktura_Libraries\Manufaktura.Contr
 C:\Users\alicj\source\repos\WPF - MusicG\Manufaktura_Libraries\Manufaktura.Controls.WPF\obj\Debug\Manufaktura.Controls.WPF.csproj.CopyComplete
 C:\Users\alicj\source\repos\WPF - MusicG\Manufaktura_Libraries\Manufaktura.Controls.WPF\obj\Debug\Manufaktura.Controls.WPF.dll
 C:\Users\alicj\source\repos\WPF - MusicG\Manufaktura_Libraries\Manufaktura.Controls.WPF\obj\Debug\Manufaktura.Controls.WPF.pdb
-C:\Users\alicj\source\repos\WPF - MusicG\Manufaktura_Libraries\Manufaktura.Controls.WPF\bin\Debug\Newtonsoft.Json.dll

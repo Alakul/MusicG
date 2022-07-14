@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\alicj\source\repos\MusicG\MusicG\obj\Debug\
+C:\Users\alicj\source\repos\WPF - MusicG\MusicG\obj\Debug\
 MusicG
 none
 false
 DEBUG;TRACE
-C:\Users\alicj\source\repos\MusicG\MusicG\App.xaml
-5447360526
+C:\Users\alicj\source\repos\WPF - MusicG\MusicG\App.xaml
+51814285742
 
-201227571878
-1221280156867
-AppWindow.xaml;Dictionaries\ControlsDictionary.xaml;Menu\GenerateMusic.xaml;Menu\About.xaml;Menu\MainMenu.xaml;
+23-796209498
+1221762397014
+AppWindow.xaml;Dictionaries\ControlsDictionary.xaml;Pages\GenerateMusic.xaml;Pages\About.xaml;Pages\MainMenu.xaml;
 
-True
+False
 

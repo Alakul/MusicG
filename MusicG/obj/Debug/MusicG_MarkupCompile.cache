@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\alicj\source\repos\WPF - MusicG\MusicG\App.xaml
-5-1560740313
+51814285742
 
-19-1148965385
+221285879120
 1221762397014
-AppWindow.xaml;Dictionaries\ControlsDictionary.xaml;Menu\GenerateMusic.xaml;Menu\About.xaml;Menu\MainMenu.xaml;
+AppWindow.xaml;Dictionaries\ControlsDictionary.xaml;Pages\GenerateMusic.xaml;Pages\About.xaml;Pages\MainMenu.xaml;
 
 False
 

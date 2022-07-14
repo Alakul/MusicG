@@ -1,4 +1,4 @@
-﻿using MusicG.Menu;
+﻿using MusicG.Pages;
 using Manufaktura.Controls.Model;
 using System;
 using System.Windows;

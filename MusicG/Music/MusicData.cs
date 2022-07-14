@@ -5,7 +5,7 @@ namespace MusicG
     public static class MusicData
     {
         public static Dictionary<string, string[]> scaleValues = new Dictionary<string, string[]>(){
-            {"Durowa", new string[] { "C-dur", "G-dur", "D-dur", "A-dur", "E-dur", "H-dur", "F-dur", "B-dur", "Es-dur", "As-dur", "Des-dur" }},
+            { "Durowa", new string[] { "C-dur", "G-dur", "D-dur", "A-dur", "E-dur", "H-dur", "F-dur", "B-dur", "Es-dur", "As-dur", "Des-dur" }},
             { "Molowa", new string[] { "A-moll", "E-moll", "H-moll", "Fis-moll", "Cis-moll", "Gis-moll", "D-moll", "G-moll", "C-moll", "F-moll", "B-moll" }}
         };
 

@@ -80,17 +80,20 @@
     <Compile Include="Commands\PlayCommand.cs" />
     <Compile Include="Commands\PlayerCommand.cs" />
     <Compile Include="Commands\StopCommand.cs" />
-    <Compile Include="Menu\GenerateMusic.xaml.cs">
+    <Compile Include="GeneticAlgorithm\Chromosome.cs" />
+    <Compile Include="GeneticAlgorithm\GeneticAlgorithm.cs" />
+    <Compile Include="GeneticAlgorithm\Gene.cs" />
+    <Compile Include="Pages\GenerateMusic.xaml.cs">
       <DependentUpon>GenerateMusic.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Menu\About.xaml.cs">
+    <Compile Include="Pages\About.xaml.cs">
       <DependentUpon>About.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Menu\MainMenu.xaml.cs">
+    <Compile Include="Pages\MainMenu.xaml.cs">
       <DependentUpon>MainMenu.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Menu\Switcher.cs" />
-    <Compile Include="Music\MusicController.cs" />
+    <Compile Include="Pages\Switcher.cs" />
+    <Compile Include="Music\MusicAdapter.cs" />
     <Compile Include="ValidationRules\MainValidationRule.cs" />
     <Page Include="AppWindow.xaml">
       <SubType>Designer</SubType>
@@ -100,21 +103,21 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="GeneticAlgorithm.cs" />
+    <Compile Include="GeneticAlgorithmOld.cs" />
     <Compile Include="Models\MainViewModel.cs" />
     <Page Include="Dictionaries\ControlsDictionary.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Menu\GenerateMusic.xaml">
+    <Page Include="Pages\GenerateMusic.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Menu\About.xaml">
+    <Page Include="Pages\About.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Menu\MainMenu.xaml">
+    <Page Include="Pages\MainMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
