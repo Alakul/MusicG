@@ -121,9 +121,7 @@ namespace MusicGTests
             string[] semitones = MusicData.semitonesSharp;
             Gene gene = new Gene(semitones, "D#", 5, 1.0);
 
-            MethodInfo methodInfo = typeof(Gene).GetMethod("DecodeNote", BindingFlags.NonPublic | BindingFlags.Instance);
-            object[] parameters = {  };
-            string noteDecoded = (string)methodInfo.Invoke(gene, parameters);
+            string noteDecoded = gene.DecodeNote();
 
             Assert.AreEqual("D#", noteDecoded);
         }
@@ -133,10 +131,8 @@ namespace MusicGTests
         {
             string[] semitones = MusicData.semitonesSharp;
             Gene gene = new Gene(semitones, "D#", 5, 1.0);
-
-            MethodInfo methodInfo = typeof(Gene).GetMethod("DecodeOctave", BindingFlags.NonPublic | BindingFlags.Instance);
-            object[] parameters = { };
-            int octaveDecoded = (int)methodInfo.Invoke(gene, parameters);
+            
+            int octaveDecoded = gene.DecodeOctave();
 
             Assert.AreEqual(5, octaveDecoded);
         }

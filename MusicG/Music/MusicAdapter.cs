@@ -13,22 +13,19 @@ namespace MusicG
         //MIDI
         public static Chromosome CheckNote(Chromosome chromosome, string[] semitonesSelected)
         {
-            Chromosome chromosomeChanged = chromosome;
             for (int i = 0; i < semitonesSelected.Length; i++){   
                 if (semitonesSelected[i].Contains('b') == true){
-                    chromosomeChanged = ChangeNote(chromosome);
+                    chromosome = ChangeNote(chromosome);
                     break;
                 }
             } 
-            return chromosomeChanged;
+            return chromosome;
         }
 
         public static Chromosome ChangeNote(Chromosome chromosome)
         {
-            Chromosome chromosomeDecoded = chromosome;
-
-            for (int i = 0; i < chromosomeDecoded.Genes.Count; i++){
-                string noteValue = chromosomeDecoded.Genes[i].GeneNote;
+            for (int i = 0; i < chromosome.Genes.Count; i++){
+                string noteValue = chromosome.Genes[i].GeneNote;
 
                 switch (noteValue){
                     case "Db":
@@ -44,10 +41,10 @@ namespace MusicG
                     default:
                         break;
                 }
-                chromosomeDecoded.Genes[i].GeneNote = noteValue;
-                chromosomeDecoded.Genes[i].CodeGene();
+                chromosome.Genes[i].GeneNote = noteValue;
+                chromosome.Genes[i].CodeGene();
             }
-            return chromosomeDecoded;
+            return chromosome;
         }
 
         public static List<MidiNote> GetNotesSequence(Chromosome chromosome)
@@ -92,7 +89,6 @@ namespace MusicG
         //SHEET MUSIC
         public static Score WriteSheetMusic(Chromosome chromosome, string scaleSet, string scaleName)
         {
-            Chromosome chromosomeDecoded = chromosome;
             MajorScale scale = GetScale(scaleSet, scaleName);
             Score score = Score.CreateOneStaffScore(Clef.Treble, scale);
             var firstStaff = score.FirstStaff;
@@ -117,16 +113,16 @@ namespace MusicG
                 }
             }
 
-            for (int i = 0; i < chromosomeDecoded.Genes.Count; i++){
-                string noteValue = chromosomeDecoded.Genes[i].GeneNote;
-                string octaveValue = chromosomeDecoded.Genes[i].GeneOctave.ToString();
+            for (int i = 0; i < chromosome.Genes.Count; i++){
+                string noteValue = chromosome.Genes[i].GeneNote;
+                string octaveValue = chromosome.Genes[i].GeneOctave.ToString();
 
                 if (noteValue.Contains('#') == true){
                     noteValue = noteValue.Replace("#", "Sharp");
                 }
 
                 string noteFull = noteValue + octaveValue;
-                double durationValue = chromosomeDecoded.Genes[i].GeneDuration;
+                double durationValue = chromosome.Genes[i].GeneDuration;
                 sum += durationValue;
 
                 Pitch pitch = GetNote(noteFull);

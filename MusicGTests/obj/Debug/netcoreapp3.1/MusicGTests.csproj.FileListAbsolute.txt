@@ -1,8 +1,3 @@
-C:\Users\alicj\source\repos\WPF - MusicG\MusicGTests\obj\Debug\netcoreapp3.1\MusicGTests.csproj.AssemblyReference.cache
-C:\Users\alicj\source\repos\WPF - MusicG\MusicGTests\obj\Debug\netcoreapp3.1\MusicGTests.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\alicj\source\repos\WPF - MusicG\MusicGTests\obj\Debug\netcoreapp3.1\MusicGTests.AssemblyInfoInputs.cache
-C:\Users\alicj\source\repos\WPF - MusicG\MusicGTests\obj\Debug\netcoreapp3.1\MusicGTests.AssemblyInfo.cs
-C:\Users\alicj\source\repos\WPF - MusicG\MusicGTests\obj\Debug\netcoreapp3.1\MusicGTests.csproj.CoreCompileInputs.cache
 C:\Users\alicj\source\repos\WPF - MusicG\MusicGTests\bin\Debug\netcoreapp3.1\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
 C:\Users\alicj\source\repos\WPF - MusicG\MusicGTests\bin\Debug\netcoreapp3.1\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
 C:\Users\alicj\source\repos\WPF - MusicG\MusicGTests\bin\Debug\netcoreapp3.1\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
@@ -104,6 +99,11 @@ C:\Users\alicj\source\repos\WPF - MusicG\MusicGTests\bin\Debug\netcoreapp3.1\Man
 C:\Users\alicj\source\repos\WPF - MusicG\MusicGTests\bin\Debug\netcoreapp3.1\Manufaktura.Music.pdb
 C:\Users\alicj\source\repos\WPF - MusicG\MusicGTests\bin\Debug\netcoreapp3.1\Midi.pdb
 C:\Users\alicj\source\repos\WPF - MusicG\MusicGTests\bin\Debug\netcoreapp3.1\Midi.xml
+C:\Users\alicj\source\repos\WPF - MusicG\MusicGTests\obj\Debug\netcoreapp3.1\MusicGTests.csproj.AssemblyReference.cache
+C:\Users\alicj\source\repos\WPF - MusicG\MusicGTests\obj\Debug\netcoreapp3.1\MusicGTests.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\alicj\source\repos\WPF - MusicG\MusicGTests\obj\Debug\netcoreapp3.1\MusicGTests.AssemblyInfoInputs.cache
+C:\Users\alicj\source\repos\WPF - MusicG\MusicGTests\obj\Debug\netcoreapp3.1\MusicGTests.AssemblyInfo.cs
+C:\Users\alicj\source\repos\WPF - MusicG\MusicGTests\obj\Debug\netcoreapp3.1\MusicGTests.csproj.CoreCompileInputs.cache
 C:\Users\alicj\source\repos\WPF - MusicG\MusicGTests\obj\Debug\netcoreapp3.1\MusicGTests.csproj.CopyComplete
 C:\Users\alicj\source\repos\WPF - MusicG\MusicGTests\obj\Debug\netcoreapp3.1\MusicGTests.dll
 C:\Users\alicj\source\repos\WPF - MusicG\MusicGTests\obj\Debug\netcoreapp3.1\MusicGTests.pdb

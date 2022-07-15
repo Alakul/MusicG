@@ -504,6 +504,7 @@
                                             <Condition Binding="{Binding ElementName=probCrossover, Path=(Validation.HasError)}" Value="false" />
                                             <Condition Binding="{Binding ElementName=probMutation, Path=(Validation.HasError)}" Value="false" />
                                             <Condition Binding="{Binding ElementName=tournament, Path=(Validation.HasError)}" Value="false" />
+                                            <Condition Binding="{Binding ElementName=octave, Path=(Validation.HasError)}" Value="false" />
 
                                             <Condition Binding="{Binding ElementName=play, Path=(Button.IsEnabled)}" Value="true" />
                                         </MultiDataTrigger.Conditions>

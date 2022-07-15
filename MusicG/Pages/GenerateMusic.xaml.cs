@@ -148,7 +148,7 @@ namespace MusicG.Pages
             }
             else {
                 geneticAlgorithm.NewGeneration(generationsValue, prefferedOctave, crossoverProbabilityValue,
-                    mutationProbabilityValue,criteriaWeight, intervalWeight, tournamentSize, selectedSelection,
+                    mutationProbabilityValue, criteriaWeight, intervalWeight, tournamentSize, selectedSelection,
                     selectedMutation);
             }
 

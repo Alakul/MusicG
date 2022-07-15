@@ -76,19 +76,6 @@ C:\Users\alicj\source\repos\MusicG\MusicG\obj\Debug\MusicG.csproj.CoreCompileInp
 C:\Users\alicj\source\repos\MusicG\MusicG\obj\Debug\MusicG.csproj.CopyComplete
 C:\Users\alicj\source\repos\MusicG\MusicG\obj\Debug\MusicG.exe
 C:\Users\alicj\source\repos\MusicG\MusicG\obj\Debug\MusicG.pdb
-C:\Users\alicj\source\repos\WPF - MusicG\MusicG\obj\Debug\MusicG.csproj.AssemblyReference.cache
-C:\Users\alicj\source\repos\WPF - MusicG\MusicG\obj\Debug\MusicG.csproj.SuggestedBindingRedirects.cache
-C:\Users\alicj\source\repos\WPF - MusicG\MusicG\obj\Debug\AppWindow.baml
-C:\Users\alicj\source\repos\WPF - MusicG\MusicG\obj\Debug\Dictionaries\ControlsDictionary.baml
-C:\Users\alicj\source\repos\WPF - MusicG\MusicG\obj\Debug\App.baml
-C:\Users\alicj\source\repos\WPF - MusicG\MusicG\obj\Debug\AppWindow.g.cs
-C:\Users\alicj\source\repos\WPF - MusicG\MusicG\obj\Debug\Pages\GenerateMusic.g.cs
-C:\Users\alicj\source\repos\WPF - MusicG\MusicG\obj\Debug\Pages\About.g.cs
-C:\Users\alicj\source\repos\WPF - MusicG\MusicG\obj\Debug\Pages\MainMenu.g.cs
-C:\Users\alicj\source\repos\WPF - MusicG\MusicG\obj\Debug\App.g.cs
-C:\Users\alicj\source\repos\WPF - MusicG\MusicG\obj\Debug\GeneratedInternalTypeHelper.g.cs
-C:\Users\alicj\source\repos\WPF - MusicG\MusicG\obj\Debug\MusicG_MarkupCompile.cache
-C:\Users\alicj\source\repos\WPF - MusicG\MusicG\obj\Debug\MusicG_MarkupCompile.lref
 C:\Users\alicj\source\repos\WPF - MusicG\MusicG\bin\Debug\Sanford.txt
 C:\Users\alicj\source\repos\WPF - MusicG\MusicG\bin\Debug\MusicG.exe.config
 C:\Users\alicj\source\repos\WPF - MusicG\MusicG\bin\Debug\MusicG.exe
@@ -105,6 +92,19 @@ C:\Users\alicj\source\repos\WPF - MusicG\MusicG\bin\Debug\Manufaktura.Controls.p
 C:\Users\alicj\source\repos\WPF - MusicG\MusicG\bin\Debug\Manufaktura.Music.pdb
 C:\Users\alicj\source\repos\WPF - MusicG\MusicG\bin\Debug\Midi.pdb
 C:\Users\alicj\source\repos\WPF - MusicG\MusicG\bin\Debug\Midi.xml
+C:\Users\alicj\source\repos\WPF - MusicG\MusicG\obj\Debug\MusicG.csproj.AssemblyReference.cache
+C:\Users\alicj\source\repos\WPF - MusicG\MusicG\obj\Debug\MusicG.csproj.SuggestedBindingRedirects.cache
+C:\Users\alicj\source\repos\WPF - MusicG\MusicG\obj\Debug\AppWindow.baml
+C:\Users\alicj\source\repos\WPF - MusicG\MusicG\obj\Debug\Dictionaries\ControlsDictionary.baml
+C:\Users\alicj\source\repos\WPF - MusicG\MusicG\obj\Debug\App.baml
+C:\Users\alicj\source\repos\WPF - MusicG\MusicG\obj\Debug\AppWindow.g.cs
+C:\Users\alicj\source\repos\WPF - MusicG\MusicG\obj\Debug\Pages\GenerateMusic.g.cs
+C:\Users\alicj\source\repos\WPF - MusicG\MusicG\obj\Debug\Pages\About.g.cs
+C:\Users\alicj\source\repos\WPF - MusicG\MusicG\obj\Debug\Pages\MainMenu.g.cs
+C:\Users\alicj\source\repos\WPF - MusicG\MusicG\obj\Debug\App.g.cs
+C:\Users\alicj\source\repos\WPF - MusicG\MusicG\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\alicj\source\repos\WPF - MusicG\MusicG\obj\Debug\MusicG_MarkupCompile.cache
+C:\Users\alicj\source\repos\WPF - MusicG\MusicG\obj\Debug\MusicG_MarkupCompile.lref
 C:\Users\alicj\source\repos\WPF - MusicG\MusicG\obj\Debug\Pages\GenerateMusic.baml
 C:\Users\alicj\source\repos\WPF - MusicG\MusicG\obj\Debug\Pages\About.baml
 C:\Users\alicj\source\repos\WPF - MusicG\MusicG\obj\Debug\Pages\MainMenu.baml

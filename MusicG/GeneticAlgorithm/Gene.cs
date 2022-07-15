@@ -112,14 +112,14 @@ namespace MusicG
             return durationCoded;
         }
 
-        private string DecodeNote()
+        public string DecodeNote()
         {
             int noteIndex = GeneNoteCoded.IndexOf('1');
             string noteDecoded = semitonesSelected[noteIndex].ToString();
             return noteDecoded;
         }
 
-        private int DecodeOctave()
+        public int DecodeOctave()
         {
             int octaveDecoded = Convert.ToInt32(GeneOctaveCoded, 2);
             return octaveDecoded;

@@ -82,13 +82,14 @@ namespace MusicG
 
                 Crossover();
                 
+                //Tu jest błąd
                 if (selectedMutation == 0){
                     MutationSemitones();
                 }
                 else {
                     MutationOctave();
                 }
-
+                
                 FitnessFunction();
                 counter++;
             }
@@ -178,12 +179,11 @@ namespace MusicG
             int drawnNumber;
             int bestChromosomeIndex;
             double bestChromosomeFitness;
-            int populationSize = Population.Count;
             List<Chromosome> chromosomesSelected = new List<Chromosome> ();
             
-            while (loopCounter < populationSize){
+            while (loopCounter < PopulationSize){
                 for (int i = 0; i < tournamentSize; i++){
-                    drawnNumber = random.Next(0, populationSize);
+                    drawnNumber = random.Next(0, PopulationSize);
                     tmpFitnessList.Add(Fitness[drawnNumber]);
                     tmpIndexList.Add(drawnNumber);
                 }
@@ -454,26 +454,21 @@ namespace MusicG
 
         private Chromosome ChangeNotes(Chromosome chromosome)
         {
-            List<Gene> chromosomeChanged = chromosome.Genes;
-            Gene gene;
-            string noteCoded;
-
             for (int i = 0; i < chromosome.Genes.Count; i++){
-                if (random.Next(1, 1001) <= MutationProbability){    
-                    (gene, noteCoded) = ChangeGeneNote(chromosome.Genes[i]);
-                    gene.GeneNoteCoded = noteCoded;
-                    gene.DecodeGene();
-                    chromosomeChanged[i] = gene;
+                if (random.Next(1, 1001) <= MutationProbability){
+                    Gene gene = new Gene(SemitonesSelected, chromosome.Genes[i].GeneNote, chromosome.Genes[i].GeneOctave, chromosome.Genes[i].GeneDuration);
+                    gene.GeneNoteCoded = ChangeGeneNote(chromosome.Genes[i].GeneNoteCoded);
+                    gene.GeneNote = chromosome.Genes[i].DecodeNote();
+                    chromosome.Genes[i] = gene;
                 }
             }
-            chromosome.Genes = chromosomeChanged;
             return chromosome;
         }
 
-        private (Gene, string) ChangeGeneNote(Gene gene)
+        private string ChangeGeneNote(string geneNote)
         {
             int probability = 500;
-            string noteValue = gene.GeneNoteCoded;
+            string noteValue = geneNote;
             int index = noteValue.IndexOf('1');
             char[] noteArray = noteValue.ToCharArray();
 
@@ -497,7 +492,7 @@ namespace MusicG
             }
 
             string noteCoded = SaveArrayToString(noteArray);
-            return (gene, noteCoded);
+            return noteCoded;
         }
 
         private string SaveArrayToString(char[] array)
@@ -520,13 +515,10 @@ namespace MusicG
 
         private Chromosome ChangeOctave(Chromosome chromosome)
         {
-            List<Gene> chromosomeChanged = chromosome.Genes.ToList();
-
             for (int i = 0; i < chromosome.Genes.Count; i++){
                 if (random.Next(1, 1001) <= MutationProbability)
                 {
-                    Gene gene = chromosome.Genes[i];
-                    string octaveValue = gene.GeneOctaveCoded;
+                    string octaveValue = chromosome.Genes[i].GeneOctaveCoded;
                     char[] octaveArray;
                     string octaveCoded = "";
 
@@ -550,13 +542,13 @@ namespace MusicG
                         octaveCoded = octaveValue;
                     }
 
+                    Gene gene = new Gene(SemitonesSelected, chromosome.Genes[i].GeneNote, chromosome.Genes[i].GeneOctave, chromosome.Genes[i].GeneDuration);
                     gene.GeneOctaveCoded = octaveCoded;
-                    gene.DecodeGene();
-                    chromosomeChanged[i] = gene;
+                    gene.GeneOctave = chromosome.Genes[i].DecodeOctave();
+                    chromosome.Genes[i] = gene;
                 }
             }
 
-            chromosome.Genes = chromosomeChanged;
             return chromosome;
         }
 

@@ -103,7 +103,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="GeneticAlgorithmOld.cs" />
     <Compile Include="Models\MainViewModel.cs" />
     <Page Include="Dictionaries\ControlsDictionary.xaml">
       <SubType>Designer</SubType>
