@@ -115,3 +115,7 @@ C:\Users\alicj\source\repos\WPF - MusicG\MusicG\obj\Debug\MusicG.csproj.CoreComp
 C:\Users\alicj\source\repos\WPF - MusicG\MusicG\obj\Debug\MusicG.csproj.CopyComplete
 C:\Users\alicj\source\repos\WPF - MusicG\MusicG\obj\Debug\MusicG.exe
 C:\Users\alicj\source\repos\WPF - MusicG\MusicG\obj\Debug\MusicG.pdb
+C:\Users\alicj\source\repos\WPF - MusicG\MusicG\bin\Debug\MusicG.exe.manifest
+C:\Users\alicj\source\repos\WPF - MusicG\MusicG\bin\Debug\MusicG.application
+C:\Users\alicj\source\repos\WPF - MusicG\MusicG\obj\Debug\MusicG.exe.manifest
+C:\Users\alicj\source\repos\WPF - MusicG\MusicG\obj\Debug\MusicG.application

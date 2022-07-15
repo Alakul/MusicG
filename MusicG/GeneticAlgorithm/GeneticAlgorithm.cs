@@ -82,7 +82,6 @@ namespace MusicG
 
                 Crossover();
                 
-                //Tu jest błąd
                 if (selectedMutation == 0){
                     MutationSemitones();
                 }
