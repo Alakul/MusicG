@@ -396,3 +396,13 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+Manufaktura_Libraries/Manufaktura.Controls.Desktop/bin/
+Manufaktura_Libraries/Manufaktura.Controls.Desktop/obj/
+Manufaktura_Libraries/Manufaktura.Controls.WPF/bin/
+Manufaktura_Libraries/Manufaktura.Controls.WPF/obj/
+Manufaktura_Libraries/Manufaktura.Controls/bin/
+Manufaktura_Libraries/Manufaktura.Controls/obj/
+Manufaktura_Libraries/Manufaktura.Music/bin/
+Manufaktura_Libraries/Manufaktura.Music/obj/
+Midi/obj/
+Midi/bin/
